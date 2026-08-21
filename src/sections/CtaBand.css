@@ -141,3 +141,10 @@
 }
 
 .cta-band__phone:hover { text-decoration-color: var(--navy); }
+
+/* ── Phones ─────────────────────────────────────────────────────────────────
+   Keep the primary action and the number; drop the WhatsApp pill, which the
+   fixed bar already carries two thumb-widths below it. */
+@media (max-width: 767px) {
+  .cta-band__actions .btn--white { display: none; }
+}

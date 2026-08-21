@@ -88,7 +88,7 @@ export const hours = {
 
 /* ── Hero ──────────────────────────────────────────────────────────────────── */
 export const hero = {
-  eyebrow: 'Trusted dental care in Shyamoli',
+  eyebrow: 'Trusted care in Shyamoli',
   // Words listed in `highlight` render in the accent colour inside the headline.
   headline: 'Your smile is our priority',
   highlight: ['smile'],

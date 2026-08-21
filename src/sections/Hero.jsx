@@ -20,7 +20,7 @@ export default function Hero() {
         <Photo
           src="hero-clinic.jpg"
           alt=""
-          ratio="1500/647"
+          ratio="1200/806"
           shape="flat"
           priority
           className="hero__photo"

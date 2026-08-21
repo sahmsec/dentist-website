@@ -13,10 +13,10 @@
   /* Taller than it is wide, which is what makes object-fit zoom in on Dr.
      Arman rather than letterbox him. Capped so a tablet does not get a wall of
      photograph. */
-  --hero-band: min(140vw, 560px);
+  --hero-band: min(118vw, 470px);
   /* How far the card climbs back over the band — a fraction of it, so the
      strip of photo that stays visible keeps its proportion at every width. */
-  --hero-lift: calc(var(--hero-band) * 0.63);
+  --hero-lift: calc(var(--hero-band) * 0.58);
   --hero-curve: var(--r-curve);
 
   position: relative;
@@ -40,10 +40,9 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  /* A room rather than a person. On a phone the band is taller than the image
-     so the full height shows and only the horizontal window moves — biased
-     right, where the chair is. */
-  object-position: 68% 50%;
+  /* A room rather than a person. The frame is near-square so a phone shows its
+     full height and the chair is not lost behind the card. */
+  object-position: 50% 50%;
 }
 
 /* Grounds the card against the photo rather than letting it float on a bright
@@ -106,8 +105,12 @@
 .hero__circle .eyebrow::before { width: 11px; height: 11px; }
 
 /* ── Call / WhatsApp — phones only ─────────────────────────────────────────── */
+/* The fixed call bar carries Call and WhatsApp on every screen of every page,
+   and from 992px the header carries "Book Appointment". A pair of pills here
+   too meant six of the same two actions inside the first screen and a half,
+   which is what made the phone layout feel like it was shouting. */
 .hero__actions {
-  display: grid;
+  display: none;
   gap: 10px;
   margin-top: 6px;
 }
@@ -165,7 +168,9 @@
     min-height: clamp(520px, 62vw, 760px);
   }
 
-  .hero__media .hero__photo { object-position: 50% 55%; }
+  /* Wide band, near-square source: width fills and the vertical window
+     moves. Biased down onto the chair rather than the ceiling. */
+  .hero__media .hero__photo { object-position: 50% 68%; }
 
   /* Weight on the left, under the card, so the white circle stays readable and
      the chair on the right of the photograph stays bright. */
@@ -227,9 +232,7 @@
     font-size: clamp(0.75rem, calc(var(--hero-circle) * 0.026), 0.8125rem);
   }
 
-  /* The header carries "Book Appointment" at this size, and the circle has no
-     room for a pair of pills without losing its proportions. */
-  .hero__actions { display: none; }
+
 
   /* ── Navy circle button straddling the circle's lower-right edge ─────────── */
   .hero__badge {

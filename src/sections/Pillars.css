@@ -21,10 +21,20 @@
 }
 
 /* Colour, radius, clipping and stacking come from the .band primitive; only the
-   tuck and the padding that compensates for it are local. */
+   tuck and the padding that compensates for it are local.
+   --clear is breathing room under the hero card. The band tucks 30px up behind
+   the card's lower edge, and the compensating padding alone left the first
+   heading sitting right against the card's shadow. Measured: this puts ~48px
+   between them. */
 .pillars__band {
+  --clear: 28px;
   margin-top: calc(var(--tuck) * -1);
-  padding-block: calc(var(--band-pad) + var(--tuck)) var(--band-pad);
+  padding-block: calc(var(--band-pad) + var(--tuck) + var(--clear)) var(--band-pad);
+}
+
+@media (min-width: 900px) {
+  /* The card is a circle overlaid on the band up here, not in the flow. */
+  .pillars__band { --clear: 0px; }
 }
 
 .pillars__inner {
@@ -140,4 +150,13 @@
   .pillars__item-title { align-self: auto; }
 
   .pillars__item-text { line-height: var(--lh-body); }
+}
+
+/* ── Phones ─────────────────────────────────────────────────────────────────
+   The band sits ~800px down, with the fixed call bar pinned to the bottom of
+   the same screen. A third call button here was the fourth of the same action
+   in the first screen and a half. The promises are the point of this block;
+   the calling is handled. */
+@media (max-width: 767px) {
+  .pillars__intro .btn { display: none; }
 }
