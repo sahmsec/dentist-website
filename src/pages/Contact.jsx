@@ -23,12 +23,10 @@ const channels = [
     href: links.whatsapp,
     external: true,
   },
-  {
-    icon: 'mail',
-    label: 'Email',
-    value: contact.email.display,
-    href: links.mailto,
-  },
+  // Only listed when a real inbox exists; see contact.email in site.js.
+  ...(contact.email
+    ? [{ icon: 'mail', label: 'Email', value: contact.email.display, href: links.mailto }]
+    : []),
 ]
 
 export default function Contact() {

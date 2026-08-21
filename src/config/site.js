@@ -38,10 +38,17 @@ export const contact = {
     display: '01915109006',
     message: 'Hello Dr. Arman, I would like to book a dental appointment.',
   },
-  email: {
-    display: 'appointment@drarmansdental.com', // ← swap for the real inbox
-    address: 'appointment@drarmansdental.com',
-  },
+  /*  Set this to null until there is a real, monitored inbox.
+   *
+   *  It was a placeholder on a domain that may not exist, and a dead address on
+   *  a live site is worse than no address — a patient writes to it and hears
+   *  nothing back. Every place that shows an email checks for null and simply
+   *  omits it: the header info row, the footer contact tiles and the Contact
+   *  page all drop to phone, WhatsApp and directions.
+   *
+   *  To switch it on:  email: { display: 'x@y.com', address: 'x@y.com' }
+   */
+  email: null,
   address: {
     line1: '12/Cha/A/2, Road No 4',
     line2: 'Shyamoli, Dhaka',
@@ -340,7 +347,7 @@ export const nav = [
 export const links = {
   tel: `tel:${contact.phone.dial}`,
   whatsapp: `https://wa.me/${contact.whatsapp.number}?text=${encodeURIComponent(contact.whatsapp.message)}`,
-  mailto: `mailto:${contact.email.address}`,
+  mailto: contact.email ? `mailto:${contact.email.address}` : null,
   maps: contact.address.mapsUrl,
 }
 

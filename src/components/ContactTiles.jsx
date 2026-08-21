@@ -20,7 +20,8 @@ const tiles = [
     href: links.whatsapp,
     external: true,
   },
-  { icon: 'mail', label: 'Email', value: contact.email.display, href: links.mailto },
+  // Omitted entirely when no inbox is configured, rather than shown dead.
+  ...(contact.email ? [{ icon: 'mail', label: 'Email', value: contact.email.display, href: links.mailto }] : []),
   {
     icon: 'mapPin',
     label: 'Chamber address',

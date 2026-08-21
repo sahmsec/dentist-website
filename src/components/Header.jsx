@@ -14,7 +14,9 @@ const STICK_AT = 120
    where the topbar itself is hidden. */
 const infoBlocks = [
   { key: 'phone', icon: 'phone', label: contact.phone.label, value: contact.phone.display, href: links.tel },
-  { key: 'email', icon: 'mail', label: 'Email Address', value: contact.email.display, href: links.mailto },
+  ...(contact.email
+    ? [{ key: 'email', icon: 'mail', label: 'Email Address', value: contact.email.display, href: links.mailto }]
+    : []),
   {
     key: 'address',
     icon: 'mapPin',

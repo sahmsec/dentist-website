@@ -40,10 +40,10 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  /* He stands upper-left of a square frame. A centred crop cuts his head off
-     entirely, so the window is pulled up and left of centre — his face sits in
-     the strip of photo that stays visible above the card. */
-  object-position: 34% 6%;
+  /* A room rather than a person. On a phone the band is taller than the image
+     so the full height shows and only the horizontal window moves — biased
+     right, where the chair is. */
+  object-position: 68% 50%;
 }
 
 /* Grounds the card against the photo rather than letting it float on a bright
@@ -165,16 +165,13 @@
     min-height: clamp(520px, 62vw, 760px);
   }
 
-  /* The band is wide here, so the crop is bound by width and only the vertical
-     window is in play. 14% left just 5px above his hairline at 1440 — one
-     viewport change from decapitating him — so this sits well clear. */
-  .hero__media .hero__photo { object-position: 50% 8%; }
+  .hero__media .hero__photo { object-position: 50% 55%; }
 
-  /* Mirrored: the weight sits on the right, behind the card, so the left of
-     the frame — where Dr. Arman actually stands — stays bright. */
+  /* Weight on the left, under the card, so the white circle stays readable and
+     the chair on the right of the photograph stays bright. */
   .hero__scrim {
     background: linear-gradient(
-      260deg,
+      100deg,
       rgba(var(--navy-rgb), 0.62) 0%,
       rgba(var(--navy-rgb), 0.3) 44%,
       rgba(var(--navy-rgb), 0) 76%
@@ -191,14 +188,10 @@
     pointer-events: none;
   }
 
-  /* He stands on the left of every photograph we have, and the band shows the
-     image at full width at these ratios — so object-position cannot move him.
-     The card moves instead, mirroring the reference layout rather than sitting
-     on his face. */
   .hero__card {
     width: var(--hero-circle);
     max-width: 100%;
-    margin: 0 0 0 auto;
+    margin: 0;
     pointer-events: auto;
   }
 
@@ -243,10 +236,9 @@
     position: absolute;
     bottom: calc(var(--hero-badge) * -0.16);
     left: 50%;
-    /* Centre of the badge sits 13% of the diameter left of the circle's
-       centre — mirrored with the card, so it straddles the edge facing the
-       photograph rather than hanging off the band's outer margin. */
-    margin-left: calc(var(--hero-circle) * -0.13 - var(--hero-badge) * 0.5);
+    /* Centre of the badge sits 13% of the diameter right of the circle's
+       centre, which is what puts it on the edge rather than beside it. */
+    margin-left: calc(var(--hero-circle) * 0.13 - var(--hero-badge) * 0.5);
     display: grid;
     align-content: center;
     justify-items: center;
@@ -274,7 +266,7 @@
   /* ── Floating rating card ───────────────────────────────────────────────── */
   .hero__rating {
     position: absolute;
-    left: clamp(24px, 5vw, 72px);
+    right: clamp(24px, 5vw, 72px);
     bottom: clamp(32px, 6vw, 88px);
     display: grid;
     gap: 8px;

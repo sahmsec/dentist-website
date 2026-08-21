@@ -13,10 +13,14 @@ export default function Hero() {
   return (
     <section className="hero" aria-label={identity.brandName}>
       <div className="hero__media">
+        {/* The chamber, not the dentist. He appears four times further down —
+            introduction, both why-us panes and the About page — so the hero
+            carries the room instead, as the reference layout does. Decorative,
+            hence the empty alt: the headline beside it says what this is. */}
         <Photo
-          src="hero-dr-arman.jpg"
-          alt="Dr. Arman Kayser at the chamber"
-          ratio="1/1"
+          src="hero-clinic.jpg"
+          alt=""
+          ratio="1500/647"
           shape="flat"
           priority
           className="hero__photo"

@@ -6,8 +6,21 @@ This matters, so it is stated plainly.
 
 **Photographs of Dr. Arman** — every one is a real photograph of him, cropped
 from the originals kept in `_source/`. None is generated, and none should be.
-`hero-dr-arman.jpg`, `dr-arman-portrait.jpg`, `dr-arman-about.jpg`,
-`team-arman.jpg`, `why-qualified.jpg`.
+
+He appears four times and no two use the same outfit, because one photograph
+stretched across every slot made the site look like it had a single asset:
+
+| File | Source | Where |
+| --- | --- | --- |
+| `dr-arman-portrait.jpg` | grey suit | Home introduction |
+| `why-qualified.jpg` | white coat | Home, "an oral & dental surgeon" |
+| `why-painless.jpg` | scrubs and mask, treating | Home, "painless treatment" |
+| `dr-arman-about.jpg` | blue scrubs, standing | About page |
+| `team-arman.jpg` | white coat, head and shoulders | About page team card |
+
+The hero deliberately does **not** show him. `hero-clinic.jpg` is the treatment
+room, matching the reference layout, which puts a scene behind the circle card
+rather than a portrait. He is already on that page three times below the fold.
 
 `why-painless.jpg` is a real clinical photograph of him treating a patient —
 the only one on the site showing actual treatment, and the most credible image
@@ -23,7 +36,8 @@ instrument still life that carry atmosphere behind text. They are **not**
 photographs of his chamber. `titlebar-*.jpg`, `stats-band.jpg`,
 `chamber-interior.jpg`, `why-painless/transparent/modern.jpg`, `service-*.jpg`.
 
-`chamber-interior.jpg` and `titlebar-about.jpg` are a step closer than the rest:
+`hero-clinic.jpg`, `chamber-interior.jpg` and `titlebar-about.jpg` are a step
+closer than the rest:
 they were generated from a description of his actual room — royal blue chair and
 matching stool, green fabric partition, wall-mounted light on an articulated
 arm, small sink, warm wood cabinet — so they carry his room's real colours and
