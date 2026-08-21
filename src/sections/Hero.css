@@ -98,7 +98,7 @@
   max-width: 100%;
   padding: 7px 13px 7px 9px;
   gap: 7px;
-  font-size: calc(var(--fs-xs) * 0.92);
+  font-size: var(--fs-xs);   /* 13px floor — uppercase at 1px tracking needs it */
   line-height: 1.3;
   text-wrap: balance;
 }
@@ -216,7 +216,7 @@
   }
 
   .hero__lede {
-    font-size: clamp(0.875rem, calc(var(--hero-circle) * 0.034), 1.0625rem);
+    font-size: clamp(0.9375rem, calc(var(--hero-circle) * 0.034), 1.0625rem);
     line-height: 1.55;
   }
 
@@ -224,7 +224,7 @@
     justify-self: center;
     padding: 8px 16px 8px 11px;
     gap: 8px;
-    font-size: clamp(0.625rem, calc(var(--hero-circle) * 0.026), 0.8125rem);
+    font-size: clamp(0.75rem, calc(var(--hero-circle) * 0.026), 0.8125rem);
   }
 
   /* The header carries "Book Appointment" at this size, and the circle has no

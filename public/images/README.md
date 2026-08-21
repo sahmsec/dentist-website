@@ -1,40 +1,31 @@
 # Photographs for the site
 
-## Current status
+## What is real and what is generated
 
-Fifteen slots are filled, all derived from Dr. Arman's own three photographs
-(kept in `_source/`). Everything below that is still open is listed at the end
-of this file.
+This matters, so it is stated plainly.
 
-| Filled from real photos | Used for |
+**Photographs of Dr. Arman** — every one is a real photograph of him, cropped
+from the three originals kept in `_source/`. None is generated, and none should
+be. `hero-dr-arman.jpg`, `dr-arman-portrait.jpg`, `dr-arman-about.jpg`,
+`team-arman.jpg`, `why-qualified.jpg`.
+
+**Environments and equipment** — generated with FLUX.1-schnell via
+`scripts/generate-images.ps1`. These are illustrative: clean clinical rooms and
+instrument still life that carry atmosphere behind text. They are **not**
+photographs of his chamber. `titlebar-*.jpg`, `stats-band.jpg`,
+`chamber-interior.jpg`, `why-painless/transparent/modern.jpg`, `service-*.jpg`.
+
+Replacing the generated set with real photographs of the actual chamber is the
+single biggest improvement left. Drop a file in under the same name and it
+takes over — no code change.
+
+**Deliberately empty.** These render a designed fallback rather than a guess:
+
+| Slot | Why it stays empty |
 | --- | --- |
-| `hero-dr-arman.jpg` | The home page hero band |
-| `dr-arman-portrait.jpg` | Home introduction, blue scrubs |
-| `dr-arman-about.jpg` | About page portrait, white coat |
-| `team-arman.jpg` | Team card |
-| `why-qualified/painless/transparent/modern.jpg` | The four why-us panes |
-| `stats-band.jpg` | Background behind the counters |
-| `titlebar-about/services/contact/default.jpg` | Inner page banners |
-| `chamber-interior.jpg` | Small inset on the home introduction |
-| `og-cover.jpg` | Social share card |
-
-**Still open — and why.**
-
-*Needs a photographer, not AI.* `ba-1/2/3-before.jpg` and `ba-1/2/3-after.jpg`
-are clinical before-and-after pairs. These have to be genuine cases with written
-patient consent; generated results would be a claim about outcomes that did not
-happen. Until they exist the section renders labelled panels.
-
-*Needs a real person.* `team-associate.jpg`, `team-assistant.jpg` and
-`patient-1.jpg`–`patient-3.jpg`. Rather than invented faces, these render a
-monogram — deliberate-looking, and honest.
-
-*Nice to have.* `service-general.jpg` and the five other service images. These
-currently render a branded tile carrying that treatment's own icon, which reads
-as designed rather than missing, so they are optional rather than blocking.
-
-Photographs of the chamber itself would improve the site more than anything else
-on this list.
+| `ba-1/2/3-before.jpg`, `ba-1/2/3-after.jpg` | Before-and-after pairs are claims about clinical outcomes. They must be genuine cases with written patient consent. |
+| `patient-1.jpg`–`patient-3.jpg` | Testimonial avatars. Rather than invented faces beside real quotes, these render a monogram. |
+| `team-associate.jpg`, `team-assistant.jpg` | Real colleagues. A monogram until there are photographs of them. |
 
 ---
 

@@ -27,7 +27,9 @@
 
 /* The heading exists for the outline; the button inside it carries the type. */
 .why-panel__acc-heading {
+  /* `font` is a shorthand and resets font-size, so it has to come first. */
   font: inherit;
+  font-size: var(--fs-h4);
   letter-spacing: normal;
 }
 

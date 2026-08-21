@@ -114,16 +114,23 @@ export default function About() {
                     </ul>
                   </div>
 
-                  <div className="team-card__strip">
-                    <span className="icon-circle icon-circle--sm team-card__strip-icon">
-                      <Icon name={member.lead ? 'phone' : 'tooth'} size={16} />
-                    </span>
-                    {member.lead && (
-                      <a className="team-card__strip-link" href={links.tel}>
-                        Call the chamber
-                      </a>
-                    )}
-                  </div>
+                  {/* The whole strip is the link for the lead, not just the
+                      label — it reads as one bar, so tapping anywhere on it
+                      should dial rather than only the 128px of text. */}
+                  {member.lead ? (
+                    <a className="team-card__strip team-card__strip--link" href={links.tel}>
+                      <span className="icon-circle icon-circle--sm team-card__strip-icon">
+                        <Icon name="phone" size={16} />
+                      </span>
+                      <span className="team-card__strip-label">Call the chamber</span>
+                    </a>
+                  ) : (
+                    <div className="team-card__strip">
+                      <span className="icon-circle icon-circle--sm team-card__strip-icon">
+                        <Icon name="tooth" size={16} />
+                      </span>
+                    </div>
+                  )}
                 </Reveal>
               </li>
             ))}

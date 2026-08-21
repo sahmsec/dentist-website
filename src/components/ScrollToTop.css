@@ -6,7 +6,11 @@
   /* Above the call bar, below the header — a pinned nav must never be covered. */
   z-index: calc(var(--z-header) - 1);
 
-  display: grid;
+  /* Phones already carry the fixed call bar at the bottom of every screen. A
+     second floating control on a 390px column has nowhere to sit that is not
+     over the text — measured covering body copy at ten of nineteen scroll
+     positions — so this is desktop-only, re-enabled in the query below. */
+  display: none;
   place-items: center;
   width: 50px;
   height: 50px;
@@ -40,6 +44,7 @@
 
 @media (min-width: 768px) {
   .back-to-top {
+    display: grid;
     right: 28px;
     bottom: 28px;
     width: 54px;

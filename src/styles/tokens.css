@@ -47,7 +47,7 @@
   --fs-h1: clamp(2.35rem, 1.3rem + 4.2vw, 3.625rem);      /*  38 → 58  hero        */
   --fs-h2: clamp(2rem, 1.15rem + 3.4vw, 3.625rem);        /*  32 → 58  section     */
   --fs-h3: clamp(1.35rem, 1.1rem + 0.9vw, 1.625rem);      /*  22 → 26  card        */
-  --fs-h4: clamp(1.15rem, 1rem + 0.5vw, 1.25rem);         /*  18 → 20  small card  */
+  --fs-h4: clamp(1.25rem, 1rem + 0.7vw, 1.375rem);        /*  20 → 22  small card  */
   --fs-numeral: clamp(3.25rem, 1.5rem + 6.5vw, 5.5rem);   /*  52 → 88  counters    */
   --fs-lede: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);   /*  17 → 19             */
   --fs-body: 1.0625rem;                                    /*  17                  */
@@ -64,7 +64,7 @@
   /* ── Geometry ──────────────────────────────────────────────────────────── */
   --container: 1320px;
   --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 1.875rem);   /* 20 → 30 */
-  --section-y: clamp(3.5rem, 1.6rem + 7.6vw, 7.5rem);   /* 56 → 120 vertical rhythm */
+  --section-y: clamp(2.75rem, 1.2rem + 7.6vw, 7.5rem);  /* 44 → 120 vertical rhythm */
 
   --nav-h: 80px;
   --nav-h-sticky: 68px;

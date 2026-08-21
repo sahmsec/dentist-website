@@ -212,17 +212,17 @@
   color: var(--white);
 }
 
-.team-card__strip-link {
-  /* The strip is already 64px tall, so a 44px target costs no height. */
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
+/* The strip itself is the tap target now, so the label needs no box of its
+   own — it only carries the type. */
+.team-card__strip-label {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--fs-sm);
   color: var(--accent-ink);
-  transition: opacity var(--t) var(--ease);
 }
+
+.team-card__strip--link { cursor: pointer; transition: background var(--t) var(--ease); }
+.team-card__strip--link:hover { background: var(--accent-strong); }
 
 .team-card__strip-link:hover {
   opacity: 0.72;
