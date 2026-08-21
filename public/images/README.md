@@ -15,9 +15,17 @@ instrument still life that carry atmosphere behind text. They are **not**
 photographs of his chamber. `titlebar-*.jpg`, `stats-band.jpg`,
 `chamber-interior.jpg`, `why-painless/transparent/modern.jpg`, `service-*.jpg`.
 
+`chamber-interior.jpg` and `titlebar-about.jpg` are a step closer than the rest:
+they were generated from a description of his actual room — royal blue chair and
+matching stool, green fabric partition, wall-mounted light on an articulated
+arm, small sink, warm wood cabinet — so they carry his room's real colours and
+character. They remain renderings, not photographs of it.
+
 Replacing the generated set with real photographs of the actual chamber is the
-single biggest improvement left. Drop a file in under the same name and it
-takes over — no code change.
+single biggest improvement left. Drop a file in under the same name and it takes
+over — no code change. The photograph supplied so far cannot be used: it carries
+a third party's "GrowBiz" watermark across the centre of the frame, which cannot
+be cropped out. The un-watermarked original is needed from whoever produced it.
 
 **Deliberately empty.** These render a designed fallback rather than a guess:
 
