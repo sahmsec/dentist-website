@@ -5,9 +5,17 @@
 This matters, so it is stated plainly.
 
 **Photographs of Dr. Arman** — every one is a real photograph of him, cropped
-from the three originals kept in `_source/`. None is generated, and none should
-be. `hero-dr-arman.jpg`, `dr-arman-portrait.jpg`, `dr-arman-about.jpg`,
+from the originals kept in `_source/`. None is generated, and none should be.
+`hero-dr-arman.jpg`, `dr-arman-portrait.jpg`, `dr-arman-about.jpg`,
 `team-arman.jpg`, `why-qualified.jpg`.
+
+`why-painless.jpg` is a real clinical photograph of him treating a patient —
+the only one on the site showing actual treatment, and the most credible image
+here for that reason. **The patient consented to its use.** It is cropped from
+`_source/treatment-real.jpg` at full frame and colour-corrected (the chamber's
+yellow wall photographs far more saturated than it looks in the room). If that
+consent is ever withdrawn, delete the file — the pane falls back to a branded
+panel and nothing else breaks.
 
 **Environments and equipment** — generated with FLUX.1-schnell via
 `scripts/generate-images.ps1`. These are illustrative: clean clinical rooms and
