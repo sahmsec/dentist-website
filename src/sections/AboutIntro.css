@@ -22,7 +22,10 @@
      dimensions set the inline aspect-ratio stops applying and object-fit does
      the cropping instead — held high in the frame so it never takes his head. */
   height: clamp(180px, 46vw, 240px);
-  object-position: 50% 12%;
+  /* His hairline sits at ~7% of this crop. At 12% the mobile letterbox clipped
+     the top of his head by a few pixels; 6% keeps clear headroom at every box
+     ratio this photo gets rendered into. */
+  object-position: 50% 6%;
   border-radius: var(--r-sm) var(--r-xl) var(--r-xl);
 }
 
