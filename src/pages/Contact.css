@@ -1,0 +1,250 @@
+/* ── Reach out: the headline and the number, beside the three channels ─────── */
+.contact-reach__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+  align-items: start;
+}
+
+.contact-reach__intro {
+  display: grid;
+  gap: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+}
+
+.contact-reach__dial {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  background: var(--white);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-reach__dial-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--body);
+}
+
+/* The single loudest element on the page — sized like a headline, and a real
+   tel: link so a phone dials it on tap. */
+.contact-reach__number {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  color: var(--navy);
+  transition: color var(--t) var(--ease);
+}
+
+.contact-reach__number:hover {
+  color: var(--accent-strong);
+}
+
+.contact-reach__number-icon {
+  width: 52px;
+  height: 52px;
+  transition: transform var(--t) var(--ease);
+}
+
+.contact-reach__number:hover .contact-reach__number-icon {
+  transform: rotate(-12deg);
+}
+
+.contact-reach__actions {
+  gap: 12px;
+  margin-top: 2px;
+}
+
+/* ── The three channel cards ───────────────────────────────────────────────── */
+.contact-reach__cards {
+  display: grid;
+  gap: clamp(1rem, 0.6rem + 1.4vw, 1.5rem);
+}
+
+.contact-card {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  /* `translate`, not `transform`: .reveal.is-in resets transform to none. */
+  transition: translate var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+
+.contact-card:hover {
+  translate: 0 -6px;
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-card__icon {
+  margin-bottom: 6px;
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.contact-card:hover .contact-card__icon {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.contact-card__label {
+  font-size: var(--fs-h4);
+  color: var(--ink);
+}
+
+.contact-card__value {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--body);
+  /* The email address is long enough to overflow a narrow card. */
+  overflow-wrap: anywhere;
+}
+
+/* Two up, with the third spanning the pair, so the block squares off against
+   the headline column instead of running away down the page. */
+@media (min-width: 1101px) {
+  .contact-reach__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-reach__cards > li:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Hours and map ─────────────────────────────────────────────────────────── */
+.contact-detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1.5rem, 0.8rem + 2.6vw, 2.5rem);
+  align-items: stretch;
+}
+
+.contact-hours {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 18px;
+  /* The section behind it is white too, so the card needs depth to read. */
+  box-shadow: var(--shadow-md);
+}
+
+.contact-hours__title {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
+}
+
+.contact-hours__rows {
+  display: grid;
+  width: 100%;
+}
+
+.contact-hours__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  padding-block: 14px;
+  border-top: 1px solid var(--hairline-soft);
+}
+
+.contact-hours__row:last-child {
+  border-bottom: 1px solid var(--hairline-soft);
+}
+
+.contact-hours__days {
+  font-size: var(--fs-sm);
+  color: var(--body);
+}
+
+.contact-hours__time {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.contact-hours__note {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  color: var(--accent-ink);
+}
+
+.contact-hours__address {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contact-hours__address-icon {
+  margin-top: 2px;
+}
+
+.contact-hours__address-text {
+  font-style: normal;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--body);
+}
+
+/* ── Map ───────────────────────────────────────────────────────────────────── */
+.contact-map {
+  min-height: 420px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--surface-2);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 0;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .contact-reach__grid,
+  .contact-detail__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-reach__cards {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  }
+
+  .contact-map,
+  .contact-map iframe {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-reach__actions {
+    width: 100%;
+  }
+
+  .contact-reach__actions .btn {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,138 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   Measured from the reference dental theme and re-authored here. Every colour,
+   size, radius and duration used anywhere in the site resolves to one of these
+   — nothing downstream hard-codes a hex value.
+
+   Two palettes ship. The default matches the reference (warm yellow on deep
+   navy). To switch the whole site to the teal of Dr. Arman's existing print
+   branding, put data-palette="teal" on <html> in index.html. That is the only
+   edit required — every surface, button, icon tile and shadow follows.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand ─────────────────────────────────────────────────────────────── */
+  --accent: #ffd152;
+  --accent-rgb: 255, 209, 82;
+  --accent-strong: #f7c02c;   /* hover / pressed */
+  --accent-soft: #fff2cc;     /* tints, wash backgrounds */
+  --accent-ink: #09243c;      /* text that sits ON accent */
+
+  --navy: #09243c;
+  --navy-rgb: 9, 36, 60;
+  --navy-soft: #12304a;       /* raised surfaces inside dark sections */
+
+  /* ── Text ──────────────────────────────────────────────────────────────── */
+  --ink: #081b38;             /* headings */
+  --ink-muted: rgba(8, 27, 56, 0.7);
+  --body: #696f6f;            /* paragraphs */
+  --body-on-dark: rgba(255, 255, 255, 0.72);
+  --menu: #001837;
+
+  /* ── Surfaces ──────────────────────────────────────────────────────────── */
+  --surface: #f1f5f9;         /* page background */
+  --surface-2: #e8eef5;       /* subtle inset */
+  --white: #ffffff;
+  --hairline: rgba(9, 36, 60, 0.15);
+  --hairline-soft: rgba(9, 36, 60, 0.08);
+  --hairline-on-dark: rgba(255, 255, 255, 0.14);
+
+  /* ── Type ──────────────────────────────────────────────────────────────── */
+  --font-display: 'Onest', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+
+  /* Fluid scale: clamp(min, preferred, max) so nothing overflows on a phone
+     and nothing looks undersized on a 1440px screen. */
+  --fs-display: clamp(2.75rem, 1.4rem + 5.4vw, 4.5rem);   /*  44 → 72  page titles */
+  --fs-h1: clamp(2.35rem, 1.3rem + 4.2vw, 3.625rem);      /*  38 → 58  hero        */
+  --fs-h2: clamp(2rem, 1.15rem + 3.4vw, 3.625rem);        /*  32 → 58  section     */
+  --fs-h3: clamp(1.35rem, 1.1rem + 0.9vw, 1.625rem);      /*  22 → 26  card        */
+  --fs-h4: clamp(1.15rem, 1rem + 0.5vw, 1.25rem);         /*  18 → 20  small card  */
+  --fs-numeral: clamp(3.25rem, 1.5rem + 6.5vw, 5.5rem);   /*  52 → 88  counters    */
+  --fs-lede: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);   /*  17 → 19             */
+  --fs-body: 1.0625rem;                                    /*  17                  */
+  --fs-sm: 1rem;                                           /*  16                  */
+  --fs-xs: 0.8125rem;                                      /*  13  eyebrow / meta  */
+  --fs-nav: 0.875rem;                                      /*  14                  */
+
+  --lh-tight: 1.05;
+  --lh-heading: 1.24;
+  --lh-body: 1.7;
+
+  --ls-eyebrow: 0.0625em;    /* 1px at 13-14px — the reference tracking */
+
+  /* ── Geometry ──────────────────────────────────────────────────────────── */
+  --container: 1320px;
+  --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 1.875rem);   /* 20 → 30 */
+  --section-y: clamp(3.5rem, 1.6rem + 7.6vw, 7.5rem);   /* 56 → 120 vertical rhythm */
+
+  --nav-h: 80px;
+  --nav-h-sticky: 68px;
+
+  /* Radii. The last three are the reference's signature asymmetric shapes —
+     they are what make the layout read as this design rather than generic. */
+  --r-sm: 10px;
+  --r-md: 20px;
+  --r-lg: 30px;
+  --r-xl: 50px;
+  --r-2xl: 60px;
+  --r-pill: 999px;
+  --r-curve: clamp(60px, 10vw, 150px);   /* the depth of the signature curve  */
+  --r-panel: clamp(40px, 6vw, 80px);     /* inset panels: titlebar, dark bands */
+
+  --r-card: 30px 30px var(--r-curve) var(--r-curve);
+  --r-band: 0 0 var(--r-curve) var(--r-curve);
+  --r-band-top: var(--r-curve) var(--r-curve) 0 0;
+  --r-media: 10px clamp(70px, 12vw, 170px) clamp(70px, 12vw, 170px);
+
+  /* ── Depth ─────────────────────────────────────────────────────────────── */
+  --shadow-sm: 0 2px 8px rgba(9, 36, 60, 0.05);
+  --shadow-md: 0 10px 30px rgba(9, 36, 60, 0.07);
+  --shadow-lg: 0 24px 60px rgba(9, 36, 60, 0.11);
+  --shadow-accent: 0 12px 28px rgba(var(--accent-rgb), 0.42);
+
+  /* ── Motion ────────────────────────────────────────────────────────────── */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 160ms;
+  --t: 280ms;
+  --t-slow: 620ms;
+
+  /* ── Layering ──────────────────────────────────────────────────────────── */
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-callbar: 90;
+}
+
+/* ── Alternate palette: the teal of the existing print/Facebook branding ────
+   Activate with <html data-palette="teal">. Yellow survives as a small
+   highlight so the accent role in the layout is never left empty. */
+:root[data-palette='teal'] {
+  --accent: #0e5b56;
+  --accent-rgb: 14, 91, 86;
+  --accent-strong: #0a4a46;
+  --accent-soft: #d9ebe9;
+  --accent-ink: #ffffff;
+
+  --navy: #06322f;
+  --navy-rgb: 6, 50, 47;
+  --navy-soft: #0b423e;
+
+  --ink: #06322f;
+  --ink-muted: rgba(6, 50, 47, 0.7);
+  --menu: #06322f;
+
+  --surface: #f2f6f5;
+  --surface-2: #e6eeed;
+  --hairline: rgba(6, 50, 47, 0.15);
+  --hairline-soft: rgba(6, 50, 47, 0.08);
+
+  --shadow-accent: 0 12px 28px rgba(14, 91, 86, 0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 1ms;
+    --t: 1ms;
+    --t-slow: 1ms;
+  }
+}

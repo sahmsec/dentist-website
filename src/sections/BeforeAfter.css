@@ -1,0 +1,150 @@
+.before-after__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 0.5rem + 2vw, 1.875rem);
+  margin: 0;
+  margin-top: clamp(2.25rem, 1rem + 4vw, 4rem);
+}
+
+.before-after__card {
+  height: 100%;
+  padding: 16px;
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+/* ── Comparison slider ─────────────────────────────────────────────────────── */
+.before-after__frame {
+  --pos: 50%;
+  position: relative;
+  overflow: hidden;
+  /* The frame sits 16px inside a 30px card, so its radius is the card's less
+     that padding — otherwise the two curves fight each other. */
+  border-radius: calc(var(--r-lg) - 16px);
+  background: var(--surface-2);
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+  /* Horizontal drags belong to the slider; vertical ones still scroll. */
+  touch-action: pan-y;
+}
+
+.before-after__frame .photo {
+  width: 100%;
+  pointer-events: none;
+}
+
+.before-after__reveal {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+.before-after__reveal .photo {
+  height: 100%;
+  object-fit: cover;
+}
+
+.before-after__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  display: grid;
+  place-items: center;
+  width: 3px;
+  margin-left: -1.5px;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.before-after__grip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--t) var(--ease);
+}
+
+.before-after__frame:hover .before-after__grip {
+  transform: scale(1.06);
+}
+
+/* Icons.jsx ships a single chevron; rotating it either way gives the pair. */
+.before-after__chev--l { transform: rotate(90deg); }
+.before-after__chev--r { transform: rotate(-90deg); }
+
+/* The range input is the keyboard control, so its focus ring has to appear on
+   the grip the sighted user is actually looking at. */
+.before-after__range:focus-visible ~ .before-after__handle .before-after__grip {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+.before-after__tag {
+  position: absolute;
+  top: 14px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.before-after__tag--before {
+  left: 14px;
+  background: rgba(var(--navy-rgb), 0.78);
+  color: var(--white);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.before-after__tag--after {
+  right: 14px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ── Caption ───────────────────────────────────────────────────────────────── */
+.before-after__meta {
+  display: grid;
+  gap: 8px;
+  padding: 0 14px 14px;
+}
+
+.before-after__meta p {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .before-after__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .before-after__grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 460px;
+    margin-inline: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .before-after__frame:hover .before-after__grip {
+    transform: none;
+  }
+}

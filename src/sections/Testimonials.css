@@ -1,0 +1,175 @@
+/* Dark inset panel: the light page shows through around it, which is what gives
+   the deep corner radii something to read against. */
+.testimonials__panel {
+  background: var(--navy);
+  border-radius: var(--r-panel);
+  padding: clamp(2.5rem, 1.2rem + 5vw, 5rem) clamp(1.25rem, 0.2rem + 4.2vw, 4rem);
+}
+
+.testimonials__slider { margin-top: clamp(2rem, 1rem + 3vw, 3.5rem); }
+
+.testimonials__viewport { overflow: hidden; }
+
+/* One card per view. The track is exactly as wide as the viewport, so a slide
+   is 100% of it and one step along is that slide plus the gap after it. */
+.testimonials__track {
+  --slide-gap: clamp(1rem, 0.4rem + 1.8vw, 1.875rem);
+
+  display: flex;
+  gap: var(--slide-gap);
+  transform: translateX(calc((-100% - var(--slide-gap)) * var(--index, 0)));
+  transition: transform var(--t-slow) var(--ease);
+}
+
+.testimonials__slide {
+  display: flex;
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+/* Two per view. A slide is now half the viewport less the gap between the pair,
+   so one step is half of (viewport + gap). */
+@media (min-width: 900px) {
+  .testimonials__track {
+    transform: translateX(calc((-100% - var(--slide-gap)) / 2 * var(--index, 0)));
+  }
+
+  .testimonials__slide { flex: 0 0 calc((100% - var(--slide-gap)) / 2); }
+}
+
+/* ── Card ──────────────────────────────────────────────────────────────────── */
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
+  padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--hairline-on-dark);
+  border-radius: var(--r-lg);
+}
+
+.testimonial-card__glyph { color: var(--accent); }
+
+.testimonial-card__stars {
+  display: flex;
+  gap: 4px;
+  color: var(--accent);
+}
+
+.testimonial-card__quote {
+  color: var(--white);
+  font-size: var(--fs-lede);
+  line-height: 1.6;
+}
+
+/* Pushed down so the attribution lines up across a pair of unequal quotes. */
+.testimonial-card__rule {
+  width: 100%;
+  margin-top: auto;
+}
+
+.testimonial-card__person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Two classes deep so this wins over the `width: 100%` on .photo regardless of
+   which stylesheet the bundler emits first. */
+.testimonial-card .testimonial-card__avatar {
+  width: 56px;
+  flex: none;
+}
+
+.testimonial-card__name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  line-height: 1.3;
+  color: var(--white);
+}
+
+.testimonial-card__context {
+  display: block;
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Controls ──────────────────────────────────────────────────────────────── */
+.testimonials__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+}
+
+.testimonials__arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  transition: background var(--t) var(--ease), color var(--t) var(--ease),
+              opacity var(--t) var(--ease);
+}
+
+.testimonials__arrow:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.testimonials__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.testimonials__dots {
+  display: flex;
+  align-items: center;
+  /* The buttons carry their own 44px of padding, so any gap here would push
+     them apart visually AND leave dead strips between the targets. */
+  gap: 0;
+}
+
+/* The button itself is the full 44x44 target and is transparent; the pill you
+   actually see is drawn by ::before at its centre. An earlier version inflated
+   a 10px button with a negative-inset pseudo-element, but neighbouring hit
+   areas then overlapped and the later sibling swallowed the earlier one's taps,
+   leaving the middle dots effectively 22x10. Real boxes tile instead. */
+.testimonials__dot {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  background: none;
+  border-radius: 0;
+}
+
+.testimonials__dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transition: background var(--t) var(--ease), width var(--t) var(--ease);
+}
+
+.testimonials__dot:hover::before { background: rgba(255, 255, 255, 0.5); }
+
+.testimonials__dot[aria-current='true']::before {
+  width: 28px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+}

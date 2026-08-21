@@ -1,0 +1,9 @@
+# Normalise to LF in the repository. The app is built inside a Linux container,
+# so CRLF creeping into shell scripts or the Dockerfile would break the build.
+* text=auto eol=lf
+
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.ico  binary

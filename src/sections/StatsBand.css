@@ -1,0 +1,267 @@
+.stats-band__panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--r-panel);
+}
+
+/* The photo fills the panel: explicit width + height override the aspect-ratio
+   the Photo component sets inline, so the same markup works for the real image
+   and for the placeholder div that stands in until it is dropped in. */
+.stats-band__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.stats-band__media .photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.stats-band__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(var(--navy-rgb), 0.9) 0%,
+    rgba(var(--navy-rgb), 0.5) 100%
+  );
+}
+
+.stats-band__body {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Upper area ────────────────────────────────────────────────────────────── */
+.stats-band__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+  align-items: stretch;
+  gap: clamp(2rem, 4vw, 3.75rem);
+  padding: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  padding-bottom: clamp(2.5rem, 1rem + 6vw, 6rem);
+  min-height: clamp(320px, 34vw, 460px);
+}
+
+.stats-band__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* The band eyebrow keeps the white pill of the reference rather than the
+   translucent one `.on-dark` would otherwise give it. */
+.stats-band .eyebrow.stats-band__eyebrow {
+  background: var(--white);
+  color: var(--ink);
+}
+
+.stats-band__title {
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+/* ── Chamber hours card ────────────────────────────────────────────────────── */
+.stats-band__hours {
+  align-self: start;
+  display: grid;
+  /* An explicit shrinkable track. The implicit `auto` one takes its floor from
+     the widest child — the nowrap time, the pill — and would push the card past
+     its column on a phone instead of letting the children reflow. */
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  min-width: 0;
+  gap: 18px;
+  padding: 32px;
+  background: rgba(var(--navy-rgb), 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--hairline-on-dark);
+  border-radius: var(--r-md);
+}
+
+.stats-band__hours-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.stats-band__hours-title {
+  font-size: var(--fs-h4);
+  color: var(--white);
+}
+
+.stats-band__hours-badge {
+  background: rgba(var(--accent-rgb), 0.16);
+  color: var(--accent);
+}
+
+.stats-band__hours-list {
+  display: grid;
+  width: 100%;
+  margin: 0;
+}
+
+.stats-band__hours-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  /* The time is nowrap, so on a narrow card it drops to its own line rather
+     than setting a min-content floor the column cannot honour. */
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding-block: 12px;
+  border-top: 1px solid var(--hairline-on-dark);
+}
+
+.stats-band__hours-row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.stats-band__days {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--fs-sm);
+}
+
+.stats-band__time {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.stats-band .stats-band__note {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* .btn is nowrap, which at 320px is wider than the card it sits in. Inside this
+   card the label may break; everywhere wider it still sits on one line. */
+.stats-band__hours .btn {
+  max-width: 100%;
+  white-space: normal;
+}
+
+/* ── Counters ──────────────────────────────────────────────────────────────── */
+.stats-band__stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid var(--hairline-on-dark);
+}
+
+.stats-band__stat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  justify-items: center;
+  text-align: center;
+  padding: clamp(1.5rem, 1rem + 1.6vw, 2.5rem) clamp(0.75rem, 2vw, 1.5rem);
+  border-left: 1px solid var(--hairline-on-dark);
+}
+
+.stats-band__stat:first-child {
+  border-left: 0;
+}
+
+.stats-band .stats-band__value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-numeral);
+  line-height: 1;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.stats-band__suffix {
+  color: var(--accent);
+}
+
+.stats-band .stats-band__label {
+  max-width: 20ch;
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+  /* Two lines is the reference's shape; a longer label truncates rather than
+     pushing the columns out of alignment. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  /* minmax(0, 1fr), not 1fr: a bare 1fr floors the track at its min-content,
+     which the nowrap hours card would blow straight past. */
+  .stats-band__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stats-band__intro {
+    justify-content: flex-start;
+  }
+
+  .stats-band__title {
+    max-width: 20ch;
+  }
+
+  .stats-band__hours {
+    justify-self: stretch;
+    max-width: 420px;
+  }
+}
+
+/* Four across only once the container is at its full width. Below that a cell
+   is narrower than the widest numeral — "5,000+" at the display size is ~293px
+   and cannot break — so the counters run into each other. Two columns instead. */
+@media (max-width: 1320px) {
+  .stats-band__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats-band__stat {
+    border-top: 1px solid var(--hairline-on-dark);
+  }
+
+  /* Redraw the edges for a 2×2: no rule above the first row, none left of
+     the first column. */
+  .stats-band__stat:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .stats-band__stat:nth-child(odd) {
+    border-left: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .stats-band__hours {
+    padding: 24px;
+  }
+}
+
+/* Two columns of counters leave ~110px of text width here. A grouped numeral
+   like "5,000+" has no break opportunity, so it is the type size that gives. */
+@media (max-width: 460px) {
+  .stats-band .stats-band__value {
+    font-size: var(--fs-h2);
+  }
+
+  .stats-band__stat {
+    padding-inline: 10px;
+  }
+}

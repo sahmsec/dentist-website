@@ -1,0 +1,85 @@
+# Dev + prod for the Dr. Arman Kayser portfolio site.
+#
+#   docker compose up web          -> http://localhost:5174  (Vite dev server, HMR)
+#   docker compose up --build site -> http://localhost:8080  (nginx, production bundle)
+#
+# Everything — npm install, package lifecycle scripts, the dev server — runs
+# inside the container as an unprivileged user. The Windows host never executes
+# npm package code and never gets a node_modules tree written into it.
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    image: dentist-portfolio:dev
+    container_name: dentist-web
+    init: true
+    user: "node"
+    ports:
+      # Loopback only — never exposed to the LAN. The host port is overridable
+      # because VS Code and other tools commonly squat on 5173 already:
+      #   WEB_PORT=5180 docker compose up web
+      - "127.0.0.1:${WEB_PORT:-5174}:5173"
+    volumes:
+      - ./src:/app/src:rw
+      - ./public:/app/public:rw
+      - ./index.html:/app/index.html:rw
+      - ./vite.config.js:/app/vite.config.js:ro
+      - ./package.json:/app/package.json:ro
+      - node_modules:/app/node_modules   # container-only; never touches the host
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true         # Windows bind mounts emit no inotify events
+      # The browser reaches the dev server on the host port, not 5173, so the
+      # HMR websocket has to be pointed at the same number vite.config.js reads.
+      - WEB_PORT=${WEB_PORT:-5174}
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2g
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:5173/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  site:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: prod
+    image: dentist-portfolio:prod
+    container_name: dentist-site
+    init: true
+    profiles: ["prod"]
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true                      # static bundle: nothing needs to be written
+    tmpfs:
+      - /tmp:size=16m
+      - /var/cache/nginx:size=32m
+      - /var/run:size=8m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256m
+    restart: unless-stopped
+
+volumes:
+  node_modules:

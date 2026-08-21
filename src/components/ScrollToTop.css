@@ -1,0 +1,48 @@
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  /* Clears the fixed call bar on phones, and the home-indicator strip under it. */
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 88px);
+  /* Above the call bar, below the header — a pinned nav must never be covered. */
+  z-index: calc(var(--z-header) - 1);
+
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-md);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease),
+              background var(--t) var(--ease), visibility 0s linear var(--t);
+}
+
+/* Hidden means untabbable, so visibility flips only once the fade has finished. */
+.back-to-top.is-shown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease),
+              background var(--t) var(--ease), visibility 0s;
+}
+
+.back-to-top:hover {
+  background: var(--accent-strong);
+  box-shadow: var(--shadow-accent);
+}
+
+.back-to-top:active { transform: translateY(2px); }
+
+@media (min-width: 768px) {
+  .back-to-top {
+    right: 28px;
+    bottom: 28px;
+    width: 54px;
+    height: 54px;
+  }
+}

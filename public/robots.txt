@@ -1,0 +1,8 @@
+# Dr. Arman Kayser — Oral & Dental Surgeon, Shyamoli, Dhaka
+# Nothing on this site is private, so everything is open to crawlers.
+
+User-agent: *
+Allow: /
+
+# Update the host here if the site is published on another domain.
+Sitemap: https://drarmansdental.com/sitemap.xml

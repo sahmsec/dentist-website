@@ -1,0 +1,204 @@
+/* The contact row sits on white, so the dark block below it curves up out of
+   white — the same overlap move the light sections make over the dark bands. */
+.footer { background: var(--white); }
+
+.footer__main {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+  border-radius: var(--r-band-top);
+  padding-top: calc(var(--section-y) * 0.85);
+  color: var(--body-on-dark);
+}
+
+.footer__main > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer__watermark {
+  position: absolute;
+  right: -4%;
+  bottom: -12%;
+  line-height: 0;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.footer__watermark .logo-mark {
+  width: clamp(220px, 36vw, 420px);
+  height: auto;
+}
+
+/* ── Columns ───────────────────────────────────────────────────────────────── */
+.footer__cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.25rem, 1.2rem + 3vw, 3.5rem);
+}
+
+@media (min-width: 620px) {
+  .footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer__col--brand { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1024px) {
+  .footer__cols {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1.35fr);
+  }
+  .footer__col--brand { grid-column: auto; }
+}
+
+.footer__col { min-width: 0; }
+
+.footer__heading {
+  font-size: var(--fs-h4);
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+/* ── Brand column ──────────────────────────────────────────────────────────── */
+.footer__col--brand { display: grid; justify-items: start; gap: 18px; }
+
+.footer__tagline {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lede);
+  color: var(--accent);
+}
+
+.footer__blurb {
+  max-width: 38ch;
+  font-size: var(--fs-sm);
+}
+
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.footer__social-link {
+  background: color-mix(in srgb, var(--white) 10%, transparent);
+  color: var(--white);
+}
+
+.footer__social-link:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(-3px);
+}
+
+/* ── Link columns ──────────────────────────────────────────────────────────── */
+.footer__links { display: grid; gap: 13px; }
+
+.footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fs-sm);
+  color: var(--body-on-dark);
+  transition: color var(--t) var(--ease), gap var(--t) var(--ease);
+}
+
+/* Echoes the eyebrow dot rather than a generic bullet. */
+.footer__links a::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.5;
+  transition: opacity var(--t) var(--ease);
+}
+
+.footer__links a:hover { color: var(--white); gap: 14px; }
+.footer__links a:hover::before { opacity: 1; }
+
+/* ── Hours column ──────────────────────────────────────────────────────────── */
+.footer__hours { display: grid; }
+
+.footer__hours li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding-block: 11px;
+  font-size: var(--fs-sm);
+}
+
+.footer__hours li + li { border-top: 1px solid var(--hairline-on-dark); }
+.footer__hours li:first-child { padding-top: 0; }
+
+.footer__hours-days { color: var(--body-on-dark); }
+
+.footer__hours-time {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.footer__emergency {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-block: 18px 22px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.footer__emergency svg { flex: none; }
+
+/* ── Bottom bar ────────────────────────────────────────────────────────────── */
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 30px;
+  margin-top: calc(var(--section-y) * 0.55);
+  padding-block: 26px;
+  border-top: 1px solid var(--hairline-on-dark);
+  font-size: var(--fs-sm);
+}
+
+.footer__copy { color: var(--body-on-dark); }
+
+.footer__address {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--body-on-dark);
+  transition: color var(--t) var(--ease);
+}
+
+.footer__address svg { flex: none; color: var(--accent); }
+.footer__address:hover { color: var(--white); }
+
+/* ── Touch targets ──────────────────────────────────────────────────────────
+   The footer link columns and the address line are ordinary text links, so
+   their hit area is only the line box — about 27px. Growing the block axis
+   brings each to the 44px minimum without moving the text, because the extra
+   height is absorbed by dropping the list's own row gap.
+
+   Scoped to the two text lists by name: a blanket `.footer__col li > a` also
+   caught the social discs, whose .icon-circle centring is grid-based and is
+   lost the moment something forces them to flex. */
+.footer__links li > a,
+.footer__hours li > a,
+.footer__address {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 44px;
+}
+
+.footer__links,
+.footer__hours { gap: 0; }

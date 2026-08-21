@@ -1,0 +1,56 @@
+/* Height of the bar itself, without the safe-area inset. Declared on :root so
+   the page-foot spacer below can reserve exactly the same amount. */
+:root { --call-bar-h: 62px; }
+
+.call-bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: var(--z-callbar);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Clears the iPhone home indicator without leaving a gap on devices that
+     have no inset to report. */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-shadow: 0 -6px 24px rgba(var(--navy-rgb), 0.18);
+}
+
+.call-bar__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: var(--call-bar-h);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1;
+  transition: background var(--t) var(--ease);
+}
+
+.call-bar__action svg { flex: none; }
+
+.call-bar__action--call {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.call-bar__action--call:active { background: var(--accent-strong); }
+
+.call-bar__action--whatsapp {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.call-bar__action--whatsapp:active { background: var(--navy-soft); }
+
+.call-bar :focus-visible { outline-offset: -6px; }
+
+/* The reserved strip at the foot of the page, sized to match the bar exactly. */
+body.has-call-bar {
+  padding-bottom: calc(var(--call-bar-h) + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 768px) {
+  .call-bar { display: none; }
+  body.has-call-bar { padding-bottom: 0; }
+}

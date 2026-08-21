@@ -1,0 +1,93 @@
+.contact-tiles {
+  padding-block: calc(var(--section-y) * 0.42);
+}
+
+.contact-tiles--white { background: var(--white); }
+.contact-tiles--surface { background: var(--surface); }
+
+.contact-tiles__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.contact-tiles__item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-block: 20px;
+  min-width: 0;
+}
+
+/* Stacked on a phone, the tiles are split by horizontal hairlines. The
+   breakpoints below swap those for vertical ones as columns appear. */
+.contact-tiles__item + .contact-tiles__item {
+  border-top: 1px solid var(--hairline-soft);
+}
+
+.contact-tiles__icon {
+  color: var(--accent-ink);
+}
+
+.contact-tiles__text {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.contact-tiles__label {
+  font-family: var(--font-display);
+  font-size: calc(var(--fs-xs) - 1px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--body);
+}
+
+.contact-tiles__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--navy);
+  /* The email address is one long token — let it break rather than push the
+     grid wider than the container. */
+  overflow-wrap: anywhere;
+}
+
+.contact-tiles__item:hover .contact-tiles__icon,
+.contact-tiles__item:focus-visible .contact-tiles__icon {
+  transform: translateY(-4px);
+  background: var(--accent-strong);
+}
+
+@media (min-width: 640px) {
+  .contact-tiles__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .contact-tiles__item {
+    padding-inline: clamp(1rem, 2.4vw, 1.875rem);
+    padding-block: 22px;
+  }
+
+  .contact-tiles__item + .contact-tiles__item { border-top: 0; }
+  .contact-tiles__item:nth-child(n + 3) { border-top: 1px solid var(--hairline-soft); }
+  .contact-tiles__item:nth-child(even) { border-left: 1px solid var(--hairline-soft); }
+
+  /* Flush the outer edges with the container so the row lines up with every
+     other section on the page. */
+  .contact-tiles__item:nth-child(odd) { padding-left: 0; }
+  .contact-tiles__item:nth-child(even) { padding-right: 0; }
+}
+
+@media (min-width: 1024px) {
+  .contact-tiles__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  .contact-tiles__item:nth-child(n + 3) { border-top: 0; }
+  .contact-tiles__item:nth-child(even) { border-left: 0; }
+  .contact-tiles__item + .contact-tiles__item { border-left: 1px solid var(--hairline-soft); }
+
+  .contact-tiles__item:nth-child(odd) { padding-left: clamp(1rem, 2.4vw, 1.875rem); }
+  .contact-tiles__item:nth-child(even) { padding-right: clamp(1rem, 2.4vw, 1.875rem); }
+  .contact-tiles__item:first-child { padding-left: 0; }
+  .contact-tiles__item:last-child { padding-right: 0; }
+}

@@ -1,0 +1,69 @@
+.photo {
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+}
+
+/* Shape variants used across the site. */
+.photo--circle { border-radius: 50%; aspect-ratio: 1; }
+.photo--drop   { border-radius: var(--r-card); }
+.photo--band   { border-radius: var(--r-band); }
+.photo--media  { border-radius: var(--r-media); }
+.photo--lg     { border-radius: var(--r-lg); }
+.photo--xl     { border-radius: var(--r-xl); }
+.photo--flat   { border-radius: 0; }
+.photo--fill   { height: 100%; }
+
+/* ── Placeholder shown until the real file is dropped into /public/images ──── */
+.photo--empty {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  color: rgba(var(--navy-rgb), 0.16);
+  background:
+    radial-gradient(120% 100% at 20% 0%, rgba(var(--accent-rgb), 0.5), transparent 62%),
+    linear-gradient(calc(145deg + var(--drift, 0deg)), var(--surface-2), var(--white));
+}
+
+/* Faint diagonal weave so a large empty slot still has surface texture. */
+.photo--empty::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(var(--navy-rgb), 0.035) 0 2px,
+    transparent 2px 11px
+  );
+}
+
+.photo__watermark {
+  width: clamp(56px, 26%, 128px);
+  height: auto;
+  z-index: 1;
+}
+
+.photo__slot {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1;
+  max-width: calc(100% - 24px);
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  background: rgba(var(--navy-rgb), 0.06);
+  color: rgba(var(--navy-rgb), 0.5);
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Inside a circular slot there is no room for the filename caption. */
+.photo--circle .photo__slot { display: none; }

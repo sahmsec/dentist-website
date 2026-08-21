@@ -1,0 +1,376 @@
+/* ── Top bar ───────────────────────────────────────────────────────────────────
+   Logo + the three contact blocks. It carries the page background rather than
+   white, so the white nav row below reads as a separate plate. Hidden on small
+   screens, where the same three blocks reappear inside the drawer. */
+.header__top { display: none; background: var(--surface); }
+
+.header__top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2.5rem);
+  padding-block: 18px;
+}
+
+.header__info-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.75rem);
+  min-width: 0;
+}
+
+.header__info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.header__info:hover .icon-circle {
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(-2px);
+}
+
+.header__info-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.header__info-label {
+  font-size: calc(var(--fs-xs) - 1px);
+  line-height: 1.4;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--body);
+}
+
+.header__info-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  line-height: 1.3;
+  color: var(--ink);
+  transition: color var(--t) var(--ease);
+}
+
+.header__info:hover .header__info-value { color: var(--accent-strong); }
+
+/* The chamber address is long. One line with an ellipsis keeps the topbar a
+   single row instead of letting one block grow taller than the other two. */
+.header__info--address .header__info-value {
+  max-width: 24ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Nav row ───────────────────────────────────────────────────────────────── */
+.header__bar {
+  position: relative;
+  z-index: var(--z-header);
+  background: var(--white);
+}
+
+.header__bar-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  height: var(--nav-h);
+  transition: height var(--t) var(--ease);
+}
+
+/* Past STICK_AT the row leaves the flow and pins itself; the spacer rendered
+   by Header.jsx takes over its height so the page never jumps. */
+.header__bar.is-stuck {
+  position: fixed;
+  inset: 0 0 auto;
+  box-shadow: var(--shadow-md);
+  animation: header-drop var(--t) var(--ease);
+}
+
+.header__bar.is-stuck .header__bar-inner { height: var(--nav-h-sticky); }
+
+@keyframes header-drop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+/* Only rendered below 992px — the topbar owns the logo above that. */
+.header__logo { flex: none; }
+
+.header__menu { display: none; }
+
+.header__menu-list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 2.2vw, 2.25rem);
+}
+
+.header__link {
+  position: relative;
+  display: inline-block;
+  padding-block: 8px;
+  font-family: var(--font-display);
+  font-size: var(--fs-nav);
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--menu);
+  transition: color var(--t) var(--ease);
+}
+
+.header__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t) var(--ease);
+}
+
+.header__link:hover { color: var(--ink); }
+.header__link:hover::after,
+.header__link.is-active::after { transform: scaleX(1); }
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.header__socials { display: none; }
+
+.header__social {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition: background var(--t) var(--ease), color var(--t) var(--ease),
+              box-shadow var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.header__social:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+/* Specificity 0-2-0 so this beats .btn { display: inline-flex } in base.css
+   regardless of the order the two stylesheets happen to be emitted in. */
+.header__actions .header__cta { display: none; }
+
+/* Below 992px the appointment pill collapses to the badge on its own — the
+   label is what goes, never the ability to dial. */
+.header__call {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+
+.header__call:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.header__burger {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.header__burger:hover { background: var(--accent); color: var(--accent-ink); }
+
+/* ── Mobile drawer ─────────────────────────────────────────────────────────── */
+.header__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: rgba(var(--navy-rgb), 0.55);
+  opacity: 0;
+  visibility: hidden;
+  /* visibility flips instantly on open and waits for the slide-out on close,
+     which keeps the panel out of the tab order while it is shut. */
+  transition: opacity var(--t) var(--ease), visibility 0s linear var(--t);
+}
+
+.header__backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--t) var(--ease), visibility 0s;
+}
+
+.header__drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: calc(var(--z-drawer) + 1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(360px, 88vw);
+  padding: 20px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 32px);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--r-lg) 0 0 var(--r-lg);
+  overflow-y: auto;
+  /* overflow-x would compute to auto beside overflow-y:auto, letting long
+     tokens scroll the panel sideways. clip forbids it outright. */
+  overflow-x: clip;
+  overscroll-behavior: contain;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform var(--t) var(--ease), visibility 0s linear var(--t);
+}
+
+.header__drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--t) var(--ease), visibility 0s;
+}
+
+.header__drawer-close {
+  display: grid;
+  place-items: center;
+  align-self: flex-end;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink);
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.header__drawer-close:hover { background: var(--navy); color: var(--white); }
+
+.header__drawer-nav ul {
+  display: grid;
+  gap: 4px;
+}
+
+.header__drawer-link {
+  display: block;
+  padding-block: 8px;
+  font-family: var(--font-display);
+  /* --fs-h3 resolves to ~22px at the widths the drawer is used at. */
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  transition: color var(--t) var(--ease), padding-left var(--t) var(--ease);
+}
+
+.header__drawer-link:hover { padding-left: 6px; }
+.header__drawer-link.is-active { color: var(--accent-strong); }
+
+.header__drawer-info {
+  display: grid;
+  gap: 18px;
+}
+
+/* Nothing to truncate against in a 360px panel — let the address wrap. */
+.header__drawer-info .header__info--address .header__info-value {
+  max-width: none;
+  white-space: normal;
+  overflow: visible;
+}
+
+/* An email address is a single unbroken token, so without an explicit break
+   opportunity it pushes the drawer wider than the viewport. min-width:0 lets
+   the grid/flex child actually shrink to its container. */
+.header__drawer-info .header__info { min-width: 0; }
+
+.header__drawer-info .header__info-text { min-width: 0; }
+
+.header__drawer-info .header__info-value {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.header__drawer-cta {
+  display: grid;
+  gap: 12px;
+}
+
+.header__drawer-cta .btn { width: 100%; }
+
+.header__drawer-social {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── Breakpoints ───────────────────────────────────────────────────────────── */
+@media (min-width: 992px) {
+  .header__top { display: block; }
+  .header__logo { display: none; }
+  .header__menu { display: block; }
+  .header__actions .header__cta { display: inline-flex; }
+  .header__call,
+  .header__burger { display: none; }
+  .header__backdrop,
+  .header__drawer { display: none; }
+}
+
+@media (min-width: 1200px) {
+  .header__socials {
+    display: flex;
+    gap: 8px;
+    margin-right: 8px;
+  }
+}
+
+/* ── Very narrow phones (≤360px) ────────────────────────────────────────────
+   At 320px the logo lockup plus the call button and burger exceed the line.
+   The subtitle is the least load-bearing element in the row, so it goes first
+   and the mark shrinks — the wordmark and both actions stay intact. */
+/* Drawer social icons are 36px in the row; a phone needs 44. */
+.header__drawer-social .header__social {
+  width: 44px;
+  height: 44px;
+}
+
+@media (max-width: 360px) {
+  .header__bar .container {
+    padding-inline: 14px;
+    gap: 10px;
+  }
+
+  .header__bar .logo { gap: 8px; min-width: 0; }
+  .header__bar .logo__sub { display: none; }
+  .header__bar .logo__name { font-size: 1.05rem; }
+  .header__bar .logo-mark { width: 34px; height: 34px; }
+
+  .header__actions { gap: 8px; }
+
+  /* 44 is the floor — shrink the gaps and the logo instead, never the targets. */
+  .header__call,
+  .header__burger { width: 44px; height: 44px; }
+}

@@ -1,0 +1,38 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity var(--t) var(--ease);
+}
+
+.logo:hover { opacity: 0.85; }
+
+.logo-mark { flex: none; }
+
+.logo__text {
+  display: grid;
+  line-height: 1.15;
+}
+
+.logo__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.logo__sub {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--body);
+}
+
+.logo--light .logo__name { color: var(--white); }
+.logo--light .logo__sub { color: rgba(255, 255, 255, 0.6); }
+
+/* The logo is a link; 38px of lockup height is under the tap minimum. */
+.logo { min-height: 44px; }

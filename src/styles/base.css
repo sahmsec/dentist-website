@@ -1,0 +1,421 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE + SHARED PRIMITIVES
+   Reset, typography, and the small vocabulary of classes every section reuses:
+   .container .section .eyebrow .section-head .btn .card .icon-circle .tile
+   Section-specific styling lives beside its component, never here.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h-sticky) + 20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--body);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video { display: block; max-width: 100%; }
+
+img { height: auto; }
+
+button,
+input,
+select,
+textarea { font: inherit; color: inherit; }
+
+button { cursor: pointer; background: none; border: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+ul, ol { list-style: none; padding: 0; }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Dark surfaces need the ring to be visible against them too. */
+.on-dark :focus-visible { outline-color: var(--accent); }
+
+/* ── Typography ────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); }
+h2 { font-size: var(--fs-h2); line-height: var(--lh-tight); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+
+p { text-wrap: pretty; }
+
+/* Accent-coloured words inside a headline — driven by `highlight` in site.js. */
+.hl { color: var(--accent); }
+
+:root[data-palette='teal'] .hl { color: var(--accent); }
+
+/* On a dark or photographic band, headings and copy invert. */
+.on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { color: var(--white); }
+.on-dark p { color: var(--body-on-dark); }
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.65;
+}
+
+.muted { color: var(--body); }
+
+/* Screen-reader-only, still focusable for the skip link. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0; left: 50%;
+  translate: -50% -140%;
+  z-index: 999;
+  padding: 12px 24px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 0 0 var(--r-sm) var(--r-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  transition: translate var(--t) var(--ease);
+}
+
+.skip-link:focus-visible { translate: -50% 0; }
+
+/* ── Layout ────────────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow { max-width: calc(880px + var(--gutter) * 2); }
+
+.section { padding-block: var(--section-y); }
+.section--tight { padding-block: calc(var(--section-y) * 0.62); }
+.section--flush-top { padding-top: 0; }
+.section--flush-bottom { padding-bottom: 0; }
+
+.section--dark {
+  background: var(--navy);
+  color: var(--body-on-dark);
+}
+
+.section--white { background: var(--white); }
+
+/* The signature move of this design language: a light block that overlaps the
+   band beneath it with a deep bottom radius. */
+.section--curve-bottom {
+  border-radius: var(--r-band);
+  position: relative;
+  z-index: 2;
+}
+
+.section--curve-top { border-radius: var(--r-band-top); }
+
+/* A band that runs edge to edge and carries the deep bottom curve. This is the
+   silhouette the reference uses for its accent, stats and closing bands — they
+   break out of the container while their contents stay inside one. */
+.band {
+  position: relative;
+  border-radius: var(--r-band);
+  overflow: hidden;
+}
+
+.band--accent { background: var(--accent); }
+.band--navy { background: var(--navy); }
+.band--top { border-radius: var(--r-band-top); }
+.band--both { border-radius: var(--r-curve); }
+
+.grid { display: grid; gap: clamp(1.25rem, 0.5rem + 2vw, 1.875rem); }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+
+/* ── Eyebrow pill ──────────────────────────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  /* .section-head is a grid, whose children stretch by default — without this
+     the pill spans the whole column instead of hugging its label. */
+  justify-self: start;
+  align-self: start;
+  width: fit-content;
+  padding: 9px 20px 9px 14px;
+  background: var(--white);
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+/* The half-filled dot glyph that precedes every eyebrow in this design. */
+.eyebrow::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+  background: linear-gradient(90deg, var(--accent) 50%, var(--accent-soft) 50%);
+}
+
+.eyebrow--bare {
+  background: none;
+  box-shadow: none;
+  padding-inline: 0;
+}
+
+.on-dark .eyebrow { background: rgba(255, 255, 255, 0.1); color: var(--white); }
+
+/* ── Section heading block ─────────────────────────────────────────────────── */
+.section-head { display: grid; gap: 18px; }
+
+.section-head--center {
+  justify-items: center;
+  text-align: center;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.section-head--center .eyebrow,
+.stack--center .eyebrow { justify-self: center; }
+
+.section-head--split {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 3.75rem);
+}
+
+@media (max-width: 900px) {
+  .section-head--split { grid-template-columns: 1fr; align-items: start; }
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────────────
+   Every button in this design is a pill carrying a circular arrow badge. The
+   badge is a real element (`.btn__icon`) so it can rotate on hover. */
+.btn {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--accent-ink);
+  --btn-badge-bg: var(--white);
+  --btn-badge-fg: var(--navy);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 30px 8px 8px;
+  min-height: 60px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background var(--t) var(--ease), transform var(--t) var(--ease),
+              box-shadow var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.btn__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--btn-badge-bg);
+  color: var(--btn-badge-fg);
+  transition: transform var(--t) var(--ease), background var(--t) var(--ease),
+              color var(--t) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn:hover .btn__icon { transform: rotate(45deg); }
+
+.btn:active { transform: translateY(0); }
+
+/* Variants */
+.btn--navy {
+  --btn-bg: var(--navy);
+  --btn-fg: var(--white);
+  --btn-badge-bg: var(--white);
+  --btn-badge-fg: var(--navy);
+}
+.btn--navy:hover { box-shadow: 0 12px 28px rgba(var(--navy-rgb), 0.3); }
+
+.btn--white {
+  --btn-bg: var(--white);
+  --btn-fg: var(--ink);
+  --btn-badge-bg: var(--accent);
+  --btn-badge-fg: var(--accent-ink);
+}
+.btn--white:hover { box-shadow: var(--shadow-lg); }
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink);
+  --btn-badge-bg: var(--accent);
+  --btn-badge-fg: var(--accent-ink);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.btn--ghost:hover { --btn-bg: var(--white); box-shadow: var(--shadow-md); }
+
+.on-dark .btn--ghost {
+  --btn-fg: var(--white);
+  box-shadow: inset 0 0 0 1px var(--hairline-on-dark);
+}
+.on-dark .btn--ghost:hover { --btn-bg: rgba(255, 255, 255, 0.08); }
+
+.btn--sm {
+  min-height: 48px;
+  padding: 6px 24px 6px 6px;
+  gap: 10px;
+  font-size: var(--fs-xs);
+}
+.btn--sm .btn__icon { width: 36px; height: 36px; }
+
+/* A text link that behaves like a button but reads as prose. */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  transition: color var(--t) var(--ease), gap var(--t) var(--ease);
+}
+
+.link-arrow__icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  transition: transform var(--t) var(--ease);
+}
+
+.link-arrow:hover { gap: 16px; }
+.link-arrow:hover .link-arrow__icon { transform: rotate(45deg); }
+
+.on-dark .link-arrow { color: var(--white); }
+
+/* ── Cards ─────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  padding: clamp(1.5rem, 1rem + 1.6vw, 2.25rem);
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+
+.card--hover:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+/* The signature service-card silhouette. */
+.card--drop { border-radius: var(--r-card); }
+
+.card--outline {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+
+/* ── Icon shapes ───────────────────────────────────────────────────────────── */
+.icon-circle {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  transition: background var(--t) var(--ease), color var(--t) var(--ease),
+              transform var(--t) var(--ease);
+}
+
+.icon-circle--accent { background: var(--accent); color: var(--accent-ink); }
+.icon-circle--sm { width: 44px; height: 44px; }
+.icon-circle--lg { width: 72px; height: 72px; }
+
+/* The rounded-square tile used by the contact row. */
+.icon-tile {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex: none;
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  color: var(--accent-ink);
+  transition: transform var(--t) var(--ease), background var(--t) var(--ease);
+}
+
+/* ── Utility ───────────────────────────────────────────────────────────────── */
+.stack { display: grid; gap: 18px; justify-items: start; }
+.stack--center { justify-items: center; text-align: center; }
+.row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.hairline { height: 1px; background: var(--hairline-soft); border: 0; }
+.on-dark .hairline { background: var(--hairline-on-dark); }
+
+/* Reveal-on-scroll. The hook adds `is-in` once the element enters the viewport;
+   without JS or with reduced motion the content is simply already visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}

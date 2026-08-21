@@ -1,0 +1,143 @@
+/* The band runs edge to edge, so the vertical rhythm below it lives on the
+   section rather than on a .section wrapper whose padding would split the
+   colour into a stripe. The section above supplies the space overhead. */
+.cta-band { padding-bottom: var(--section-y); }
+
+/* Colour, radius and clipping come from the .band primitive. The stacking
+   context is local: it is what lets the watermark sit behind the content but
+   still in front of the yellow. */
+.cta-band__band {
+  isolation: isolate;
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+.cta-band__inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1.75rem, 1rem + 3vw, 3.5rem);
+}
+
+@media (max-width: 900px) {
+  .cta-band__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  }
+}
+
+/* Line-art tooth bled into the right third and clipped by the band's curve. */
+.cta-band__watermark {
+  position: absolute;
+  z-index: -1;
+  right: 4%;
+  bottom: -14%;
+  width: clamp(150px, 24%, 300px);
+  height: auto;
+  color: var(--navy);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .cta-band__watermark {
+    right: -6%;
+    bottom: -8%;
+    width: 190px;
+  }
+}
+
+/* ── Rating ────────────────────────────────────────────────────────────────── */
+.cta-band__rating {
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+
+.cta-band__avatars { display: flex; }
+
+.cta-band__avatars .cta-band__avatar {
+  width: 48px;
+  flex: none;
+  /* A ring rather than a border, so the 48px circle is not eaten into. */
+  box-shadow: 0 0 0 3px var(--white);
+}
+
+.cta-band__avatars .cta-band__avatar + .cta-band__avatar { margin-left: -14px; }
+
+.cta-band__score {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--navy);
+}
+
+.cta-band__score-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1;
+}
+
+.cta-band__stars {
+  display: flex;
+  gap: 3px;
+  color: var(--navy);
+}
+
+.cta-band__note {
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: rgba(var(--navy-rgb), 0.7);
+}
+
+/* ── Message ───────────────────────────────────────────────────────────────── */
+.cta-band__eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: rgba(var(--navy-rgb), 0.72);
+}
+
+/* A notch under --fs-h2: this headline shares its row with two other columns,
+   so it tops out lower than a standalone section title. */
+.cta-band__title {
+  margin-top: 12px;
+  font-size: clamp(1.625rem, 1rem + 2.2vw, 2.375rem);
+  color: var(--navy);
+}
+
+/* ── Actions ───────────────────────────────────────────────────────────────── */
+.cta-band__actions {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+@media (min-width: 901px) {
+  .cta-band__actions {
+    justify-self: end;
+    justify-items: end;
+    text-align: right;
+  }
+}
+
+/* inline-flex + min-height so the tel: link is a 44px-tall target on a phone,
+   not just the height of its own text. */
+.cta-band__phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--navy-rgb), 0.3);
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--t) var(--ease);
+}
+
+.cta-band__phone:hover { text-decoration-color: var(--navy); }

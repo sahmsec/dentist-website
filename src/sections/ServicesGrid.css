@@ -1,0 +1,56 @@
+.services-grid__head { margin-bottom: clamp(2.25rem, 1.4rem + 2.6vw, 3.75rem); }
+
+/* The split head hangs its copy and its action in one column; the button needs
+   air beneath the paragraph rather than sitting on its baseline. */
+.services-grid__head .section-head__aside {
+  display: grid;
+  justify-items: start;
+  gap: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+
+/* Reveal wraps each card, so the wrapper is the grid item and has to stretch
+   for the cards in a row to end up the same height. */
+.services-grid__item { display: flex; }
+
+.service-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 0.6rem + 0.5vw, 1rem);
+  padding: clamp(24px, 3vw, 36px);
+}
+
+.service-card__title { font-size: var(--fs-h3); }
+
+.service-card__summary {
+  color: var(--body);
+  font-size: var(--fs-sm);
+}
+
+/* The photo takes whatever room is left, so cards carrying different amounts of
+   copy still line their circles up across the row. It bleeds out to the card's
+   edges — at this size the circle is the card's main mass, and the deep bottom
+   radius is what crops it. */
+.service-card__media {
+  position: relative;
+  margin-top: auto;
+  margin-inline: calc(clamp(24px, 3vw, 36px) * -0.55);
+  margin-bottom: calc(clamp(24px, 3vw, 36px) * -0.35);
+}
+
+/* Pinned to the circle's upper-right, at the 45° point rather than the corner
+   of its box, so the badge sits on the edge instead of floating off it. */
+.service-card__badge {
+  position: absolute;
+  top: 13%;
+  left: 86%;
+  translate: -50% -50%;
+  box-shadow: 0 0 0 6px var(--white);
+  transition: rotate var(--t) var(--ease), background var(--t) var(--ease);
+}
+
+.service-card:hover .service-card__badge,
+.service-card:focus-visible .service-card__badge {
+  background: var(--accent-strong);
+  rotate: 10deg;
+}
