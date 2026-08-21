@@ -38,10 +38,15 @@ export default function ServicesGrid({ limit }) {
           {shown.map((service, i) => (
             <Reveal className="services-grid__item" key={service.slug} delay={i * 90}>
               {/* The whole card is the link, so the hover target matches what
-                  the lift makes it look like. */}
+                  the lift makes it look like. Title and summary stay first in
+                  the DOM — on a phone the grid areas move the photo to the left
+                  of them, which is a purely visual reorder the single focus
+                  stop cannot get out of step with. */}
               <Link to="/services" className="card card--drop card--hover service-card">
-                <h3 className="service-card__title">{service.title}</h3>
-                <p className="service-card__summary">{service.summary}</p>
+                <div className="service-card__text">
+                  <h3 className="service-card__title">{service.title}</h3>
+                  <p className="service-card__summary">{service.summary}</p>
+                </div>
 
                 <div className="service-card__media">
                   <Photo

@@ -1,23 +1,41 @@
-.services-grid__head { margin-bottom: clamp(2.25rem, 1.4rem + 2.6vw, 3.75rem); }
+/* Phone layout is the default here; the tall photo-led card is the override
+   further down, from 768px up. */
+
+.services-grid__head { margin-bottom: 1.5rem; }
 
 /* The split head hangs its copy and its action in one column; the button needs
    air beneath the paragraph rather than sitting on its baseline. */
 .services-grid__head .section-head__aside {
   display: grid;
   justify-items: start;
-  gap: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  gap: 1rem;
 }
+
+.services-grid__list { gap: 14px; }
 
 /* Reveal wraps each card, so the wrapper is the grid item and has to stretch
    for the cards in a row to end up the same height. */
 .services-grid__item { display: flex; }
 
+/* Photo left, copy right. Grid areas rather than DOM order, so the heading
+   still comes first to a screen reader. */
 .service-card {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.75rem, 0.6rem + 0.5vw, 1rem);
-  padding: clamp(24px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: 'media text';
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  /* The signature drop silhouette, held to one corner: two deep bottom curves
+     would swallow a card this short. */
+  border-radius: var(--r-md) var(--r-md) var(--r-xl) var(--r-md);
+}
+
+.service-card__text {
+  grid-area: text;
+  display: grid;
+  gap: 4px;
 }
 
 .service-card__title { font-size: var(--fs-h3); }
@@ -25,17 +43,13 @@
 .service-card__summary {
   color: var(--body);
   font-size: var(--fs-sm);
+  line-height: 1.45;
 }
 
-/* The photo takes whatever room is left, so cards carrying different amounts of
-   copy still line their circles up across the row. It bleeds out to the card's
-   edges — at this size the circle is the card's main mass, and the deep bottom
-   radius is what crops it. */
 .service-card__media {
+  grid-area: media;
   position: relative;
-  margin-top: auto;
-  margin-inline: calc(clamp(24px, 3vw, 36px) * -0.55);
-  margin-bottom: calc(clamp(24px, 3vw, 36px) * -0.35);
+  width: 96px;
 }
 
 /* Pinned to the circle's upper-right, at the 45° point rather than the corner
@@ -45,12 +59,57 @@
   top: 13%;
   left: 86%;
   translate: -50% -50%;
-  box-shadow: 0 0 0 6px var(--white);
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 0 0 4px var(--white);
   transition: rotate var(--t) var(--ease), background var(--t) var(--ease);
 }
+
+.service-card__badge svg { width: 19px; height: 19px; }
 
 .service-card:hover .service-card__badge,
 .service-card:focus-visible .service-card__badge {
   background: var(--accent-strong);
   rotate: 10deg;
+}
+
+/* ── Tablet and up: the photo-led card ─────────────────────────────────────── */
+@media (min-width: 768px) {
+  .services-grid__head { margin-bottom: clamp(2.25rem, 1.4rem + 2.6vw, 3.75rem); }
+
+  .services-grid__head .section-head__aside { gap: clamp(1.25rem, 1rem + 1vw, 1.75rem); }
+
+  .services-grid__list { gap: clamp(1.25rem, 0.5rem + 2vw, 1.875rem); }
+
+  .service-card {
+    grid-template-columns: minmax(0, 1fr);
+    /* The media row takes whatever room is left, so cards carrying different
+       amounts of copy still line their circles up across the row. */
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 'text' 'media';
+    align-items: end;
+    gap: clamp(0.75rem, 0.6rem + 0.5vw, 1rem);
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: var(--r-card);
+  }
+
+  .service-card__text { gap: clamp(0.75rem, 0.6rem + 0.5vw, 1rem); }
+
+  .service-card__summary { line-height: var(--lh-body); }
+
+  /* The circle bleeds out to the card's edges — at this size it is the card's
+     main mass, and the deep bottom radius is what crops it. */
+  .service-card__media {
+    width: auto;
+    margin-inline: calc(clamp(24px, 3vw, 36px) * -0.55);
+    margin-bottom: calc(clamp(24px, 3vw, 36px) * -0.35);
+  }
+
+  .service-card__badge {
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 0 0 6px var(--white);
+  }
+
+  .service-card__badge svg { width: 26px; height: 26px; }
 }

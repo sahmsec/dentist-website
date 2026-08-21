@@ -1,17 +1,40 @@
 # Photographs for the site
 
-Every photograph the site uses lives in this folder. Each slot in the layout
-asks for one specific filename — save the photo under exactly that name and it
-appears. There is no upload screen, no code to change and no build step: drop
-the file in, refresh the page, done.
+## Current status
 
-**Nothing breaks while a photo is missing.** Until a file exists, the site draws
-a branded placeholder in its place — a soft brand-coloured panel with the tooth
-watermark and the filename printed across it. So an unfinished site still lays
-out correctly, and every empty slot tells you on screen which file it is waiting
-for. Photograph the chamber over several visits and fill the folder as you go.
+Fifteen slots are filled, all derived from Dr. Arman's own three photographs
+(kept in `_source/`). Everything below that is still open is listed at the end
+of this file.
 
-Filenames are lowercase, with a `.jpg` extension, spelled exactly as listed.
+| Filled from real photos | Used for |
+| --- | --- |
+| `hero-dr-arman.jpg` | The home page hero band |
+| `dr-arman-portrait.jpg` | Home introduction, blue scrubs |
+| `dr-arman-about.jpg` | About page portrait, white coat |
+| `team-arman.jpg` | Team card |
+| `why-qualified/painless/transparent/modern.jpg` | The four why-us panes |
+| `stats-band.jpg` | Background behind the counters |
+| `titlebar-about/services/contact/default.jpg` | Inner page banners |
+| `chamber-interior.jpg` | Small inset on the home introduction |
+| `og-cover.jpg` | Social share card |
+
+**Still open — and why.**
+
+*Needs a photographer, not AI.* `ba-1/2/3-before.jpg` and `ba-1/2/3-after.jpg`
+are clinical before-and-after pairs. These have to be genuine cases with written
+patient consent; generated results would be a claim about outcomes that did not
+happen. Until they exist the section renders labelled panels.
+
+*Needs a real person.* `team-associate.jpg`, `team-assistant.jpg` and
+`patient-1.jpg`–`patient-3.jpg`. Rather than invented faces, these render a
+monogram — deliberate-looking, and honest.
+
+*Nice to have.* `service-general.jpg` and the five other service images. These
+currently render a branded tile carrying that treatment's own icon, which reads
+as designed rather than missing, so they are optional rather than blocking.
+
+Photographs of the chamber itself would improve the site more than anything else
+on this list.
 
 ---
 

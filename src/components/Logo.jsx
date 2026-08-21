@@ -48,8 +48,11 @@ export default function Logo({ tone = 'dark', size = 44, showText = true }) {
       <LogoMark size={size} tone={tone} />
       {showText && (
         <span className="logo__text">
-          <span className="logo__name">{identity.shortName}</span>
-          <span className="logo__sub">{identity.title}</span>
+          {/* The lockup carries the practice name; his surgical title is stated
+              in the topbar, the hero and every page banner, so repeating it here
+              would only make the mark too wide to sit beside the phone button. */}
+          <span className="logo__name">Dr. Arman&rsquo;s</span>
+          <span className="logo__sub">Dental Care</span>
         </span>
       )}
     </Link>

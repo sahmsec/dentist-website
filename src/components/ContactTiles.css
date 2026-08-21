@@ -1,5 +1,9 @@
+/* Four live actions — call, WhatsApp, mail, map. On a phone they are compact
+   rows rather than stacked tiles: a 48px accent tile on the left, the label and
+   the value beside it, hairlines between. Same four taps, a third of the
+   height. From 640px up the row becomes the two- then four-up grid again. */
 .contact-tiles {
-  padding-block: calc(var(--section-y) * 0.42);
+  padding-block: calc(var(--section-y) * 0.24);
 }
 
 .contact-tiles--white { background: var(--white); }
@@ -13,8 +17,9 @@
 .contact-tiles__item {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding-block: 20px;
+  gap: 14px;
+  padding-block: 7px;
+  min-height: 62px;
   min-width: 0;
 }
 
@@ -24,13 +29,16 @@
   border-top: 1px solid var(--hairline-soft);
 }
 
-.contact-tiles__icon {
+/* Beats .icon-tile's 64px on specificity, not on source order. */
+.contact-tiles__item .contact-tiles__icon {
+  width: 48px;
+  height: 48px;
   color: var(--accent-ink);
 }
 
 .contact-tiles__text {
   display: grid;
-  gap: 4px;
+  gap: 2px;
   min-width: 0;
 }
 
@@ -48,7 +56,7 @@
   font-family: var(--font-display);
   font-size: var(--fs-h4);
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.3;
   color: var(--navy);
   /* The email address is one long token — let it break rather than push the
      grid wider than the container. */
@@ -62,12 +70,20 @@
 }
 
 @media (min-width: 640px) {
+  .contact-tiles { padding-block: calc(var(--section-y) * 0.42); }
+
   .contact-tiles__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .contact-tiles__item {
+    gap: 18px;
     padding-inline: clamp(1rem, 2.4vw, 1.875rem);
     padding-block: 22px;
   }
+
+  .contact-tiles__item .contact-tiles__icon { width: 64px; height: 64px; }
+
+  .contact-tiles__text { gap: 4px; }
+  .contact-tiles__value { line-height: 1.35; }
 
   .contact-tiles__item + .contact-tiles__item { border-top: 0; }
   .contact-tiles__item:nth-child(n + 3) { border-top: 1px solid var(--hairline-soft); }

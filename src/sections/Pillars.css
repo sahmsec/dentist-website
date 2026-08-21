@@ -1,8 +1,21 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PILLARS — phone layout first.
+
+   Phone: each promise is a row — navy icon circle left, title and text right,
+   separated by hairlines. Roughly a third of the height the stacked
+   icon-over-title-over-paragraph version cost.
+
+   From 900px: today's composition — a 1fr 2fr grid with the three promises
+   side by side, split by vertical hairlines.
+   ══════════════════════════════════════════════════════════════════════════ */
+
 .pillars {
-  /* The band slides up by exactly the hero's corner radius, so the yellow
-     fills the notches the hero's curve leaves rather than starting below them. */
-  --tuck: var(--r-curve);
-  --band-pad: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  /* The band slides up by the depth of the hero's corner radius, so the yellow
+     fills the notches the hero's rounded card leaves rather than starting
+     below them. Half depth here: on a phone the band tucks under a card, not
+     under the full-bleed curve. */
+  --tuck: calc(var(--r-curve) * 0.5);
+  --band-pad: clamp(1.25rem, 0.75rem + 2vw, 3.25rem);
 
   position: relative;
 }
@@ -16,15 +29,13 @@
 
 .pillars__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  align-items: center;
-  gap: clamp(1.75rem, 3.2vw, 3.5rem);
+  gap: clamp(1rem, 3.2vw, 3.5rem);
 }
 
 .pillars__intro {
   display: grid;
   justify-items: start;
-  gap: 14px;
+  gap: 10px;
 }
 
 .pillars__title {
@@ -35,34 +46,45 @@
 
 .pillars__sub {
   font-size: var(--fs-sm);
+  line-height: 1.45;
   color: rgba(var(--navy-rgb), 0.8);
 }
 
-.pillars__list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.25rem, 2.4vw, 2.25rem);
-}
+.pillars__intro .btn { margin-top: 4px; }
 
+.pillars__list { display: grid; }
+
+/* Icon left, copy right — the single change that halves this section. */
 .pillars__item {
   display: grid;
-  align-content: start;
-  justify-items: start;
-  gap: 12px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 4px 14px;
 }
 
 .pillars__item + .pillars__item {
-  border-left: 1px solid var(--hairline);
-  padding-left: clamp(1.25rem, 2.4vw, 2.25rem);
+  margin-top: 12px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 12px;
+}
+
+.pillars__item .icon-circle {
+  width: 48px;
+  height: 48px;
+  /* Spans both copy rows so the circle optically centres on the whole block
+     rather than hanging off the title alone. */
+  grid-row: 1 / span 2;
 }
 
 .pillars__item-title {
+  align-self: center;
   font-size: var(--fs-h4);
   color: var(--navy);
 }
 
 .pillars__item-text {
   font-size: var(--fs-sm);
+  line-height: 1.45;
   color: rgba(var(--navy-rgb), 0.8);
 }
 
@@ -75,21 +97,47 @@
   pointer-events: none;
 }
 
-@media (max-width: 899px) {
-  /* Below this width the hero's circle has already left the photo, so the band
-     tucks under a card rather than under the curve — half the depth is enough. */
-  .pillars { --tuck: calc(var(--r-curve) * 0.5); }
+@media (min-width: 900px) {
+  .pillars {
+    --tuck: var(--r-curve);
+    --band-pad: clamp(1.75rem, 1rem + 2.6vw, 3.25rem);
+  }
 
-  .pillars__inner { grid-template-columns: minmax(0, 1fr); }
-}
+  .pillars__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: center;
+  }
 
-@media (max-width: 639px) {
-  .pillars__list { grid-template-columns: minmax(0, 1fr); }
+  .pillars__intro { gap: 14px; }
+  .pillars__intro .btn { margin-top: 0; }
+
+  .pillars__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.4vw, 2.25rem);
+  }
+
+  .pillars__item {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    justify-items: start;
+    gap: 12px;
+  }
 
   .pillars__item + .pillars__item {
-    border-left: 0;
-    border-top: 1px solid var(--hairline);
-    padding-left: 0;
-    padding-top: clamp(1.25rem, 4vw, 1.75rem);
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+    border-left: 1px solid var(--hairline);
+    padding-left: clamp(1.25rem, 2.4vw, 2.25rem);
   }
+
+  .pillars__item .icon-circle {
+    width: 56px;
+    height: 56px;
+    grid-row: auto;
+  }
+
+  .pillars__item-title { align-self: auto; }
+
+  .pillars__item-text { line-height: var(--lh-body); }
 }

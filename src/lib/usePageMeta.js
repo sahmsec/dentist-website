@@ -7,12 +7,14 @@ import { identity } from '../config/site.js'
  * Nothing is restored on unmount: every route calls this on mount, so the next
  * page overwrites both values before anyone can read a stale one.
  *
- *   usePageMeta({ title: 'Contact', description: '…' })   → "Contact — Dr. Arman Kayser"
+ *   usePageMeta({ title: 'Contact', description: '…' })   → "Contact — Dr. Arman's Dental Care"
  *   usePageMeta({ title: null, description: '…' })        → identity.metaTitle verbatim
  */
 export function usePageMeta({ title, description } = {}) {
   useEffect(() => {
-    document.title = title ? `${title} — ${identity.name}` : identity.metaTitle
+    // Suffix with the practice name, not the person's — the site is titled
+    // after the practice and every tab should read the same way.
+    document.title = title ? `${title} — ${identity.brandName}` : identity.metaTitle
 
     if (!description) return
 

@@ -1,12 +1,16 @@
+/* Tighter than the global rhythm on a phone and identical to it at 1440px —
+   the upper end of the clamp is the untouched --section-y value. */
+.testimonials.section { padding-block: clamp(2.5rem, 1.2rem + 7vw, 7.5rem); }
+
 /* Dark inset panel: the light page shows through around it, which is what gives
    the deep corner radii something to read against. */
 .testimonials__panel {
   background: var(--navy);
   border-radius: var(--r-panel);
-  padding: clamp(2.5rem, 1.2rem + 5vw, 5rem) clamp(1.25rem, 0.2rem + 4.2vw, 4rem);
+  padding: clamp(1.75rem, 0.5rem + 5.5vw, 5rem) clamp(1.25rem, 0.2rem + 4.2vw, 4rem);
 }
 
-.testimonials__slider { margin-top: clamp(2rem, 1rem + 3vw, 3.5rem); }
+.testimonials__slider { margin-top: clamp(1.25rem, 0.4rem + 3.4vw, 3.5rem); }
 
 .testimonials__viewport { overflow: hidden; }
 
@@ -27,59 +31,65 @@
   min-width: 0;
 }
 
-/* Two per view. A slide is now half the viewport less the gap between the pair,
-   so one step is half of (viewport + gap). */
-@media (min-width: 900px) {
-  .testimonials__track {
-    transform: translateX(calc((-100% - var(--slide-gap)) / 2 * var(--index, 0)));
-  }
-
-  .testimonials__slide { flex: 0 0 calc((100% - var(--slide-gap)) / 2); }
-}
-
-/* ── Card ──────────────────────────────────────────────────────────────────── */
+/* ── Card ──────────────────────────────────────────────────────────────────────
+   On a phone the quote mark and the stars share a row instead of stacking, which
+   takes a whole line and a gap out of every card. The flex column returns at
+   900px, where two cards sit side by side and their rules must line up. */
 .testimonial-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  gap: 12px;
   width: 100%;
-  padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  padding: clamp(1.125rem, 0.6rem + 2.4vw, 2.25rem);
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--hairline-on-dark);
   border-radius: var(--r-lg);
 }
 
-.testimonial-card__glyph { color: var(--accent); }
+.testimonial-card__glyph {
+  grid-column: 1;
+  grid-row: 1;
+  width: 26px;
+  height: 26px;
+  color: var(--accent);
+}
 
 .testimonial-card__stars {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
   display: flex;
   gap: 4px;
   color: var(--accent);
 }
 
 .testimonial-card__quote {
+  grid-column: 1 / -1;
   color: var(--white);
-  font-size: var(--fs-lede);
-  line-height: 1.6;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
 }
 
 /* Pushed down so the attribution lines up across a pair of unequal quotes. */
 .testimonial-card__rule {
+  grid-column: 1 / -1;
   width: 100%;
   margin-top: auto;
 }
 
 .testimonial-card__person {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 /* Two classes deep so this wins over the `width: 100%` on .photo regardless of
    which stylesheet the bundler emits first. */
 .testimonial-card .testimonial-card__avatar {
-  width: 56px;
+  width: 48px;
   flex: none;
 }
 
@@ -102,10 +112,11 @@
 /* ── Controls ──────────────────────────────────────────────────────────────── */
 .testimonials__controls {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  margin-top: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+  gap: 10px;
+  margin-top: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
 }
 
 .testimonials__arrow {
@@ -131,9 +142,15 @@
   cursor: default;
 }
 
+/* Four 44px dots plus two arrows are wider than a 320px phone can hold, and the
+   targets are not allowed to shrink — so below 380px the dots take their own
+   row instead of overflowing the panel. */
 .testimonials__dots {
+  order: 1;
+  flex-basis: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   /* The buttons carry their own 44px of padding, so any gap here would push
      them apart visually AND leave dead strips between the targets. */
   gap: 0;
@@ -172,4 +189,41 @@
   width: 28px;
   border-radius: var(--r-pill);
   background: var(--accent);
+}
+
+@media (min-width: 380px) {
+  .testimonials__dots {
+    order: 0;
+    flex-basis: auto;
+  }
+}
+
+/* Two per view. A slide is now half the viewport less the gap between the pair,
+   so one step is half of (viewport + gap). */
+@media (min-width: 900px) {
+  .testimonials__track {
+    transform: translateX(calc((-100% - var(--slide-gap)) / 2 * var(--index, 0)));
+  }
+
+  .testimonials__slide { flex: 0 0 calc((100% - var(--slide-gap)) / 2); }
+
+  .testimonial-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .testimonial-card__glyph { width: 34px; height: 34px; }
+
+  .testimonial-card__quote {
+    font-size: var(--fs-lede);
+    line-height: 1.6;
+  }
+
+  .testimonial-card .testimonial-card__avatar { width: 56px; }
+
+  .testimonial-card__person { gap: 14px; }
+
+  .testimonials__controls { gap: 18px; }
 }

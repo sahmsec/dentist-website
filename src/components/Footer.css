@@ -7,7 +7,7 @@
   overflow: hidden;
   background: var(--navy);
   border-radius: var(--r-band-top);
-  padding-top: calc(var(--section-y) * 0.85);
+  padding-top: calc(var(--section-y) * 0.55);
   color: var(--body-on-dark);
 }
 
@@ -30,23 +30,14 @@
   height: auto;
 }
 
-/* ── Columns ───────────────────────────────────────────────────────────────── */
+/* ── Columns ───────────────────────────────────────────────────────────────
+   On a phone the four columns are one stack divided by hairlines: brand,
+   the two accordions closed, then the hours. The grid gap is 0 so those
+   hairlines meet the blocks they divide; the columns space themselves. */
 .footer__cols {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(2.25rem, 1.2rem + 3vw, 3.5rem);
-}
-
-@media (min-width: 620px) {
-  .footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .footer__col--brand { grid-column: 1 / -1; }
-}
-
-@media (min-width: 1024px) {
-  .footer__cols {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1.35fr);
-  }
-  .footer__col--brand { grid-column: auto; }
+  gap: 0;
 }
 
 .footer__col { min-width: 0; }
@@ -54,11 +45,16 @@
 .footer__heading {
   font-size: var(--fs-h4);
   color: var(--white);
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 /* ── Brand column ──────────────────────────────────────────────────────────── */
-.footer__col--brand { display: grid; justify-items: start; gap: 18px; }
+.footer__col--brand {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
 
 .footer__tagline {
   font-family: var(--font-display);
@@ -67,10 +63,9 @@
   color: var(--accent);
 }
 
-.footer__blurb {
-  max-width: 38ch;
-  font-size: var(--fs-sm);
-}
+/* The practice description repeats what the hero and the about page already
+   said; on a phone that is a screenful of scrolling for nothing. */
+.footer__blurb { display: none; }
 
 .footer__social {
   display: flex;
@@ -90,8 +85,39 @@
   transform: translateY(-3px);
 }
 
-/* ── Link columns ──────────────────────────────────────────────────────────── */
-.footer__links { display: grid; gap: 13px; }
+/* ── Link columns ──────────────────────────────────────────────────────────
+   Real <details>, so a phone gets a working accordion with no JavaScript in
+   the loop. Closed, the two of them cost 96px instead of ten link rows. */
+.footer__acc { border-top: 1px solid var(--hairline-on-dark); }
+
+.footer__acc-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 46px;
+  cursor: pointer;
+  /* Any display other than list-item drops the disclosure triangle in Blink
+     and WebKit; list-style covers Firefox. */
+  list-style: none;
+}
+
+.footer__acc-summary::-webkit-details-marker { display: none; }
+
+.footer__acc-summary .footer__heading { margin-bottom: 0; }
+
+.footer__acc-chev {
+  flex: none;
+  color: var(--accent);
+  transition: transform var(--t) var(--ease);
+}
+
+.footer__acc[open] .footer__acc-chev { transform: rotate(180deg); }
+
+.footer__links {
+  display: grid;
+  padding-bottom: 10px;
+}
 
 .footer__links a {
   display: inline-flex;
@@ -118,6 +144,11 @@
 .footer__links a:hover::before { opacity: 1; }
 
 /* ── Hours column ──────────────────────────────────────────────────────────── */
+.footer__col--hours {
+  border-top: 1px solid var(--hairline-on-dark);
+  padding-top: 16px;
+}
+
 .footer__hours { display: grid; }
 
 .footer__hours li {
@@ -125,8 +156,9 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 14px;
-  padding-block: 11px;
+  padding-block: 5px;
   font-size: var(--fs-sm);
+  line-height: 1.45;
 }
 
 .footer__hours li + li { border-top: 1px solid var(--hairline-on-dark); }
@@ -145,7 +177,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  margin-block: 18px 22px;
+  margin-block: 10px 12px;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--fs-xs);
@@ -163,21 +195,17 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px 30px;
-  margin-top: calc(var(--section-y) * 0.55);
-  padding-block: 26px;
+  margin-top: 14px;
+  padding-block: 12px;
   border-top: 1px solid var(--hairline-on-dark);
   font-size: var(--fs-sm);
 }
 
 .footer__copy { color: var(--body-on-dark); }
 
-.footer__address {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--body-on-dark);
-  transition: color var(--t) var(--ease);
-}
+/* The contact row at the top of the footer already carries the address as a
+   maps link, three taps higher up. One of them is enough on a phone. */
+.footer__address { display: none; }
 
 .footer__address svg { flex: none; color: var(--accent); }
 .footer__address:hover { color: var(--white); }
@@ -192,8 +220,7 @@
    caught the social discs, whose .icon-circle centring is grid-based and is
    lost the moment something forces them to flex. */
 .footer__links li > a,
-.footer__hours li > a,
-.footer__address {
+.footer__hours li > a {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -202,3 +229,77 @@
 
 .footer__links,
 .footer__hours { gap: 0; }
+
+/* ── Desktop ───────────────────────────────────────────────────────────────
+   From here the accordions are plain open columns again and every hairline
+   the phone stack used goes away. */
+@media (min-width: 620px) {
+  .footer__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2.25rem, 1.2rem + 3vw, 3.5rem);
+  }
+
+  .footer__col--brand { grid-column: 1 / -1; margin-bottom: 0; }
+
+  /* Two columns wide, the grid gap does the dividing the hairlines did in the
+     stack. The accordion rules stay until 768, where they open for good. */
+  .footer__col--hours { border-top: 0; padding-top: 0; }
+}
+
+@media (min-width: 768px) {
+  .footer__main { padding-top: calc(var(--section-y) * 0.85); }
+
+  .footer__heading { margin-bottom: 24px; }
+
+  .footer__col--brand { gap: 18px; margin-bottom: 0; }
+
+  .footer__blurb {
+    display: block;
+    max-width: 38ch;
+    font-size: var(--fs-sm);
+  }
+
+  .footer__acc { border-top: 0; }
+
+  .footer__acc-summary {
+    display: block;
+    min-height: 0;
+    cursor: default;
+  }
+
+  .footer__acc-summary .footer__heading { margin-bottom: 24px; }
+  .footer__acc-chev { display: none; }
+
+  /* Belt to the `open` attribute the component pins from 768px up: the panel
+     of a closed <details> is hidden on this pseudo, so revealing it here means
+     the columns still render open if that attribute never arrives. */
+  .footer__acc::details-content { content-visibility: visible; }
+
+  .footer__links { padding-bottom: 0; }
+
+  .footer__hours li { padding-block: 11px; line-height: var(--lh-body); }
+
+  .footer__emergency { margin-block: 18px 22px; }
+
+  .footer__bottom {
+    margin-top: calc(var(--section-y) * 0.55);
+    padding-block: 26px;
+  }
+
+  .footer__address {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 9px;
+    min-height: 44px;
+    color: var(--body-on-dark);
+    transition: color var(--t) var(--ease);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer__cols {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1.35fr);
+  }
+  .footer__col--brand { grid-column: auto; }
+}

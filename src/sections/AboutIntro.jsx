@@ -10,6 +10,10 @@ import './AboutIntro.css'
  * The Home page's introduction to Dr. Arman: a photo composition on the left,
  * the short version of the About page on the right, ending on the two things a
  * visitor can actually do — read more, or ring the chamber.
+ *
+ * On a phone the composition collapses to one cropped portrait and the prose to
+ * its opening paragraph; the rest is still in the markup and comes back at
+ * 768px. The About page is where the full text belongs anyway.
  */
 
 // The badge over the portrait reuses the years-in-practice stat, so the number
@@ -53,7 +57,9 @@ export default function AboutIntro() {
           <p className="lede about-intro__lede">{about.lede}</p>
 
           {about.body.slice(0, 2).map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
+            <p className="about-intro__para" key={i}>
+              {paragraph}
+            </p>
           ))}
 
           <ul className="about-intro__checks">

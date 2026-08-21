@@ -13,10 +13,10 @@ export const identity = {
   credential: 'BDS',
   title: 'Oral & Dental Surgeon',
   tagline: 'Healthy Teeth, Confident You',
-  brandName: "Dr. Arman's Dental",
-  metaTitle: 'Dr. Arman Kayser — Oral & Dental Surgeon, Shyamoli Dhaka',
+  brandName: "Dr. Arman's Dental Care",
+  metaTitle: "Dr. Arman's Dental Care — Oral & Dental Surgeon, Shyamoli Dhaka",
   metaDescription:
-    'Dr. Arman Kayser, Oral & Dental Surgeon in Shyamoli, Dhaka. General dentistry, ' +
+    "Dr. Arman's Dental Care — Oral & Dental Surgeon in Shyamoli, Dhaka. General dentistry, " +
     'orthodontics, dental implants, cosmetic dentistry and teeth whitening. ' +
     'Call 01915109006 to book an appointment.',
 }

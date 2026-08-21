@@ -1,10 +1,22 @@
-/* The circle diameter drives almost everything here — the headline size, the
-   badge offset and the text cap are all expressed as a fraction of it, so the
-   composition keeps its proportions at every width instead of drifting apart. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO — phone layout first, desktop composition in the min-width query.
+
+   Phone: a tall photo band with the white card climbing back over its lower
+   third, so the dead gap between photo and copy disappears and the call button
+   lands on the first screen.
+
+   From 900px: the card becomes the circle overlaid on a full-bleed band, with
+   the navy About badge straddling its edge and the rating card bottom-right.
+   ══════════════════════════════════════════════════════════════════════════ */
+
 .hero {
-  --hero-circle: clamp(300px, 42vw, 500px);
-  --hero-badge: clamp(96px, 12vw, 128px);
-  /* The photo band carries the same depth of curve as every other band. */
+  /* Taller than it is wide, which is what makes object-fit zoom in on Dr.
+     Arman rather than letterbox him. Capped so a tablet does not get a wall of
+     photograph. */
+  --hero-band: min(140vw, 560px);
+  /* How far the card climbs back over the band — a fraction of it, so the
+     strip of photo that stays visible keeps its proportion at every width. */
+  --hero-lift: calc(var(--hero-band) * 0.63);
   --hero-curve: var(--r-curve);
 
   position: relative;
@@ -15,7 +27,7 @@
 
 .hero__media {
   position: relative;
-  min-height: clamp(520px, 62vw, 760px);
+  height: var(--hero-band);
   border-radius: 0 0 var(--hero-curve) var(--hero-curve);
   overflow: hidden;
   background: var(--navy);
@@ -28,128 +40,88 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  /* He stands upper-left of a square frame. A centred crop cuts his head off
+     entirely, so the window is pulled up and left of centre — his face sits in
+     the strip of photo that stays visible above the card. */
+  object-position: 34% 6%;
 }
 
+/* Grounds the card against the photo rather than letting it float on a bright
+   edge. Nothing sits over the photo at this size, so the left third is left
+   alone — darkening it would darken exactly where Dr. Arman is standing. */
 .hero__scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    100deg,
-    rgba(var(--navy-rgb), 0.66) 0%,
-    rgba(var(--navy-rgb), 0.34) 44%,
-    rgba(var(--navy-rgb), 0) 74%
+    to top,
+    rgba(var(--navy-rgb), 0.4) 0%,
+    rgba(var(--navy-rgb), 0) 42%
   );
-}
-
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  /* The overlay itself is only a positioning frame — clicks pass through it to
-     the photo, and back on for the card. */
-  pointer-events: none;
 }
 
 .hero__overlay > .container { width: 100%; }
 
 .hero__card {
   position: relative;
-  width: var(--hero-circle);
-  max-width: 100%;
-  pointer-events: auto;
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  margin-top: calc(var(--hero-lift) * -1);
 }
 
-/* ── The circle card ───────────────────────────────────────────────────────── */
+/* ── The card (a circle from 900px up — hence the name) ────────────────────── */
 .hero__circle {
   display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: clamp(12px, 1.6vw, 22px);
-  width: 100%;
-  aspect-ratio: 1;
-  padding: clamp(28px, 5vw, 56px);
-  border-radius: 50%;
+  gap: 10px;
+  padding: 20px;
+  border-radius: var(--r-xl);
   background: var(--white);
   box-shadow: var(--shadow-lg);
-  text-align: center;
 }
 
-/* Nothing may reach the curve: the text block is capped well inside the
-   circle's widest chord. */
-.hero__title,
-.hero__lede { max-width: calc(var(--hero-circle) * 0.76); }
-
 .hero__title {
-  font-size: clamp(1.6rem, calc(var(--hero-circle) * 0.108), 3.375rem);
-  line-height: var(--lh-tight);
+  font-size: clamp(1.75rem, 7.4vw, 2.375rem);
+  line-height: 1.08;
 }
 
 .hero__lede {
-  font-size: clamp(0.875rem, calc(var(--hero-circle) * 0.034), 1.0625rem);
-  line-height: 1.55;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
   color: var(--body);
 }
 
-/* The shared eyebrow is sized for a full-width section; inside the circle it
-   has to fit on one line at the narrowest diameter. justify-self is restated
-   because the base rule pins the pill left, which would break the circle's
-   otherwise perfectly centred composition. */
+/* The shared eyebrow is sized for a full-width section; here it has to fit
+   "Trusted dental care in Shyamoli" on one line inside a 390px card, so the
+   pill is trimmed rather than the label. It still wraps — evenly — on the
+   narrowest phones, which is better than overflowing them. */
 .hero__circle .eyebrow {
-  justify-self: center;
   max-width: 100%;
-  padding: 8px 16px 8px 11px;
-  gap: 8px;
-  font-size: clamp(0.625rem, calc(var(--hero-circle) * 0.026), 0.8125rem);
+  padding: 7px 13px 7px 9px;
+  gap: 7px;
+  font-size: calc(var(--fs-xs) * 0.92);
+  line-height: 1.3;
+  text-wrap: balance;
 }
 
 .hero__circle .eyebrow::before { width: 11px; height: 11px; }
 
-/* ── Navy circle button straddling the circle's lower-right edge ───────────── */
-.hero__badge {
-  position: absolute;
-  bottom: calc(var(--hero-badge) * -0.16);
-  left: 50%;
-  /* Centre of the badge sits 13% of the diameter right of the circle's centre,
-     which is what puts it on the edge rather than beside it. */
-  margin-left: calc(var(--hero-circle) * 0.13 - var(--hero-badge) * 0.5);
+/* ── Call / WhatsApp — phones only ─────────────────────────────────────────── */
+.hero__actions {
   display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 6px;
-  width: var(--hero-badge);
-  height: var(--hero-badge);
-  padding: 10px;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--white);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(0.6875rem, calc(var(--hero-badge) * 0.098), 0.8125rem);
-  line-height: 1.25;
-  text-align: center;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--t) var(--ease), background var(--t) var(--ease);
+  gap: 10px;
+  margin-top: 6px;
 }
 
-.hero__badge svg { transition: transform var(--t) var(--ease); }
-
-.hero__badge:hover { background: var(--navy-soft); transform: translateY(-3px); }
-.hero__badge:hover svg { transform: rotate(45deg); }
-
-/* ── Floating rating card ──────────────────────────────────────────────────── */
-.hero__rating {
-  position: absolute;
-  right: clamp(24px, 5vw, 72px);
-  bottom: clamp(32px, 6vw, 88px);
-  display: grid;
-  gap: 8px;
-  max-width: 250px;
-  padding: 18px 24px;
-  border-radius: var(--r-md);
-  background: var(--white);
-  box-shadow: var(--shadow-lg);
+/* .btn is an inline-flex pill; full width makes the pair read as one block and
+   gives each a target the full width of the card. Height is untouched. */
+.hero__actions .btn {
+  display: flex;
+  width: 100%;
 }
+
+/* ── Desktop ornaments, hidden on phones ───────────────────────────────────── */
+.hero__badge,
+.hero__rating { display: none; }
 
 .hero__stars {
   display: flex;
@@ -176,51 +148,132 @@
   color: var(--body);
 }
 
-/* ── Below 900px the circle leaves the photo and becomes a card under it ───── */
-@media (max-width: 899px) {
-  .hero__media { min-height: clamp(260px, 46vw, 420px); }
+/* ═══════════════════════════════════════════════════════════════════════════
+   From 900px the circle leaves the flow and is overlaid on the band.
+   The circle diameter drives almost everything below it — the headline size,
+   the badge offset and the text cap are all expressed as a fraction of it, so
+   the composition keeps its proportions at every width instead of drifting.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 900px) {
+  .hero {
+    --hero-circle: clamp(300px, 42vw, 500px);
+    --hero-badge: clamp(96px, 12vw, 128px);
+  }
+
+  .hero__media {
+    height: auto;
+    min-height: clamp(520px, 62vw, 760px);
+  }
+
+  /* The band is wide here, so the crop is bound by width and only the vertical
+     window is in play — high enough to keep his head well inside the frame. */
+  .hero__media .hero__photo { object-position: 50% 14%; }
+
+  .hero__scrim {
+    background: linear-gradient(
+      100deg,
+      rgba(var(--navy-rgb), 0.66) 0%,
+      rgba(var(--navy-rgb), 0.34) 44%,
+      rgba(var(--navy-rgb), 0) 74%
+    );
+  }
 
   .hero__overlay {
-    position: static;
-    pointer-events: auto;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    /* The overlay itself is only a positioning frame — clicks pass through it
+       to the photo, and back on for the card. */
+    pointer-events: none;
   }
 
   .hero__card {
-    width: 100%;
-    max-width: 560px;
-    margin-inline: auto;
-    margin-top: calc(var(--hero-curve) * -0.5);
+    width: var(--hero-circle);
+    max-width: 100%;
+    margin: 0;
+    pointer-events: auto;
   }
 
   .hero__circle {
-    aspect-ratio: auto;
-    gap: 16px;
-    padding: clamp(28px, 6vw, 44px);
-    border-radius: var(--r-xl);
+    align-content: center;
+    justify-items: center;
+    gap: clamp(12px, 1.6vw, 22px);
+    aspect-ratio: 1;
+    padding: clamp(28px, 5vw, 56px);
+    border-radius: 50%;
+    text-align: center;
   }
 
+  /* Nothing may reach the curve: the text block is capped well inside the
+     circle's widest chord. */
   .hero__title,
-  .hero__lede { max-width: none; }
+  .hero__lede { max-width: calc(var(--hero-circle) * 0.76); }
 
-  .hero__title { font-size: var(--fs-h1); }
-  .hero__lede { font-size: var(--fs-lede); }
+  .hero__title {
+    font-size: clamp(1.6rem, calc(var(--hero-circle) * 0.108), 3.375rem);
+    line-height: var(--lh-tight);
+  }
+
+  .hero__lede {
+    font-size: clamp(0.875rem, calc(var(--hero-circle) * 0.034), 1.0625rem);
+    line-height: 1.55;
+  }
 
   .hero__circle .eyebrow {
-    padding: 9px 20px 9px 14px;
-    gap: 10px;
-    font-size: var(--fs-xs);
+    justify-self: center;
+    padding: 8px 16px 8px 11px;
+    gap: 8px;
+    font-size: clamp(0.625rem, calc(var(--hero-circle) * 0.026), 0.8125rem);
   }
 
-  .hero__circle .eyebrow::before { width: 14px; height: 14px; }
+  /* The header carries "Book Appointment" at this size, and the circle has no
+     room for a pair of pills without losing its proportions. */
+  .hero__actions { display: none; }
 
-  /* Keeps the About link — it is the hero's only navigation — but stops it
-     floating, since there is no longer an edge for it to straddle. */
+  /* ── Navy circle button straddling the circle's lower-right edge ─────────── */
   .hero__badge {
-    position: static;
-    margin: 6px auto 0;
+    position: absolute;
+    bottom: calc(var(--hero-badge) * -0.16);
+    left: 50%;
+    /* Centre of the badge sits 13% of the diameter right of the circle's
+       centre, which is what puts it on the edge rather than beside it. */
+    margin-left: calc(var(--hero-circle) * 0.13 - var(--hero-badge) * 0.5);
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 6px;
+    width: var(--hero-badge);
+    height: var(--hero-badge);
+    padding: 10px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.6875rem, calc(var(--hero-badge) * 0.098), 0.8125rem);
+    line-height: 1.25;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--t) var(--ease), background var(--t) var(--ease);
   }
-}
 
-@media (max-width: 767px) {
-  .hero__rating { display: none; }
+  .hero__badge svg { transition: transform var(--t) var(--ease); }
+
+  .hero__badge:hover { background: var(--navy-soft); transform: translateY(-3px); }
+  .hero__badge:hover svg { transform: rotate(45deg); }
+
+  /* ── Floating rating card ───────────────────────────────────────────────── */
+  .hero__rating {
+    position: absolute;
+    right: clamp(24px, 5vw, 72px);
+    bottom: clamp(32px, 6vw, 88px);
+    display: grid;
+    gap: 8px;
+    max-width: 250px;
+    padding: 18px 24px;
+    border-radius: var(--r-md);
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+  }
 }

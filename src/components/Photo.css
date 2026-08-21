@@ -46,6 +46,39 @@
   z-index: 1;
 }
 
+/* A named icon reads as a designed tile rather than a missing asset, so a
+   service card with no photograph still communicates what it is. */
+.photo__glyph {
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  width: clamp(56px, 32%, 104px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: var(--shadow-sm);
+}
+
+.photo__glyph svg { width: 55%; height: auto; }
+
+/* Monogram used wherever we have no portrait of a real person. */
+.photo__initials {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(48px, 46%, 96px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 600;
+  /* No container-query context here, so size against the viewport. */
+  font-size: clamp(0.95rem, 0.6rem + 1.4vw, 1.75rem);
+  letter-spacing: 0.02em;
+}
+
 .photo__slot {
   position: absolute;
   bottom: 12px;

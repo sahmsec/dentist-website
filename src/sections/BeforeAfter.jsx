@@ -9,8 +9,50 @@ import './BeforeAfter.css'
 /**
  * The portfolio proper — real cases from the chamber, each one a comparison
  * slider you drag across to reveal the result.
+ *
+ * On a phone the three cases are a snap carrousel rather than three stacked
+ * cards: stacking them cost three screens of scrolling for content most
+ * visitors only glance at. The track scrolls, never the page. Above 900px the
+ * same markup lays out as the desktop grid.
  */
 export default function BeforeAfter() {
+  const trackRef = useRef(null)
+  const [active, setActive] = useState(0)
+
+  // Which case is under the middle of the track — this drives the dots. Above
+  // 900px the track is a grid that never scrolls, so it simply stays at 0.
+  const onScroll = () => {
+    const track = trackRef.current
+    if (!track) return
+
+    const mid = track.scrollLeft + track.clientWidth / 2
+    let nearest = 0
+    let smallest = Infinity
+
+    Array.from(track.children).forEach((card, i) => {
+      const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - mid)
+      if (distance < smallest) {
+        smallest = distance
+        nearest = i
+      }
+    })
+
+    setActive((prev) => (prev === nearest ? prev : nearest))
+  }
+
+  const goTo = (i) => {
+    const track = trackRef.current
+    const card = track?.children[i]
+    if (!card) return
+
+    // Centre the card by hand rather than with scrollIntoView, which would also
+    // drag the page vertically to bring the section into view.
+    track.scrollTo({
+      left: card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    })
+  }
+
   return (
     <section className="section before-after" aria-label="Selected work">
       <div className="container">
@@ -22,13 +64,32 @@ export default function BeforeAfter() {
           text="A few recent cases. Every photograph is shared with the patient's consent."
         />
 
-        <ul className="before-after__grid">
+        <ul className="before-after__track" ref={trackRef} onScroll={onScroll}>
           {beforeAfter.map((item, i) => (
             <Reveal as="li" key={item.title} delay={i * 90}>
               <CompareCard item={item} />
             </Reveal>
           ))}
         </ul>
+
+        {/* Swiping is the obvious gesture, but the frames themselves capture
+            horizontal drags for the slider — so the dots double as the way to
+            reach the other cases without fighting the handle. */}
+        <div className="before-after__nav">
+          <p className="before-after__hint">Swipe for more cases</p>
+          <div className="before-after__dots">
+            {beforeAfter.map((item, i) => (
+              <button
+                key={item.title}
+                type="button"
+                className="before-after__dot"
+                onClick={() => goTo(i)}
+                aria-label={`Show case ${i + 1}: ${item.title}`}
+                aria-current={i === active ? 'true' : undefined}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -77,10 +138,12 @@ function CompareCard({ item }) {
         onPointerUp={endDrag}
         onPointerCancel={endDrag}
       >
+        {/* The frame owns the aspect ratio — landscape on a phone, portrait on
+            the desktop grid — so both photos simply fill it. */}
         <Photo
           src={item.before}
           alt={`${item.title} — before treatment`}
-          ratio="4/5"
+          ratio="4/3"
           shape="flat"
         />
 
@@ -88,7 +151,7 @@ function CompareCard({ item }) {
           <Photo
             src={item.after}
             alt={`${item.title} — after treatment`}
-            ratio="4/5"
+            ratio="4/3"
             shape="flat"
           />
         </div>

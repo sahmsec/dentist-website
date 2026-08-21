@@ -1,47 +1,44 @@
+/* Phone first: the block is an accordion inside one yellow card. The three-pane
+   tab layout lives at the bottom of this file, inside the 900px query, and only
+   ever meets the markup that WhyPanel.jsx renders at that width. */
+
+/* Tighter than the global rhythm on a phone and identical to it at 1440px —
+   the upper end of the clamp is the untouched --section-y value. */
+.why-panel.section { padding-block: clamp(2.5rem, 1.2rem + 7vw, 7.5rem); }
+
+.why-panel .section-head { gap: 12px; }
+
 .why-panel__block {
   display: grid;
-  margin-top: clamp(2rem, 1rem + 3vw, 3.75rem);
+  margin-top: clamp(1.25rem, 0.5rem + 2.4vw, 3.75rem);
   background: var(--accent);
   border-radius: var(--r-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
 }
 
-/* ── Pane 1 — the tab rail ─────────────────────────────────────────────────── */
-.why-panel__rail {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: clamp(1.5rem, 1rem + 2vw, 2.5rem) clamp(1.125rem, 0.7rem + 1.6vw, 1.75rem);
-  overflow: hidden;
-}
+.why-panel__block--acc { padding: 12px; }
 
-/* Sits under the tabs, bleeding off the bottom-left corner as in the reference. */
-.why-panel__watermark {
-  position: absolute;
-  left: -14%;
-  bottom: -14%;
-  width: clamp(190px, 72%, 320px);
-  height: auto;
-  color: rgba(var(--navy-rgb), 0.09);
-  pointer-events: none;
-}
-
-.why-panel__tabs {
-  position: relative;
+/* ── Accordion ─────────────────────────────────────────────────────────────── */
+.why-panel__acc {
   display: grid;
-  gap: 4px;
-  width: 100%;
+  gap: 6px;
 }
 
-.why-panel__tab {
+/* The heading exists for the outline; the button inside it carries the type. */
+.why-panel__acc-heading {
+  font: inherit;
+  letter-spacing: normal;
+}
+
+.why-panel__acc-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   width: 100%;
-  min-height: 62px;
-  padding: 9px 9px 9px 22px;
+  min-height: 48px;
+  padding: 4px 4px 4px 20px;
   border-radius: var(--r-pill);
   font-family: var(--font-display);
   font-size: var(--fs-sm);
@@ -49,109 +46,207 @@
   line-height: 1.25;
   text-align: left;
   color: var(--navy);
-  transition: background var(--t) var(--ease), color var(--t) var(--ease),
-              box-shadow var(--t) var(--ease);
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
 }
 
-.why-panel__tab:hover { background: rgba(var(--navy-rgb), 0.07); }
-
-.why-panel__tab.is-active {
+.why-panel__acc-trigger.is-open {
   background: var(--navy);
   color: var(--white);
-  box-shadow: var(--shadow-md);
 }
 
-/* Held in the layout at all times so selecting a tab does not resize the row. */
-.why-panel__tab-badge {
+.why-panel__acc-chevron {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   flex: none;
   border-radius: 50%;
+  background: rgba(var(--navy-rgb), 0.1);
+  color: var(--navy);
+  transition: transform var(--t) var(--ease), background var(--t) var(--ease),
+              color var(--t) var(--ease);
+}
+
+.why-panel__acc-trigger.is-open .why-panel__acc-chevron {
   background: var(--white);
   color: var(--navy);
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+  transform: rotate(180deg);
 }
 
-.why-panel__tab.is-active .why-panel__tab-badge { opacity: 1; transform: none; }
-
-/* ── Pane 2 — the detail panel ─────────────────────────────────────────────── */
-.why-panel__body {
-  position: relative;
-  z-index: 1;
-  background: var(--white);
-  border-radius: var(--r-xl) var(--r-xl) 0 0;
-  padding: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
-}
-
-.why-panel__pane {
+.why-panel__acc-panel {
   display: grid;
-  gap: 20px;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 14px 16px 16px;
+  background: var(--white);
+  border-radius: var(--r-md);
   animation: why-panel-swap var(--t-slow) var(--ease) both;
 }
 
 /* The class sets display, so `hidden` needs restating to keep winning. */
-.why-panel__pane[hidden] { display: none; }
+.why-panel__acc-panel[hidden] { display: none; }
 
-@keyframes why-panel-swap {
-  from { opacity: 0; transform: translateY(14px); }
+.why-panel .why-panel__acc-title {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
 }
 
-.why-panel__rule {
-  width: 100%;
-  justify-self: stretch;
+.why-panel .why-panel__acc-text {
+  font-size: var(--fs-sm);
+  line-height: 1.45;
 }
 
-.why-panel__checks { display: grid; gap: 12px; }
+/* ── Check list — shared by both layouts ───────────────────────────────────── */
+.why-panel__checks { display: grid; gap: 10px; }
 
 .why-panel__check {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-size: var(--fs-sm);
+  line-height: 1.4;
   color: var(--ink);
 }
 
 .why-panel__check-icon {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   flex: none;
   border-radius: 50%;
   background: var(--navy);
   color: var(--white);
 }
 
-.why-panel__cta { justify-self: start; }
-
-/* ── Pane 3 — the portrait ─────────────────────────────────────────────────── */
-.why-panel__media {
-  position: relative;
-  overflow: hidden;
+@keyframes why-panel-swap {
+  from { opacity: 0; transform: translateY(14px); }
 }
 
-.why-panel .why-panel__photo {
-  width: 100%;
-  height: clamp(260px, 62vw, 400px);
-  object-fit: cover;
-  animation: why-panel-swap var(--t-slow) var(--ease) both;
-}
-
+/* ── 900px and up: the three-pane tab block ────────────────────────────────── */
 @media (min-width: 900px) {
+  .why-panel .section-head { gap: 18px; }
+
   .why-panel__block { grid-template-columns: 0.9fr 1.2fr 1fr; }
 
-  /* Left corners round over the yellow rail — the block's own background is
-     what shows through the notches. */
-  .why-panel__body { border-radius: var(--r-xl) 0 0 var(--r-xl); }
+  /* Pane 1 — the tab rail */
+  .why-panel__rail {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem) clamp(1.125rem, 0.7rem + 1.6vw, 1.75rem);
+    overflow: hidden;
+  }
 
-  .why-panel .why-panel__photo { height: 100%; }
+  /* Sits under the tabs, bleeding off the bottom-left corner as in the
+     reference. */
+  .why-panel__watermark {
+    position: absolute;
+    left: -14%;
+    bottom: -14%;
+    width: clamp(190px, 72%, 320px);
+    height: auto;
+    color: rgba(var(--navy-rgb), 0.09);
+    pointer-events: none;
+  }
+
+  .why-panel__tabs {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .why-panel__tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 62px;
+    padding: 9px 9px 9px 22px;
+    border-radius: var(--r-pill);
+    font-family: var(--font-display);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+    color: var(--navy);
+    transition: background var(--t) var(--ease), color var(--t) var(--ease),
+                box-shadow var(--t) var(--ease);
+  }
+
+  .why-panel__tab:hover { background: rgba(var(--navy-rgb), 0.07); }
+
+  .why-panel__tab.is-active {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Held in the layout at all times so selecting a tab does not resize the
+     row. */
+  .why-panel__tab-badge {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--navy);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+  }
+
+  .why-panel__tab.is-active .why-panel__tab-badge { opacity: 1; transform: none; }
+
+  /* Pane 2 — the detail panel. The left corners round over the yellow rail —
+     the block's own background is what shows through the notches. */
+  .why-panel__body {
+    position: relative;
+    z-index: 1;
+    background: var(--white);
+    border-radius: var(--r-xl) 0 0 var(--r-xl);
+    padding: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  }
+
+  .why-panel__pane {
+    display: grid;
+    gap: 20px;
+    animation: why-panel-swap var(--t-slow) var(--ease) both;
+  }
+
+  .why-panel__pane[hidden] { display: none; }
+
+  .why-panel__rule {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .why-panel__checks { gap: 12px; }
+
+  .why-panel__check-icon { width: 28px; height: 28px; }
+
+  .why-panel__cta { justify-self: start; }
+
+  /* Pane 3 — the portrait */
+  .why-panel__media {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-panel .why-panel__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: why-panel-swap var(--t-slow) var(--ease) both;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .why-panel__acc-panel,
   .why-panel__pane,
   .why-panel .why-panel__photo { animation: none; }
 }

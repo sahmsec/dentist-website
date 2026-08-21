@@ -1,6 +1,15 @@
+/* Phone first: each step is a row — numbered badge in a left gutter, copy on the
+   right — with a dotted line running down the gutter between them. The four-up
+   stacked layout of the reference is restored at 992px. */
+
+/* Tighter than the global rhythm on a phone and identical to it at 1440px —
+   the upper end of the clamp is the untouched --section-y value. */
+.process.section { padding-block: clamp(2.5rem, 1.2rem + 7vw, 7.5rem); }
+
 .process {
-  --process-dot: clamp(84px, 4rem + 3vw, 108px);
+  --process-dot: 64px;
   --process-gap: clamp(1.25rem, 0.5rem + 2vw, 1.875rem);
+  --process-row-gap: 24px;
 }
 
 /* ── Hairline-flanked eyebrow ──────────────────────────────────────────────── */
@@ -8,7 +17,7 @@
   display: flex;
   align-items: center;
   gap: clamp(0.75rem, 2vw, 1.5rem);
-  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  margin-bottom: clamp(1.75rem, 1rem + 2.6vw, 4.5rem);
 }
 
 .process__rule {
@@ -26,24 +35,37 @@
 /* ── Steps ─────────────────────────────────────────────────────────────────── */
 .process__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2rem, 1rem + 3vw, 2.75rem) var(--process-gap);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--process-row-gap) var(--process-gap);
 }
 
 .process__step {
   position: relative;
   display: grid;
-  gap: 12px;
-  justify-items: start;
+  grid-template-columns: var(--process-dot) minmax(0, 1fr);
+  align-items: start;
+  gap: 4px 16px;
+}
+
+/* The dotted spine: from just under this badge to just above the next one, so
+   it reads as one continuous timeline rather than four detached rules. */
+.process__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--process-dot) / 2 - 1px);
+  top: calc(var(--process-dot) + 8px);
+  bottom: calc(8px - var(--process-row-gap));
+  border-left: 2px dotted rgba(var(--navy-rgb), 0.32);
 }
 
 .process__badge {
   position: relative;
   display: grid;
   place-items: center;
+  grid-column: 1;
+  grid-row: 1 / span 2;
   width: var(--process-dot);
   height: var(--process-dot);
-  margin-bottom: 14px;
   border-radius: 50%;
   background: var(--white);
   color: var(--navy);
@@ -60,31 +82,80 @@
 .process__num {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: var(--fs-h3);
+  font-size: var(--fs-h4);
   line-height: 1;
   color: var(--navy);
 }
 
-.process__text { max-width: 34ch; }
-
-/* Spans the space between this circle and the next one, which is why the right
-   edge reaches a full gap past the column. */
-.process__connector {
-  display: none;
-  position: absolute;
-  top: calc(var(--process-dot) / 2);
-  left: calc(var(--process-dot) + 8px);
-  right: calc(8px - var(--process-gap));
-  height: 12px;
-  translate: 0 -50%;
-  color: rgba(var(--navy-rgb), 0.32);
+.process__title {
+  grid-column: 2;
+  grid-row: 1;
 }
 
+.process__text {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 34ch;
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+
+.process__connector { display: none; }
+
+/* Two abreast, still as rows. The spine goes: in a two-column grid the item
+   below a step is the one after next, so a line between them would skip one. */
 @media (min-width: 640px) {
   .process__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .process__step:not(:last-child)::before { display: none; }
 }
 
+/* ── 992px and up: the reference's four stacked columns ────────────────────── */
 @media (min-width: 992px) {
-  .process__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .process__connector { display: block; }
+  .process {
+    --process-dot: clamp(84px, 4rem + 3vw, 108px);
+  }
+
+  .process__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(2rem, 1rem + 3vw, 2.75rem) var(--process-gap);
+  }
+
+  .process__step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    justify-items: start;
+  }
+
+  .process__badge {
+    grid-column: auto;
+    grid-row: auto;
+    margin-bottom: 14px;
+  }
+
+  .process__num { font-size: var(--fs-h3); }
+
+  .process__title {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .process__text {
+    grid-column: auto;
+    grid-row: auto;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  /* Spans the space between this circle and the next one, which is why the
+     right edge reaches a full gap past the column. */
+  .process__connector {
+    display: block;
+    position: absolute;
+    top: calc(var(--process-dot) / 2);
+    left: calc(var(--process-dot) + 8px);
+    right: calc(8px - var(--process-gap));
+    height: 12px;
+    translate: 0 -50%;
+    color: rgba(var(--navy-rgb), 0.32);
+  }
 }
