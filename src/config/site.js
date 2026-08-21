@@ -91,6 +91,17 @@ export const hero = {
 }
 
 /* ── The three promises from the banner ────────────────────────────────────── */
+
+/*  Heading for the accent band that carries them. Deliberately NOT
+ *  about.headline: both blocks sit on the home page a screen apart, and running
+ *  the same sentence twice made the page read like a template. This one is his
+ *  own tagline, which had no home on the site until now.
+ */
+export const pillarsIntro = {
+  title: 'Healthy teeth, confident you',
+  text: 'Three things every patient gets here, whatever they came in for.',
+}
+
 export const pillars = [
   { icon: 'tooth', title: 'Expert Care', text: 'Advanced dental solutions for all your oral health needs.' },
   { icon: 'shield', title: 'Safe & Comfortable', text: 'Painless, gentle and patient-friendly treatment.' },
@@ -295,6 +306,18 @@ export const testimonials = [
   },
 ]
 
+/* ── Section switches ──────────────────────────────────────────────────────────
+ *  Turn a whole section of the site on or off without touching a component.
+ *  The section's code, styles and content all stay in place — flipping the flag
+ *  back to true brings it straight back.
+ */
+export const sections = {
+  // Off until there are real before-and-after cases with patient consent.
+  // Generated or borrowed "results" would be a claim about outcomes this
+  // chamber did not produce, so the section stays hidden rather than filled.
+  beforeAfter: false,
+}
+
 /* ── Before / after showcase (Home section) ───────────────────────────────────
  *  Drop matching pairs into /public/images/. Leave the array as it is and
  *  branded placeholders are drawn instead — the section still reads correctly.
@@ -322,6 +345,6 @@ export const links = {
 }
 
 export default {
-  identity, contact, social, hours, hero, pillars, services,
-  reasons, process, stats, about, testimonials, beforeAfter, nav, links,
+  identity, contact, social, hours, hero, pillars, pillarsIntro, services,
+  reasons, process, stats, about, testimonials, beforeAfter, sections, nav, links,
 }

@@ -1,5 +1,5 @@
 import usePageMeta from '../lib/usePageMeta.js'
-import { identity } from '../config/site.js'
+import { identity, sections } from '../config/site.js'
 
 import Hero from '../sections/Hero.jsx'
 import Pillars from '../sections/Pillars.jsx'
@@ -32,7 +32,9 @@ export default function Home() {
         <Process />
       </div>
       <StatsBand />
-      <BeforeAfter />
+      {/* Hidden via the flag in site.js, not removed — the component, its styles
+          and its captions are all still here for when real cases exist. */}
+      {sections.beforeAfter && <BeforeAfter />}
       <Testimonials />
       <CtaBand />
     </>

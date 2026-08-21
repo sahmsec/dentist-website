@@ -39,7 +39,7 @@ be cropped out. The un-watermarked original is needed from whoever produced it.
 
 | Slot | Why it stays empty |
 | --- | --- |
-| `ba-1/2/3-before.jpg`, `ba-1/2/3-after.jpg` | Before-and-after pairs are claims about clinical outcomes. They must be genuine cases with written patient consent. |
+| `ba-1/2/3-before.jpg`, `ba-1/2/3-after.jpg` | Before-and-after pairs are claims about clinical outcomes — genuine cases with written patient consent only. **The section is currently hidden**: `sections.beforeAfter` in `src/config/site.js` is `false`. Set it to `true` when the photographs exist; the component, its styles and its captions are all still in place. |
 | `patient-1.jpg`–`patient-3.jpg` | Testimonial avatars. Rather than invented faces beside real quotes, these render a monogram. |
 | `team-associate.jpg`, `team-assistant.jpg` | Real colleagues. A monogram until there are photographs of them. |
 

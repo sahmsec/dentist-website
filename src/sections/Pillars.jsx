@@ -2,7 +2,7 @@ import Icon from '../components/Icons.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { CallButton } from '../components/Button.jsx'
 import { LogoMark } from '../components/Logo.jsx'
-import { contact, pillars } from '../config/site.js'
+import { contact, pillars, pillarsIntro } from '../config/site.js'
 import './Pillars.css'
 
 export default function Pillars() {
@@ -14,9 +14,9 @@ export default function Pillars() {
         <div className="container pillars__inner">
           <Reveal className="pillars__intro">
             <h2 className="pillars__title" id="pillars-title">
-              Your dental health is our passion
+              {pillarsIntro.title}
             </h2>
-            <p className="pillars__sub">Let us make your smile your best feature.</p>
+            <p className="pillars__sub">{pillarsIntro.text}</p>
             <CallButton variant="navy" label={`Call ${contact.phone.display}`} />
           </Reveal>
 
