@@ -1,22 +1,19 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    HERO — phone layout first, desktop composition in the min-width query.
 
-   Phone: a tall photo band with the white card climbing back over its lower
-   third, so the dead gap between photo and copy disappears and the call button
-   lands on the first screen.
+   Phone: photograph, then words. Nothing overlaps. An earlier version climbed a
+   white card back over the photo, which meant a heavy block of type sitting on
+   top of the one image that has to do the selling — it hid the photograph and
+   read as bulk. Here the picture is left alone and the copy sits beneath it on
+   the page surface, so both are legible in one glance.
 
-   From 900px: the card becomes the circle overlaid on a full-bleed band, with
-   the navy About badge straddling its edge and the rating card bottom-right.
+   From 900px: the copy becomes the white circle overlaid on a full-bleed band,
+   with the navy About badge straddling its edge and the rating card
+   bottom-right — the reference composition, which works at that width.
    ══════════════════════════════════════════════════════════════════════════ */
 
 .hero {
-  /* Taller than it is wide, which is what makes object-fit zoom in on Dr.
-     Arman rather than letterbox him. Capped so a tablet does not get a wall of
-     photograph. */
-  --hero-band: min(118vw, 470px);
-  /* How far the card climbs back over the band — a fraction of it, so the
-     strip of photo that stays visible keeps its proportion at every width. */
-  --hero-lift: calc(var(--hero-band) * 0.58);
+  --hero-band: min(96vw, 400px);
   --hero-curve: var(--r-curve);
 
   position: relative;
@@ -48,23 +45,13 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  /* Phone source is a portrait of him; keep his face high in the window so the
-     card covers his coat rather than his chin. */
-  object-position: 50% 18%;
+  /* Him left, signage right. Nothing covers the photograph on a phone, so the
+     window only needs to sit high enough to keep his head well inside it. */
+  object-position: 50% 22%;
 }
 
-/* Grounds the card against the photo rather than letting it float on a bright
-   edge. Nothing sits over the photo at this size, so the left third is left
-   alone — darkening it would darken exactly where Dr. Arman is standing. */
-.hero__scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(var(--navy-rgb), 0.4) 0%,
-    rgba(var(--navy-rgb), 0) 42%
-  );
-}
+/* Nothing sits over the photograph on a phone, so it needs no scrim there. */
+.hero__scrim { display: none; }
 
 .hero__overlay > .container { width: 100%; }
 
@@ -73,28 +60,28 @@
   width: 100%;
   max-width: 560px;
   margin-inline: auto;
-  margin-top: calc(var(--hero-lift) * -1);
 }
 
-/* ── The card (a circle from 900px up — hence the name) ────────────────────── */
+/* No card on a phone — just type on the page. The bottom padding clears the
+   yellow band, which tucks 30px up behind the end of this section; measured, it
+   was overlapping the last line of the lede by 26px. */
 .hero__circle {
   display: grid;
-  gap: 10px;
-  padding: 20px;
-  border-radius: var(--r-xl);
-  background: var(--white);
-  box-shadow: var(--shadow-lg);
+  gap: 12px;
+  justify-items: start;
+  padding: 26px 0 46px;
 }
 
 .hero__title {
-  font-size: clamp(1.75rem, 7.4vw, 2.375rem);
-  line-height: 1.08;
+  font-size: clamp(1.65rem, 6.8vw, 2.125rem);
+  line-height: 1.12;
 }
 
 .hero__lede {
   font-size: var(--fs-sm);
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--body);
+  max-width: 34ch;
 }
 
 /* The shared eyebrow is sized for a full-width section; here it has to fit
@@ -209,6 +196,10 @@
   }
 
   .hero__circle {
+    padding: clamp(28px, 5vw, 56px);
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
     align-content: center;
     justify-items: center;
     gap: clamp(12px, 1.6vw, 22px);
