@@ -220,8 +220,8 @@ export const reasons = [
     tab: 'Qualified Surgeon',
     title: 'An oral & dental surgeon, not only a dentist',
     text:
-      'Surgical training means the complicated cases — impacted wisdom teeth, implants, ' +
-      'difficult extractions — are handled in the chamber rather than referred on.',
+      'Impacted wisdom teeth, implants and difficult extractions are handled here, ' +
+      'not referred elsewhere.',
     checks: ['Registered oral & dental surgeon', 'Surgical cases handled in-house'],
     image: 'why-qualified.jpg',
   },
@@ -230,8 +230,8 @@ export const reasons = [
     tab: 'Painless Treatment',
     title: 'Gentle, genuinely painless treatment',
     text:
-      'Proper anaesthesia, unhurried technique, and a rule that you are never in the chair ' +
-      'without knowing what happens next. Nervous patients are welcome here.',
+      'Proper anaesthesia and unhurried technique. You are never in the chair without ' +
+      'knowing what happens next.',
     checks: ['Effective local anaesthesia', 'Calm, unhurried appointments'],
     image: 'why-painless.jpg',
   },
@@ -240,8 +240,8 @@ export const reasons = [
     tab: 'Transparent Pricing',
     title: 'The cost is agreed before treatment starts',
     text:
-      'You get the full treatment plan and its cost in writing before anything begins. ' +
-      'No mid-treatment surprises and no charges you did not agree to.',
+      'The plan and its cost in writing before anything begins. No mid-treatment ' +
+      'surprises.',
     checks: ['Written treatment plan', 'Fixed, agreed cost'],
     image: 'why-transparent.jpg',
   },
@@ -250,8 +250,8 @@ export const reasons = [
     tab: 'Modern Equipment',
     title: 'Current equipment, properly sterilised',
     text:
-      'Digital diagnosis, modern restorative materials, and a sterilisation protocol followed ' +
-      'for every single instrument, every single time.',
+      'Digital diagnosis, modern materials, and a sterilisation protocol followed for ' +
+      'every instrument, every time.',
     checks: ['Digital diagnosis', 'Strict sterilisation protocol'],
     image: 'why-modern.jpg',
   },
@@ -259,10 +259,10 @@ export const reasons = [
 
 /* ── Patient journey ───────────────────────────────────────────────────────── */
 export const process = [
-  { step: '01', title: 'Call the chamber', text: 'Ring 01915109006 and tell us what is bothering you. We find you a slot.' },
-  { step: '02', title: 'Examination', text: 'A full look at your teeth, gums and bite, with the diagnosis explained plainly.' },
-  { step: '03', title: 'Treatment plan', text: 'Your options, the timeline and the cost — written down and agreed before we begin.' },
-  { step: '04', title: 'Treatment & care', text: 'The work carried out gently, then a follow-up to be sure it settled well.' },
+  { step: '01', title: 'Call the chamber', text: 'Tell us what is wrong and we find you a slot.' },
+  { step: '02', title: 'Examination', text: 'Teeth, gums and bite checked, and the diagnosis explained plainly.' },
+  { step: '03', title: 'Treatment plan', text: 'Options, timeline and cost, agreed in writing before anything starts.' },
+  { step: '04', title: 'Treatment & care', text: 'Carried out gently, with a follow-up to be sure it settled.' },
 ]
 
 /* ── Stats ─────────────────────────────────────────────────────────────────── */
@@ -280,15 +280,11 @@ export const about = {
   lede: 'Let us make your smile your best feature.',
   body: [
     'Dr. Arman Kayser is an Oral & Dental Surgeon practising in Shyamoli, Dhaka. His chamber ' +
-      'handles everything from a routine scaling to full-arch implant work, with the same ' +
-      'principle behind all of it: a patient who understands their treatment is a patient who ' +
-      'is comfortable during it.',
-    'Surgical training is what sets the practice apart. Impacted wisdom teeth, difficult ' +
-      'extractions and implant placement are done here rather than referred elsewhere — fewer ' +
-      'appointments, one person accountable for the outcome, and a plan that holds together ' +
-      'from diagnosis through to follow-up.',
-    'Every treatment plan is written down and costed before work begins. Nothing starts until ' +
-      'you have agreed to it.',
+      'handles everything from a routine scaling to full-arch implant work, on one principle: ' +
+      'a patient who understands their treatment is comfortable during it.',
+    'Surgical training is what sets the practice apart: fewer appointments, one person ' +
+      'accountable for the outcome, and a plan that holds from diagnosis to follow-up.',
+    'Every plan is written down and costed before work begins.',
   ],
   credentials: [
     { title: 'BDS — Bachelor of Dental Surgery', org: 'Registered dental surgeon' },
@@ -346,6 +342,13 @@ export const sections = {
   // Generated or borrowed "results" would be a claim about outcomes this
   // chamber did not produce, so the section stays hidden rather than filled.
   beforeAfter: false,
+
+  // Off because the four quotes below are invented placeholder copy, and there
+  // are 44 real Google reviews sitting one link away. Fabricated praise beside
+  // a genuine 4.9 rating is the one thing on this page that could not survive
+  // a patient checking it. Replace `testimonials` with real review text and
+  // turn this back on.
+  testimonials: false,
 }
 
 /* ── Before / after showcase (Home section) ───────────────────────────────────

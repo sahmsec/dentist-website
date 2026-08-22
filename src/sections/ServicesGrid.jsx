@@ -25,7 +25,7 @@ export default function ServicesGrid({ limit }) {
           align="split"
           eyebrow="What I treat"
           title="Practice areas and expertise"
-          text="Everything from a routine scaling to full implant work, carried out in one chamber in Shyamoli — each treatment planned, explained and costed before anything begins."
+          text="Routine scaling through to full implant work, all in one chamber."
         >
           {hasMore && (
             <Button to="/services" variant="ghost">

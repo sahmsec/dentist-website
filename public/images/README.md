@@ -69,7 +69,7 @@ be cropped out. The un-watermarked original is needed from whoever produced it.
 | Slot | Why it stays empty |
 | --- | --- |
 | `ba-1/2/3-before.jpg`, `ba-1/2/3-after.jpg` | Before-and-after pairs are claims about clinical outcomes — genuine cases with written patient consent only. **The section is currently hidden**: `sections.beforeAfter` in `src/config/site.js` is `false`. Set it to `true` when the photographs exist; the component, its styles and its captions are all still in place. |
-| `patient-1.jpg`–`patient-3.jpg` | Testimonial avatars. Rather than invented faces beside real quotes, these render a monogram. |
+| `patient-1.jpg`–`patient-3.jpg` | Testimonial avatars. The testimonials section is currently hidden (`sections.testimonials` in `src/config/site.js`) because its four quotes are invented placeholder copy and there are 44 real Google reviews one link away. Replace the quotes with real review text, then turn it back on. |
 | `team-associate.jpg`, `team-assistant.jpg` | Real colleagues. A monogram until there are photographs of them. |
 
 ---

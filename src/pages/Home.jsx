@@ -35,7 +35,7 @@ export default function Home() {
       {/* Hidden via the flag in site.js, not removed — the component, its styles
           and its captions are all still here for when real cases exist. */}
       {sections.beforeAfter && <BeforeAfter />}
-      <Testimonials />
+      {sections.testimonials && <Testimonials />}
       <CtaBand />
     </>
   )
