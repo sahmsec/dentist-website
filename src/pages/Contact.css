@@ -1,7 +1,10 @@
 /* ── Reach out: the headline and the number, beside the three channels ─────── */
 .contact-reach__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  /* The copy column carries the headline and the number; the hours card only
+     has to hold three rows, so it no longer takes half the width the channel
+     cards needed. */
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
   gap: clamp(2rem, 1rem + 4vw, 4.5rem);
   align-items: start;
 }
@@ -14,6 +17,11 @@
 .contact-reach__dial {
   display: grid;
   justify-items: start;
+  /* Sized to the number rather than to the column: stretched full width it
+     carried ~285px of empty card to the right of the two buttons. */
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
   gap: 16px;
   padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
   background: var(--white);
@@ -65,75 +73,7 @@
   margin-top: 2px;
 }
 
-/* ── The three channel cards ───────────────────────────────────────────────── */
-.contact-reach__cards {
-  display: grid;
-  gap: clamp(1rem, 0.6rem + 1.4vw, 1.5rem);
-}
-
-.contact-card {
-  display: grid;
-  justify-items: start;
-  gap: 10px;
-  box-shadow: var(--shadow-sm);
-  /* `translate`, not `transform`: .reveal.is-in resets transform to none. */
-  transition: translate var(--t) var(--ease), box-shadow var(--t) var(--ease);
-}
-
-.contact-card:hover {
-  translate: 0 -6px;
-  box-shadow: var(--shadow-lg);
-}
-
-.contact-card__icon {
-  margin-bottom: 6px;
-  transition: background var(--t) var(--ease), color var(--t) var(--ease);
-}
-
-.contact-card:hover .contact-card__icon {
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.contact-card__label {
-  font-size: var(--fs-h4);
-  color: var(--ink);
-}
-
-.contact-card__value {
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-  color: var(--body);
-  /* The email address is long enough to overflow a narrow card. */
-  overflow-wrap: anywhere;
-}
-
-/* Two up, with the third spanning the pair, so the block squares off against
-   the headline column instead of running away down the page.
-
-   Only when there IS a third. The channel list drops email when no inbox is
-   configured, and with two cards this laid the first across one column and the
-   last across both — two cards of different widths, stacked. Guarded on the
-   third child so the count and the layout cannot drift apart again; with two
-   channels the grid stays one column and both cards are the same width. */
-@media (min-width: 1101px) {
-  .contact-reach__cards:has(> li:nth-child(3)) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .contact-reach__cards:has(> li:nth-child(3)) > li:last-child {
-    grid-column: 1 / -1;
-  }
-}
-
-/* ── Hours and map ─────────────────────────────────────────────────────────── */
-.contact-detail__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: clamp(1.5rem, 0.8rem + 2.6vw, 2.5rem);
-  align-items: stretch;
-}
-
+/* ── Chamber hours ─────────────────────────────────────────────────────────── */
 .contact-hours {
   display: grid;
   justify-items: start;
@@ -193,24 +133,32 @@
   color: var(--accent-ink);
 }
 
-.contact-hours__address {
+
+/* ── Where to find us ──────────────────────────────────────────────────────── */
+.contact-where__head {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: clamp(1.25rem, 0.9rem + 1.4vw, 2rem);
 }
 
-.contact-hours__address-icon {
-  margin-top: 2px;
+.contact-where__place {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
 }
 
-.contact-hours__address-text {
+.contact-where__address {
+  font-family: var(--font-display);
   font-style: normal;
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-  color: var(--body);
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  line-height: var(--lh-heading);
+  color: var(--ink);
 }
 
-/* ── Map ───────────────────────────────────────────────────────────────────── */
 .contact-map {
   min-height: 420px;
   border-radius: var(--r-lg);
@@ -229,14 +177,7 @@
 
 /* ── Responsive ────────────────────────────────────────────────────────────── */
 @media (max-width: 992px) {
-  .contact-reach__grid,
-  .contact-detail__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-reach__cards {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  }
+  .contact-reach__grid { grid-template-columns: 1fr; }
 
   .contact-map,
   .contact-map iframe {

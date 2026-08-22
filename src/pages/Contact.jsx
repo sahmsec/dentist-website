@@ -1,33 +1,21 @@
 import usePageMeta from '../lib/usePageMeta.js'
 import PageTitle from '../components/PageTitle.jsx'
 import SectionHead from '../components/SectionHead.jsx'
-import ContactTiles from '../components/ContactTiles.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icons.jsx'
 import Button, { CallButton, WhatsAppButton } from '../components/Button.jsx'
 import { contact, hours, identity, links } from '../config/site.js'
 import './Contact.css'
 
-/* Three ways to reach the chamber, in the order the practice prefers them. */
-const channels = [
-  {
-    icon: 'phone',
-    label: 'Call the chamber',
-    value: contact.phone.display,
-    href: links.tel,
-  },
-  {
-    icon: 'whatsapp',
-    label: 'WhatsApp',
-    value: contact.whatsapp.display,
-    href: links.whatsapp,
-    external: true,
-  },
-  // Only listed when a real inbox exists; see contact.email in site.js.
-  ...(contact.email
-    ? [{ icon: 'mail', label: 'Email', value: contact.email.display, href: links.mailto }]
-    : []),
-]
+/**
+ * The number is printed once here, and once is the point: it was on screen
+ * eight times. The channel cards restated the dial panel beside them, the page
+ * added a tile strip the footer already renders under every page, and both
+ * listed WhatsApp on the same digits as the phone.
+ *
+ * What is left is the number, two ways to start, when the chamber is open, and
+ * where it is.
+ */
 
 export default function Contact() {
   usePageMeta({
@@ -70,36 +58,9 @@ export default function Contact() {
             </Reveal>
           </div>
 
-          <ul className="contact-reach__cards">
-            {channels.map((channel, i) => (
-              <li key={channel.label}>
-                <Reveal
-                  as="a"
-                  className="card contact-card"
-                  delay={i * 90}
-                  href={channel.href}
-                  {...(channel.external
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                >
-                  <span className="icon-circle contact-card__icon">
-                    <Icon name={channel.icon} size={24} />
-                  </span>
-                  <h3 className="contact-card__label">{channel.label}</h3>
-                  <span className="contact-card__value">
-                    {channel.value}
-                    {channel.external && <span className="sr-only"> (opens in a new tab)</span>}
-                  </span>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="section section--white section--curve-bottom contact-detail">
-        <div className="container contact-detail__grid">
-          <Reveal className="card contact-hours">
+          {/* Hours sit beside the number rather than in a section below it:
+              "can I ring them now" is the same question as "what do I ring". */}
+          <Reveal className="card contact-hours" delay={90}>
             <span className="icon-circle contact-hours__icon">
               <Icon name="clock" size={24} />
             </span>
@@ -119,21 +80,24 @@ export default function Contact() {
               <Icon name="phone" size={17} />
               {hours.emergencyNote}
             </p>
+          </Reveal>
+        </div>
+      </section>
 
-            <div className="contact-hours__address">
-              <span className="icon-circle icon-circle--sm contact-hours__address-icon">
-                <Icon name="mapPin" size={18} />
-              </span>
-              <address className="contact-hours__address-text">
-                {contact.address.line1}
-                <br />
-                {contact.address.line2}
-                <br />
-                {contact.address.country}
+      {/* Full width, now the hours have moved up. The map is the one thing on
+          this page worth being large — it is the only answer here a visitor
+          cannot get from the header. */}
+      <section className="section section--white section--curve-bottom contact-where">
+        <div className="container">
+          <Reveal className="contact-where__head">
+            <div className="contact-where__place">
+              <p className="eyebrow">Where to find us</p>
+              <address className="contact-where__address">
+                {contact.address.line1}, {contact.address.line2}
               </address>
             </div>
 
-            <Button href={links.maps} variant="ghost" size="sm" icon="mapPin">
+            <Button href={links.maps} variant="navy" size="sm" icon="mapPin">
               Get directions
             </Button>
           </Reveal>
@@ -150,8 +114,6 @@ export default function Contact() {
           </Reveal>
         </div>
       </section>
-
-      <ContactTiles background="surface" />
     </>
   )
 }

@@ -16,7 +16,13 @@ const tiles = [
   {
     icon: 'whatsapp',
     label: 'WhatsApp',
-    value: contact.whatsapp.display,
+    /* WhatsApp is on the same line as the phone, so printing the number here
+       put the same eleven digits twice in one row of three tiles. The tile
+       says what it does instead; the digits are on the tile beside it. */
+    value:
+      contact.whatsapp.display === contact.phone.display
+        ? 'Send a message'
+        : contact.whatsapp.display,
     href: links.whatsapp,
     external: true,
   },
