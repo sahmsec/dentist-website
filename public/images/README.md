@@ -38,14 +38,19 @@ panel and nothing else breaks.
 **Environments and equipment** — generated with FLUX.1-schnell via
 `scripts/generate-images.ps1`. These are illustrative: clean clinical rooms and
 instrument still life that carry atmosphere behind text. They are **not**
-photographs of his chamber. `titlebar-*.jpg`, `stats-band.jpg`,
-`chamber-interior.jpg`, `why-painless/transparent/modern.jpg`, `service-*.jpg`.
+photographs of his chamber. `titlebar-services.jpg`, `titlebar-default.jpg`,
+`why-transparent.jpg`, `why-modern.jpg`, `service-*.jpg`.
 
-**His actual chamber** now fills three slots, all from the same real
-photograph: `titlebar-about.jpg` (the About page banner), `stats-band.jpg`
-(behind the counters) and `chamber-interior.jpg` (the inset on the home
-introduction, which is visible on phones now — it was hidden there, so a phone
-visitor never saw the room at all).
+**His actual reception** is `titlebar-contact.jpg` — the Contact page banner,
+signboard and desk, shot by the practice. The banner takes its height from the
+file's own ratio rather than the fixed 21/9 band, so none of it is cropped
+away; if you replace the file, pass the new ratio to `PageTitle`.
+
+**His actual chamber** fills three slots, all from the same real photograph:
+`titlebar-about.jpg` (the About page banner), `stats-band.jpg` (behind the
+counters) and `chamber-wide.jpg` (the chamber section, which phones see between
+the hero and the introduction — it was hidden there, so a phone visitor never
+saw the room at all).
 
 The two banner uses sit under a navy scrim, which turns out to solve the
 problem: the tint mutes the clutter and the orange walls while the room still
@@ -85,9 +90,10 @@ be cropped out. The un-watermarked original is needed from whoever produced it.
 
 | File | Ratio | What the shot should show |
 | --- | --- | --- |
-| `hero-dr-arman.jpg` | 16/9 | The main banner. Dr. Arman at the chamber, in scrubs or coat, looking towards camera. Bright, calm, plenty of room around him. |
+| `hero-clinic.jpg` | 1448/1086 | The home banner from 900px up — the chamber, not him, because the introduction below it is his portrait. |
+| `hero-mobile.jpg` | 1448/1086 | The home banner on phones: Dr. Arman himself, since the chamber gets a section of its own directly below. |
 | `dr-arman-portrait.jpg` | 1/1 | The introduction section, shown as a circle. Square, and centred on him in the file — a 3:4 photograph in a square box is scaled to the width, so `object-position` cannot move him sideways. |
-| `chamber-interior.jpg` | 1/1 | The small inset card that overlaps the portrait. The treatment room itself — chair, light, clean surfaces, no patient. |
+| `chamber-wide.jpg` | 1400/709 | The chamber section, which phones get between the hero and the introduction. The treatment room itself — chair, light, clean surfaces, no patient. |
 | `stats-band.jpg` | 16/9 | Wide background behind the dark numbers band. It sits under a heavy navy tint, so choose something with shape rather than detail: the chair, a wide room view, hands at work. |
 
 ## Services — six cards
@@ -170,8 +176,7 @@ hard to read.
 | --- | --- | --- |
 | `titlebar-about.jpg` | 21/9 | Wide view of the chamber or reception. |
 | `titlebar-services.jpg` | 21/9 | Instruments, chair or equipment, shot wide. |
-| `titlebar-contact.jpg` | 21/9 | The building entrance, the signboard, or the street outside. |
-| `reception.jpg` | 3/2 | Contact page, above the map. The reception as a visitor first sees it, signboard included — it is what tells them they are at the right door. No staff or patients in frame. |
+| `titlebar-contact.jpg` | 21/9 | The reception as a visitor first sees it, signboard included — it is what tells them they are at the right door. Shot wide; the banner crops harder than 21/9 on a desktop, so keep the sign near the vertical centre. |
 | `titlebar-default.jpg` | 21/9 | A neutral fallback used by any page without its own banner. |
 
 ## Social share card

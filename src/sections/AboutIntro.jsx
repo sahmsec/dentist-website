@@ -17,8 +17,9 @@ import './AboutIntro.css'
  * portrait being a circle buys: a 3:4 photograph 512px wide is 683px tall, most
  * of a laptop screen on its own.
  *
- * On a phone the portrait shrinks again to a 92px avatar and the prose to its
- * opening paragraph; the rest is still in the markup and comes back at 768px.
+ * On a phone the portrait shrinks again to a 92px avatar and the credentials
+ * drop out — they are listed in full on the About page, and on a 390px column
+ * they were a wall of text. The prose is one paragraph at every width.
  */
 
 export default function AboutIntro() {

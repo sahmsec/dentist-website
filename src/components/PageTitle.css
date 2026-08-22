@@ -11,6 +11,39 @@
   border-radius: 0 0 var(--r-panel) var(--r-panel);
 }
 
+/* Takes the banner's shape from the photograph so nothing is cropped out of it.
+   Only above 768px: at 390px the same ratio would be a 200px-tall strip, too
+   short for the heading and the breadcrumb, so a phone keeps the band and
+   crops the sides — which costs nothing, since these photographs are composed
+   around their centre. */
+@media (min-width: 768px) {
+  .page-title--uncropped {
+    min-height: 0;
+    aspect-ratio: var(--banner-ratio, 21 / 9);
+  }
+}
+
+/* A lighter hand when the photograph is the subject. The full-width wash is
+   sized for a band where the picture is texture; over a whole room it left the
+   place looking unlit, which is the opposite of what a photograph of your
+   reception is on the page to say. This darkens the corner the copy sits in and
+   lets go of the rest. */
+.page-title--uncropped .page-title__scrim {
+  background:
+    linear-gradient(
+      0deg,
+      rgba(var(--navy-rgb), 0.8) 0%,
+      rgba(var(--navy-rgb), 0.4) 34%,
+      rgba(var(--navy-rgb), 0) 66%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(var(--navy-rgb), 0.52) 0%,
+      rgba(var(--navy-rgb), 0.12) 46%,
+      rgba(var(--navy-rgb), 0) 72%
+    );
+}
+
 .page-title__media {
   position: absolute;
   inset: 0;

@@ -14,13 +14,28 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-h-sticky) + 20px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
+/* ── Lenis ──────────────────────────────────────────────────────────────────
+   lenis/dist/lenis.css transcribed, less one rule: it sets
+   `pointer-events: none` on every iframe while smooth scrolling is on, which
+   would leave the map on the contact page looking interactive and not being.
+   Dropping it costs nothing here — a wheel event over an iframe never reaches
+   this document, so the map scrolls itself and Lenis never sees it.
+
+   `scroll-behavior: smooth` came off <html> at the same time. The CSS property
+   and Lenis both animate the same scroll position, and two easings racing for
+   one number is worse than either alone. */
+html.lenis,
+html.lenis body { height: auto; }
+
+/* Held while lenis.stop() is in force — the mobile drawer does that. */
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch] { overscroll-behavior: contain; }
 
 body {
   font-family: var(--font-body);

@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import { useLenis } from 'lenis/react'
 
 import Icon from './Icons.jsx'
 import Logo from './Logo.jsx'
@@ -66,6 +67,7 @@ function SocialRow({ className }) {
 
 export default function Header() {
   const { pathname } = useLocation()
+  const lenis = useLenis()
   const [stuck, setStuck] = useState(false)
   const [barHeight, setBarHeight] = useState(0)
   const [open, setOpen] = useState(false)
@@ -120,8 +122,12 @@ export default function Header() {
     const wide = window.matchMedia('(min-width: 992px)')
     const onWiden = (e) => e.matches && setOpen(false)
 
+    /* Both locks are needed. `overflow: hidden` stops the native scroll a
+       finger drag produces; lenis.stop() stops the wheel, which Lenis handles
+       itself and which the overflow rule therefore cannot reach. */
     const scrollLock = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    lenis?.stop()
     drawerRef.current?.focus()
 
     document.addEventListener('keydown', onKey)
@@ -130,8 +136,9 @@ export default function Header() {
       document.removeEventListener('keydown', onKey)
       wide.removeEventListener('change', onWiden)
       document.body.style.overflow = scrollLock
+      lenis?.start()
     }
-  }, [open])
+  }, [open, lenis])
 
   return (
     <header className="header">

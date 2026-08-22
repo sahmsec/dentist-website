@@ -49,11 +49,13 @@
 /* Two columns of short claims rather than four full-width rows. Every pixel
    spent on the tick is a character the label loses, so it is only just large
    enough to read as the same glyph it is at full size. */
-/* One column on a phone. Two columns gave each label ~150px, which wrapped all
-   four of them onto two lines and turned a scannable list into a block of
-   ragged text. Full width fits each on one line with room to spare. */
+/* Hidden on a phone: the four credentials are listed again in full on the About
+   page, and on a 390px column they turned this into a wall of text nobody read.
+   The ≥768 block turns the list back on — stated this way round rather than as a
+   `max-width: 767px` rule, because 767/768 leaves every fractional width between
+   them uncovered and Windows display scaling puts real viewports there. */
 .about-intro__checks {
-  display: grid;
+  display: none;
   width: 100%;
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
@@ -128,12 +130,13 @@
 
 /* ── Tablet and up: the full composition and the full argument ─────────────── */
 @media (min-width: 768px) {
-  .about-intro__grid { gap: clamp(2.5rem, 1rem + 5vw, 4rem); }
+  .about-intro__grid { gap: 24px; }
 
   /* Hugs the circle rather than filling the column, so the picture is centred
-     in the space it is given at every breakpoint. */
+     in the space it is given at every breakpoint. 200px is the stacked value —
+     the two-column block raises it; see the note there. */
   .about-intro__media {
-    --portrait: clamp(240px, 30vw, 380px);
+    --portrait: 200px;
     width: max-content;
     max-width: 100%;
     margin-inline: auto;
@@ -169,6 +172,7 @@
      three at 1366px, which leaves the fourth credential alone on its own row.
      Four items want two columns at every width that has room for them. */
   .about-intro__checks {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px 24px;
   }
@@ -212,19 +216,20 @@
   .about-intro { --section-y: 6vh; }
 }
 
-/* ── The single-column band ─────────────────────────────────────────────────
-   768-959px still stacks the picture above the prose, so its height is the sum
-   of both rather than the taller of the two, and the section ran 63px past a
-   900px-tall window. The circle is identification here, not the subject. */
-@media (min-width: 768px) and (max-width: 959px) {
-  .about-intro__media { --portrait: 200px; }
+/* ── Two columns ────────────────────────────────────────────────────────────
+   Below this the picture stacks above the prose, so the section's height is the
+   sum of the two rather than the taller of them — which is why the circle is
+   only 200px there, and identification rather than the subject.
 
-  .about-intro__grid { gap: 24px; }
-}
-
+   This block raises it, and it is the ONLY companion to the ≥768 defaults: a
+   `(min-width: 768px) and (max-width: 959px)` band would leave every width in
+   between uncovered, and those widths are ordinary rather than theoretical —
+   Windows at 125% display scaling turns a 1199-device-pixel window into a CSS
+   viewport of 959.2px, where the grid is still one column but the circle jumps
+   to 288px and the section grows by 250px. */
 @media (min-width: 960px) {
-  /* 0.8/1.2, not 0.9/1.1. The picture is a circle with a fixed ceiling now, so
-     a wider left column only adds margin around it, while the extra 60-90px on
+  /* 0.8/1.2, not 0.9/1.1. The picture is a circle with a fixed ceiling, so a
+     wider left column only adds margin around it, while the extra 60-90px on
      the right is a line the paragraph does not wrap and a row the credentials
      do not take — worth ~50px of height in the 960-1200 band, where the section
      was overrunning a short window. */
@@ -232,12 +237,6 @@
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: clamp(3rem, 1rem + 5vw, 5rem);
   }
-}
 
-/* ── Phones ─────────────────────────────────────────────────────────────────
-   Cut to the two things a patient actually wants here: who he is, and a way
-   through to more. The four credentials are listed again in full on the About
-   page — on a 390px column they turned this into a wall of text nobody read. */
-@media (max-width: 767px) {
-  .about-intro__checks { display: none; }
+  .about-intro__media { --portrait: clamp(240px, 30vw, 380px); }
 }

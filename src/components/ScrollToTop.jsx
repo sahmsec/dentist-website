@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useLenis } from 'lenis/react'
 
 import Icon from './Icons.jsx'
+import { scrollToTop } from '../lib/smoothScroll.js'
 import './ScrollToTop.css'
 
 /* How far down the page the back-to-top button earns its place. */
@@ -12,15 +14,17 @@ const SHOW_AFTER = 500
  * from the bottom of Services to Contact would land you mid-page. This puts
  * every route change back at the top.
  *
- * 'instant' rather than 'auto': base.css sets scroll-behavior:smooth on <html>,
- * and 'auto' defers to that — the whole page would glide up on every click.
+ * Immediate, not animated: a new page should already be at its start, and
+ * watching the old one glide upwards first is a page-load's worth of waiting
+ * for something the visitor did not ask to see.
  */
 export default function ScrollToTop() {
   const { pathname } = useLocation()
+  const lenis = useLenis()
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
-  }, [pathname])
+    scrollToTop(lenis, { immediate: true })
+  }, [pathname, lenis])
 
   return null
 }
@@ -28,6 +32,7 @@ export default function ScrollToTop() {
 /** The floating return-to-top control, above the phone call bar on mobile. */
 export function BackToTop() {
   const [shown, setShown] = useState(false)
+  const lenis = useLenis()
 
   useEffect(() => {
     let frame = 0
@@ -47,10 +52,11 @@ export function BackToTop() {
     }
   }, [])
 
-  const toTop = () => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    window.scrollTo({ top: 0, behavior: reduced ? 'instant' : 'smooth' })
-  }
+  /* Hands the journey to Lenis so it eases the same way a wheel scroll does,
+     rather than the browser's own smooth scroll fighting it for the scroll
+     position. scrollToTop falls back to the native call and honours the
+     reduced-motion preference either way. */
+  const toTop = () => scrollToTop(lenis)
 
   return (
     <button

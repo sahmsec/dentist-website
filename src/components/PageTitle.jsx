@@ -14,10 +14,20 @@ import './PageTitle.css'
  * The scrim runs left-to-right rather than top-to-bottom because the text sits
  * bottom-left — that keeps the copy legible while leaving the right-hand side
  * of whatever photo is dropped in almost untouched.
+ *
+ * Pass `ratio` — the photograph's own aspect ratio — and the banner takes its
+ * height from the picture instead of the fixed band, so nothing is cropped out
+ * of it. For the pages where the photograph is the subject rather than a
+ * texture behind a title.
+ *
+ *   <PageTitle … image="titlebar-contact.jpg" ratio="1536 / 789" />
  */
-export default function PageTitle({ title, breadcrumb, image, eyebrow }) {
+export default function PageTitle({ title, breadcrumb, image, eyebrow, ratio }) {
   return (
-    <header className="page-title on-dark">
+    <header
+      className={`page-title on-dark${ratio ? ' page-title--uncropped' : ''}`}
+      style={ratio ? { '--banner-ratio': ratio } : undefined}
+    >
       {/* Decorative background: the heading beside it already names the page. */}
       <div className="page-title__media" aria-hidden="true">
         <Photo src={image} alt="" ratio="21/9" shape="flat" className="page-title__photo" priority />
