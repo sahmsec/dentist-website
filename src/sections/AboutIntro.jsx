@@ -25,8 +25,13 @@ export default function AboutIntro() {
     <section className="section about-intro">
       <div className="container about-intro__grid">
         <Reveal className="about-intro__media">
+          {/* Art-directed so no photograph appears twice in one view. On
+              desktop this is the blue scrubs shot, which the hero does not use
+              there — the hero is the chamber. On a phone the hero IS the scrubs
+              shot, so this becomes the coat portrait instead. */}
           <Photo
             src="dr-arman-portrait.jpg"
+            sources={[{ media: '(max-width: 899px)', src: 'dr-arman-portrait-sm.jpg' }]}
             alt={`${identity.name}, ${identity.title}`}
             ratio="3/4"
             shape="media"

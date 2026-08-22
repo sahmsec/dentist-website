@@ -205,10 +205,10 @@
     border-radius: var(--r-media);
   }
 
-  /* White ring around the inset, the way the reference separates two
-     overlapping photographs instead of letting them touch. */
+  /* Hidden from 768px up: the hero on that breakpoint IS the chamber, so
+     repeating it here would be the same room twice on one screen. */
   .about-intro__inset {
-    display: block;
+    display: none;
     position: absolute;
     right: 0;
     bottom: 0;

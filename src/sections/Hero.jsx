@@ -13,22 +13,16 @@ export default function Hero() {
   return (
     <section className="hero" aria-label={identity.brandName}>
       <div className="hero__media">
-        {/* Two different photographs, not two crops of one.
-
-            Desktop gets the room: the band is wide, the circle card sits in the
-            left third and a scene fills the rest, which is what the reference
-            layout does.
-
-            A phone gets him. The band there is a portrait window barely wider
-            than the card, and an empty room in it reads as stock — it could be
-            any clinic. This is a portfolio for one dentist, so the small screen
-            leads with his face and his name badge. The browser downloads only
-            the one it matches. */}
+        {/* Two different photographs, not two crops of one. Desktop gets the
+            chamber — the band is wide, the circle card takes the left third and
+            a room fills the rest. A phone gets him, because the band there is a
+            portrait window barely wider than the card and a room in it reads as
+            stock. The browser downloads only the one it matches. */}
         <Photo
           src="hero-clinic.jpg"
           sources={[{ media: '(max-width: 899px)', src: 'hero-mobile.jpg' }]}
           alt=""
-          ratio="1200/806"
+          ratio="1448/1086"
           shape="flat"
           priority
           className="hero__photo"

@@ -7,26 +7,25 @@ This matters, so it is stated plainly.
 **Photographs of Dr. Arman** — every one is a real photograph of him, cropped
 from the originals kept in `_source/`. None is generated, and none should be.
 
-He appears four times and no two use the same outfit, because one photograph
-stretched across every slot made the site look like it had a single asset:
+No photograph appears twice in a single view. Two slots are art-directed —
+they load a different file on a phone than on a desktop — because the hero
+swaps between the chamber and the doctor, and whatever the hero shows, the
+section under it must not repeat.
 
-| File | Source | Where |
+| Slot | Desktop | Phone |
 | --- | --- | --- |
-| `dr-arman-portrait.jpg` | grey suit | Home introduction |
-| `why-qualified.jpg` | white coat | Home, "an oral & dental surgeon" |
-| `why-painless.jpg` | scrubs and mask, treating | Home, "painless treatment" |
-| `dr-arman-about.jpg` | blue scrubs, standing | About page |
-| `team-arman.jpg` | white coat, head and shoulders | About page team card |
+| Hero | `hero-clinic.jpg` — the chamber | `hero-mobile.jpg` — blue scrubs by the signage |
+| Home introduction | `dr-arman-portrait.jpg` — blue scrubs | `dr-arman-portrait-sm.jpg` — the coat portrait |
+| Introduction inset | hidden; the hero is already the chamber | `chamber-interior.jpg` — the chamber |
+| "An oral & dental surgeon" | `why-qualified.jpg` — the coat portrait | pane hidden on phones |
+| "Painless treatment" | `why-painless.jpg` — him treating a patient | pane hidden on phones |
+| About page portrait | `dr-arman-about.jpg` — grey suit | same |
+| Team card | `team-arman.jpg` — coat portrait, head and shoulders | same |
 
-The hero carries two different photographs, chosen by viewport rather than
-cropped from one — see the `sources` prop on `Photo`:
+The coat portrait is centred to the pixel: his face sits at x=430 in an 853px
+frame whose centre is x=426, so the crops take it straight down the middle
+rather than nudging it.
 
-| File | Shown | Why |
-| --- | --- | --- |
-| `hero-clinic.jpg` | 900px and up | The band is wide, the circle card takes the left third and a room fills the rest, as the reference layout does. |
-| `hero-mobile.jpg` | below 900px | The band is a portrait window barely wider than the card. A room there reads as stock — it could be any clinic. This is one dentist's portfolio, so the phone leads with his face and name badge. |
-
-The browser downloads only the one it matches.
 
 `why-painless.jpg` is a real clinical photograph of him treating a patient —
 the only one on the site showing actual treatment, and the most credible image
