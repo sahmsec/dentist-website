@@ -15,22 +15,37 @@ import './PageTitle.css'
  * bottom-left — that keeps the copy legible while leaving the right-hand side
  * of whatever photo is dropped in almost untouched.
  *
- * Pass `ratio` — the photograph's own aspect ratio — and the banner takes its
- * height from the picture instead of the fixed band, so nothing is cropped out
- * of it. For the pages where the photograph is the subject rather than a
- * texture behind a title.
+ * `whole` fits the entire photograph into the band instead of filling it, for
+ * the pages where the picture is the subject and cropping it loses the point.
+ * The band keeps its usual height either way — a banner tall enough to hold a
+ * 2:1 photograph edge to edge is most of a laptop screen, which is a hero, not
+ * a page title. A blurred copy of the same file fills the width behind it, so
+ * the bar still reads as one photograph rather than a picture on a navy slab.
  *
- *   <PageTitle … image="titlebar-contact.jpg" ratio="1536 / 789" />
+ *   <PageTitle … image="titlebar-contact.jpg" whole />
  */
-export default function PageTitle({ title, breadcrumb, image, eyebrow, ratio }) {
+export default function PageTitle({ title, breadcrumb, image, eyebrow, whole = false }) {
   return (
-    <header
-      className={`page-title on-dark${ratio ? ' page-title--uncropped' : ''}`}
-      style={ratio ? { '--banner-ratio': ratio } : undefined}
-    >
+    <header className={`page-title on-dark${whole ? ' page-title--whole' : ''}`}>
       {/* Decorative background: the heading beside it already names the page. */}
       <div className="page-title__media" aria-hidden="true">
-        <Photo src={image} alt="" ratio="21/9" shape="flat" className="page-title__photo" priority />
+        {whole && (
+          /* Same file, so it is already in cache — no second request. */
+          <Photo src={image} alt="" ratio="21/9" shape="flat" className="page-title__wash" priority />
+        )}
+        {/* ratio="auto" in whole mode, so the element box takes the file's own
+            shape. Photo writes the ratio as an inline style, which beats the
+            stylesheet — left at 21/9 the box stays wider than the picture and
+            `contain` letterboxes it inside its own element, putting a seam
+            where the paint stops rather than at the edge of the bar. */}
+        <Photo
+          src={image}
+          alt=""
+          ratio={whole ? 'auto' : '21/9'}
+          shape="flat"
+          className="page-title__photo"
+          priority
+        />
       </div>
       <div className="page-title__scrim" aria-hidden="true" />
 

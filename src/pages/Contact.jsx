@@ -38,15 +38,10 @@ export default function Contact() {
 
   return (
     <>
-      {/* The reception is the subject here, not a texture: the fixed 21/9 band
-          cropped the desk out of the bottom of it, so the banner takes the
-          photograph's own shape instead. */}
-      <PageTitle
-        title="Contact"
-        breadcrumb="Contact"
-        image="titlebar-contact.jpg"
-        ratio="1536 / 789"
-      />
+      {/* The reception is the subject here, not a texture, and the band's own
+          4.2:1 crop cut the desk off the bottom of it — so the whole
+          photograph is fitted into the band instead. */}
+      <PageTitle title="Contact" breadcrumb="Contact" image="titlebar-contact.jpg" whole />
 
       <section className="section contact-reach">
         <div className="container contact-reach__grid">
