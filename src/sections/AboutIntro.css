@@ -29,8 +29,21 @@
   border-radius: var(--r-sm) var(--r-xl) var(--r-xl);
 }
 
-/* No width on a phone for a second photograph without shrinking the face. */
-.about-intro__inset { display: none; }
+/* Shown on a phone too. It is the only photograph of the actual chamber, and
+   hiding it there meant a visitor on a phone never saw the room at all. Sized
+   small and tucked into the portrait's corner so it costs no extra height. */
+.about-intro__inset {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: -14px;
+  width: 40%;
+  padding: 6px;
+  background: var(--surface);
+  border-radius: var(--r-md);
+}
+
+.about-intro__inset .photo { border-radius: calc(var(--r-md) - 5px); }
 
 /* Pinned inside the portrait's corner so the number never costs a row of its
    own in the flow. */

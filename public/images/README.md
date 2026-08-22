@@ -42,7 +42,15 @@ instrument still life that carry atmosphere behind text. They are **not**
 photographs of his chamber. `titlebar-*.jpg`, `stats-band.jpg`,
 `chamber-interior.jpg`, `why-painless/transparent/modern.jpg`, `service-*.jpg`.
 
-`chamber-interior.jpg` is **his actual chamber** — a real photograph, not a
+**His actual chamber** now fills three slots, all from the same real
+photograph: `titlebar-about.jpg` (the About page banner), `stats-band.jpg`
+(behind the counters) and `chamber-interior.jpg` (the inset on the home
+introduction, which is visible on phones now — it was hidden there, so a phone
+visitor never saw the room at all).
+
+The two banner uses sit under a navy scrim, which turns out to solve the
+problem: the tint mutes the clutter and the orange walls while the room still
+reads unmistakably as a working dental chamber. That is a real photograph, not a
 rendering. It has been colour-corrected with `scripts/colour-correct.ps1`
 (warm-light cast pulled back, exposure lifted, contrast added) but nothing has
 been added, removed or moved. The orange walls are the real wall colour.

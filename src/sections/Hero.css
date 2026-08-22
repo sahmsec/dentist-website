@@ -189,7 +189,11 @@
 
   .hero__media {
     height: auto;
-    min-height: clamp(520px, 62vw, 760px);
+    /* The vw term alone is blind to how tall the screen is: on a 1366x768
+       laptop it resolved to 760px, which is 99% of the viewport, so the hero
+       was the entire first screen and the page felt zoomed in. Capping against
+       vh keeps it to about three quarters whatever the screen. */
+    min-height: min(clamp(520px, 62vw, 760px), 74vh);
   }
 
   /* Wide band, near-square source: width fills and the vertical window

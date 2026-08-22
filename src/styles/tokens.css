@@ -64,7 +64,10 @@
   /* ── Geometry ──────────────────────────────────────────────────────────── */
   --container: 1320px;
   --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 1.875rem);   /* 20 → 30 */
-  --section-y: clamp(2.75rem, 1.2rem + 7.6vw, 7.5rem);  /* 44 → 120 vertical rhythm */
+  /* Also capped against viewport height: 120px top and bottom is right on a
+     1080px screen and far too generous on a 768px laptop, where it was pushing
+     most of a section off the fold. */
+  --section-y: min(clamp(2.75rem, 1.2rem + 7.6vw, 7.5rem), 11vh);
 
   --nav-h: 80px;
   --nav-h-sticky: 68px;
