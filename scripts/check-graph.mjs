@@ -108,6 +108,14 @@ for (const file of jsFiles) {
 
 /* ── 3: orphan stylesheets ────────────────────────────────────────────────── */
 const allJs = jsFiles.map((f) => readFileSync(f, 'utf8')).join('\n')
+
+// Doc comments carry usage examples with invented filenames. Scanning those for
+// photo slots reports files nobody ever intended to ship, so check 5 reads a
+// comment-stripped copy.
+const allJsCode = allJs
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^\s*\/\/.*$/gm, '')
+
 for (const css of cssFiles) {
   if (css.includes(join('src', 'styles'))) continue
   const name = basename(css)
@@ -139,8 +147,8 @@ const readmePath = join(ROOT, 'public', 'images', 'README.md')
 if (existsSync(readmePath)) {
   const readme = readFileSync(readmePath, 'utf8')
   const used = new Set()
-  for (const m of allJs.matchAll(/src=["'`]([\w./-]+\.(?:jpg|jpeg|png|webp|avif))["'`]/g)) used.add(m[1])
-  for (const m of allJs.matchAll(/["'`]([\w-]+\.(?:jpg|jpeg|png|webp))["'`]/g)) used.add(m[1])
+  for (const m of allJsCode.matchAll(/src=["'`]([\w./-]+\.(?:jpg|jpeg|png|webp|avif))["'`]/g)) used.add(m[1])
+  for (const m of allJsCode.matchAll(/["'`]([\w-]+\.(?:jpg|jpeg|png|webp))["'`]/g)) used.add(m[1])
   for (const slot of used) {
     if (!readme.includes(slot)) note(readmePath, `photo slot "${slot}" is used in code but not documented`)
   }

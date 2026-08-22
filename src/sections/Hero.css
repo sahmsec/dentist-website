@@ -33,6 +33,14 @@
   background: var(--navy);
 }
 
+/* <picture> wraps the img when art direction is in play, so both need pinning
+   or the photo stops filling the band. */
+.hero__media picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
 /* Photo renders with an aspect-ratio; pinning both edges makes it cover the
    band instead, and .photo already carries object-fit: cover. */
 .hero__media .hero__photo {
@@ -40,9 +48,9 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  /* A room rather than a person. The frame is near-square so a phone shows its
-     full height and the chair is not lost behind the card. */
-  object-position: 50% 50%;
+  /* Phone source is a portrait of him; keep his face high in the window so the
+     card covers his coat rather than his chin. */
+  object-position: 50% 18%;
 }
 
 /* Grounds the card against the photo rather than letting it float on a bright

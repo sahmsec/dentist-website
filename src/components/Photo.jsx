@@ -19,6 +19,11 @@ import './Photo.css'
  * filling the folder; production shows a clean panel.
  *
  *   <Photo src="service-general.jpg" alt="…" ratio="4/3" icon="tooth" />
+ *
+ * `sources` is art direction, not resolution switching: pass a different
+ * photograph for a different viewport and the browser downloads exactly one.
+ *
+ *   <Photo src="wide.jpg" sources={[{ media: '(max-width: 899px)', src: 'tall.jpg' }]} />
  */
 export default function Photo({
   src,
@@ -32,6 +37,7 @@ export default function Photo({
   sizes,
   priority = false,
   objectPosition,
+  sources,
 }) {
   const [failed, setFailed] = useState(false)
   const url = src ? `/images/${src}` : null
@@ -74,7 +80,7 @@ export default function Photo({
     )
   }
 
-  return (
+  const img = (
     <img
       src={url}
       alt={alt}
@@ -86,5 +92,16 @@ export default function Photo({
       sizes={sizes}
       onError={() => setFailed(true)}
     />
+  )
+
+  if (!sources?.length) return img
+
+  return (
+    <picture>
+      {sources.map((s) => (
+        <source key={s.src} media={s.media} srcSet={`/images/${s.src}`} />
+      ))}
+      {img}
+    </picture>
   )
 }

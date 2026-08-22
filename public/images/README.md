@@ -18,9 +18,15 @@ stretched across every slot made the site look like it had a single asset:
 | `dr-arman-about.jpg` | blue scrubs, standing | About page |
 | `team-arman.jpg` | white coat, head and shoulders | About page team card |
 
-The hero deliberately does **not** show him. `hero-clinic.jpg` is the treatment
-room, matching the reference layout, which puts a scene behind the circle card
-rather than a portrait. He is already on that page three times below the fold.
+The hero carries two different photographs, chosen by viewport rather than
+cropped from one — see the `sources` prop on `Photo`:
+
+| File | Shown | Why |
+| --- | --- | --- |
+| `hero-clinic.jpg` | 900px and up | The band is wide, the circle card takes the left third and a room fills the rest, as the reference layout does. |
+| `hero-mobile.jpg` | below 900px | The band is a portrait window barely wider than the card. A room there reads as stock — it could be any clinic. This is one dentist's portfolio, so the phone leads with his face and name badge. |
+
+The browser downloads only the one it matches.
 
 `why-painless.jpg` is a real clinical photograph of him treating a patient —
 the only one on the site showing actual treatment, and the most credible image
