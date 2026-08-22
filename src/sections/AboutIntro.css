@@ -18,14 +18,14 @@
 
 .about-intro__portrait {
   width: 100%;
-  /* A 3/4 frame costs a third of a phone screen for one photograph. With both
-     dimensions set the inline aspect-ratio stops applying and object-fit does
-     the cropping instead — held high in the frame so it never takes his head. */
-  height: clamp(180px, 46vw, 240px);
-  /* His hairline sits at ~7% of this crop. At 12% the mobile letterbox clipped
-     the top of his head by a few pixels; 6% keeps clear headroom at every box
-     ratio this photo gets rendered into. */
-  object-position: 50% 6%;
+  /* Portrait, not letterbox. At 180-240px this squeezed a standing photograph
+     into a 2:1 strip and, held high to protect the hairline, showed his hair
+     and forehead with the face cut off below. A photograph of the dentist is
+     worth the height on the one page that introduces him. */
+  height: clamp(320px, 84vw, 400px);
+  /* Hairline sits at ~7% of the file; this leaves clear headroom above it and
+     lands the crop on his face rather than his scalp. */
+  object-position: 50% 8%;
   border-radius: var(--r-sm) var(--r-xl) var(--r-xl);
 }
 
