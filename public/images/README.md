@@ -86,7 +86,7 @@ be cropped out. The un-watermarked original is needed from whoever produced it.
 | File | Ratio | What the shot should show |
 | --- | --- | --- |
 | `hero-dr-arman.jpg` | 16/9 | The main banner. Dr. Arman at the chamber, in scrubs or coat, looking towards camera. Bright, calm, plenty of room around him. |
-| `dr-arman-portrait.jpg` | 3/4 | The introduction section. A relaxed standing or seated portrait, waist up. |
+| `dr-arman-portrait.jpg` | 1/1 | The introduction section, shown as a circle. Square, and centred on him in the file — a 3:4 photograph in a square box is scaled to the width, so `object-position` cannot move him sideways. |
 | `chamber-interior.jpg` | 1/1 | The small inset card that overlaps the portrait. The treatment room itself — chair, light, clean surfaces, no patient. |
 | `stats-band.jpg` | 16/9 | Wide background behind the dark numbers band. It sits under a heavy navy tint, so choose something with shape rather than detail: the chair, a wide room view, hands at work. |
 
@@ -171,6 +171,7 @@ hard to read.
 | `titlebar-about.jpg` | 21/9 | Wide view of the chamber or reception. |
 | `titlebar-services.jpg` | 21/9 | Instruments, chair or equipment, shot wide. |
 | `titlebar-contact.jpg` | 21/9 | The building entrance, the signboard, or the street outside. |
+| `reception.jpg` | 3/2 | Contact page, above the map. The reception as a visitor first sees it, signboard included — it is what tells them they are at the right door. No staff or patients in frame. |
 | `titlebar-default.jpg` | 21/9 | A neutral fallback used by any page without its own banner. |
 
 ## Social share card

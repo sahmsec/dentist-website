@@ -2,6 +2,7 @@ import usePageMeta from '../lib/usePageMeta.js'
 import PageTitle from '../components/PageTitle.jsx'
 import SectionHead from '../components/SectionHead.jsx'
 import ContactTiles from '../components/ContactTiles.jsx'
+import Photo from '../components/Photo.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icons.jsx'
 import Button, { CallButton, WhatsAppButton } from '../components/Button.jsx'
@@ -91,6 +92,24 @@ export default function Contact() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* No heading: the signboard in the photograph is the heading, and this
+          is the one page where "what does it look like when I walk in" is a
+          question the visitor is actually asking. It sits above the map for the
+          same reason — recognise the room, then find the road. */}
+      <section className="section section--tight contact-reception">
+        <div className="container">
+          <Reveal className="contact-reception__frame">
+            <Photo
+              src="reception.jpg"
+              alt={`The reception at ${identity.brandName}, with the practice signboard above the desk`}
+              ratio="3/2"
+              shape="flat"
+              className="contact-reception__photo"
+            />
+          </Reveal>
         </div>
       </section>
 

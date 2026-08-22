@@ -248,3 +248,18 @@
     justify-content: flex-start;
   }
 }
+
+/* ── Reception ──────────────────────────────────────────────────────────────
+   Same frame as the chamber section on the home page, so the two photographs
+   of the practice read as the same kind of thing. Capped in width because a
+   3:2 photograph run edge to edge on a wide screen is 800px of reception desk
+   between two blocks the visitor came here to read. */
+.contact-reception__frame {
+  max-width: 900px;
+  margin-inline: auto;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-reception__photo { width: 100%; }

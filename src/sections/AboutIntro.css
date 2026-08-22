@@ -1,5 +1,12 @@
-/* Phone layout is the default; the two-photo composition and the full prose are
-   the overrides, from 768px up. */
+/* Phone layout is the default; the larger circle and the full prose are the
+   overrides, from 768px up. */
+
+/* Sized to sit inside one screen — including a real laptop, where browser
+   chrome takes ~100px off 768 and the sticky bar another 68. The site default
+   caps at 11vh a side, which spent 169px on padding at 1366x768. Tied to the
+   window height rather than the width, because the constraint being solved for
+   here is vertical. */
+.about-intro { --section-y: min(clamp(2.75rem, 1.2rem + 7.6vw, 5.5rem), 8.5vh); }
 
 .about-intro__grid {
   display: grid;
@@ -7,58 +14,21 @@
   align-items: center;
 }
 
-/* ── Photo composition ─────────────────────────────────────────────────────── */
+/* ── Portrait ──────────────────────────────────────────────────────────────── */
 
 .about-intro__media {
-  position: relative;
-  /* Past ~480px a band crop of a standing portrait turns into a letterbox, so
-     the photo stops widening before the column does. */
-  max-width: 480px;
+  margin-bottom: 4px;
 }
 
+/* On a phone the picture is identification, not the point: the hero is already
+   a full-bleed photograph of him and the chamber sits between the two, so a
+   third large image — the second of his face — competed with both. An avatar
+   says who is speaking and hands the space back to the words. */
 .about-intro__portrait {
-  width: 100%;
-  /* Portrait, not letterbox. At 180-240px this squeezed a standing photograph
-     into a 2:1 strip and, held high to protect the hairline, showed his hair
-     and forehead with the face cut off below. A photograph of the dentist is
-     worth the height on the one page that introduces him. */
-  height: clamp(320px, 84vw, 400px);
-  /* Hairline sits at ~7% of the file; this leaves clear headroom above it and
-     lands the crop on his face rather than his scalp. */
-  object-position: 50% 8%;
-  border-radius: var(--r-sm) var(--r-xl) var(--r-xl);
-}
-
-/* Pinned inside the portrait's corner so the number never costs a row of its
-   own in the flow. */
-.about-intro__badge {
-  position: absolute;
-  left: 14px;
-  bottom: 14px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 14px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-md);
-  font-family: var(--font-display);
-  font-weight: 600;
-}
-
-.about-intro__badge-value {
-  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.125rem);
-  line-height: 1;
-}
-
-.about-intro__badge-label {
-  max-width: 9ch;
-  font-size: var(--fs-xs);
-  line-height: 1.3;
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px var(--white), var(--shadow-sm);
 }
 
 /* ── Copy column ───────────────────────────────────────────────────────────── */
@@ -71,26 +41,10 @@
 
 .about-intro .section-head { gap: 10px; }
 
-/* The one-line promise sits between the headline and the prose, so it takes the
-   display face rather than the body one. A notch down from the shared lede size
-   on a phone: at 17px it wraps its last word onto a line of its own, which is
-   two lines of height for a sentence that is only doing one line of work. */
-.about-intro__lede {
-  font-family: var(--font-display);
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-  font-weight: 600;
-  color: var(--ink);
-}
-
 .about-intro__para {
   font-size: var(--fs-sm);
   line-height: 1.5;
 }
-
-/* The opening paragraph is the whole answer to "who is he" — the rest of the
-   argument is the About page's job on a phone. */
-.about-intro__para + .about-intro__para { display: none; }
 
 /* Two columns of short claims rather than four full-width rows. Every pixel
    spent on the tick is a character the label loses, so it is only just large
@@ -176,66 +130,47 @@
 @media (min-width: 768px) {
   .about-intro__grid { gap: clamp(2.5rem, 1rem + 5vw, 4rem); }
 
-  /* The padding is the room the badge hangs into, so the overlap never escapes
-     the column and never causes a horizontal scroll. A length rather than a
-     percentage because the badge is positioned against it — percentage padding
-     resolves against the width and percentage `bottom` against the height, so
-     the two would drift apart at every viewport. */
+  /* Hugs the circle rather than filling the column, so the picture is centred
+     in the space it is given at every breakpoint. */
   .about-intro__media {
-    --about-hang: 44px;
-    max-width: none;
-    padding: 0 6% var(--about-hang) 0;
+    --portrait: clamp(240px, 30vw, 380px);
+    width: max-content;
+    max-width: 100%;
+    margin-inline: auto;
+    margin-bottom: 0;
   }
 
+  /* A circle, and a deliberately modest one. As a 3:4 panel filling the column
+     this was 512x683 — taller than the prose beside it and taller than most of
+     a laptop screen, so the section could not be taken in at a glance.
+     Both dimensions are definite, which is what makes the browser ignore the
+     inline aspect-ratio the Photo component writes for the phone layout. */
   .about-intro__portrait {
-    height: auto;
-    object-position: 50% 50%;
-    border-radius: var(--r-media);
+    width: var(--portrait);
+    height: var(--portrait);
+    border-radius: 50%;
+    box-shadow: none;
   }
 
-  /* Bottom-left, not top-left. At the top it landed squarely on his head: the
-     badge is ~100px tall starting at 7% of a 683px photo, and his hairline is
-     at 8% — so the number was worn as a hat and the portrait read as though the
-     crop had cut his head off. Down here it sits over the floor. */
-  .about-intro__badge {
-    top: auto;
-    bottom: calc(var(--about-hang) + 18px);
-    left: 18px;
-    gap: 12px;
-    padding: 14px 22px;
-    border-radius: var(--r-lg);
-  }
-
-  /* "YEARS OF TRUSTED DENTAL CARE" is four words; at 9ch it set one per line
-     and the badge grew taller than the number beside it. 150px breaks it after
-     "trusted" — the label runs 244px unwrapped, so this is a little over half
-     and gives two even lines. ch is the wrong unit here: the tracking on the
-     uppercase adds most of a character's width to every character.
-
-     It has to shrink with the column: the two-column grid starts at 960px,
-     where the photo is down to ~347px and a fixed 150px label pushed the badge
-     10px past the photo's right edge. */
-  .about-intro__badge-label { max-width: clamp(105px, 11vw, 150px); }
-
-  .about-intro__content { gap: clamp(1.25rem, 1rem + 0.8vw, 1.75rem); }
+  /* Tighter than the site default. Six children at 27px apart spent 108px on
+     air, which is a sixth of the height budget the section has to live in. */
+  .about-intro__content { gap: clamp(0.875rem, 0.6rem + 0.9vw, 1.375rem); }
 
   .about-intro .section-head { gap: 18px; }
-
-  .about-intro__lede {
-    font-size: var(--fs-lede);
-    line-height: 1.65;
-  }
 
   .about-intro__para {
     font-size: var(--fs-body);
     line-height: var(--lh-body);
   }
 
-  .about-intro__para + .about-intro__para { display: block; }
-
+  /* Two columns, stated rather than inferred. auto-fit with a 250px track fell
+     to one column between 960 and ~1200px — four rows at 178px where they are
+     two rows at 100px — and narrowing the track to fit two there let it reach
+     three at 1366px, which leaves the fourth credential alone on its own row.
+     Four items want two columns at every width that has room for them. */
   .about-intro__checks {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-    gap: 14px 30px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 24px;
   }
 
   .about-intro__check {
@@ -268,46 +203,41 @@
   }
 }
 
+/* A short desktop window — a 1024x640 tablet in landscape, or a browser that is
+   not maximised — has ~572px under the sticky bar, and the copy alone is 483 of
+   it. The padding is the only part that can give, and it gives here rather than
+   on every screen: at 1366x768 the section has 112px to spare and does not need
+   to be tighter. */
+@media (min-width: 768px) and (max-height: 720px) {
+  .about-intro { --section-y: 6vh; }
+}
+
+/* ── The single-column band ─────────────────────────────────────────────────
+   768-959px still stacks the picture above the prose, so its height is the sum
+   of both rather than the taller of the two, and the section ran 63px past a
+   900px-tall window. The circle is identification here, not the subject. */
+@media (min-width: 768px) and (max-width: 959px) {
+  .about-intro__media { --portrait: 200px; }
+
+  .about-intro__grid { gap: 24px; }
+}
+
 @media (min-width: 960px) {
+  /* 0.8/1.2, not 0.9/1.1. The picture is a circle with a fixed ceiling now, so
+     a wider left column only adds margin around it, while the extra 60-90px on
+     the right is a line the paragraph does not wrap and a row the credentials
+     do not take — worth ~50px of height in the 960-1200 band, where the section
+     was overrunning a short window. */
   .about-intro__grid {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: clamp(3rem, 1rem + 5vw, 5rem);
   }
-
-  /* No outward hang: the page gutter is 28px at 1366px and the translate was
-     ~38px of a 275px badge, which put its left edge past the viewport. */
 }
 
 /* ── Phones ─────────────────────────────────────────────────────────────────
    Cut to the two things a patient actually wants here: who he is, and a way
-   through to more. The tagline repeats the closing band almost word for word,
-   and the four credentials are listed again in full on the About page — on a
-   390px column they turned this into a wall of text nobody reads. */
+   through to more. The four credentials are listed again in full on the About
+   page — on a 390px column they turned this into a wall of text nobody read. */
 @media (max-width: 767px) {
-  .about-intro__lede,
   .about-intro__checks { display: none; }
-}
-
-/* ── Phones: the portrait steps down to an avatar ───────────────────────────
-   The hero is already a full-bleed photograph of him and the chamber section
-   sits between, so a third large image — and the second of his face — competes
-   with both. At this size the picture is identification, not the point, so it
-   is a circle above the copy and the section leads with words instead. */
-@media (max-width: 767px) {
-  .about-intro__media {
-    max-width: none;
-    padding: 0;
-    margin-bottom: 4px;
-  }
-
-  .about-intro__portrait {
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    object-position: 50% 12%;
-    box-shadow: 0 0 0 5px var(--white), var(--shadow-sm);
-  }
-
-  /* The same figure leads the stats band a screen later. */
-  .about-intro__badge { display: none; }
 }

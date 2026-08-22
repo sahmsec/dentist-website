@@ -85,18 +85,20 @@ if ($Sharpen -gt 0) {
   $bg.DrawImage($small, 0, 0, $w, $h)
   $bg.Dispose()
 
-  $out = New-Object System.Drawing.Bitmap($w, $h)
+  # Not $out: PowerShell variables are case-insensitive, so that name is the
+  # -Out parameter, and the loop below tried to SetPixel on a string.
+  $sharp = New-Object System.Drawing.Bitmap($w, $h)
   for ($y = 0; $y -lt $h; $y++) {
     for ($x = 0; $x -lt $w; $x++) {
       $p = $bmp.GetPixel($x, $y); $q = $blur.GetPixel($x, $y)
       $r = [Math]::Max(0, [Math]::Min(255, $p.R + ($p.R - $q.R) * $Sharpen))
       $gg = [Math]::Max(0, [Math]::Min(255, $p.G + ($p.G - $q.G) * $Sharpen))
       $b = [Math]::Max(0, [Math]::Min(255, $p.B + ($p.B - $q.B) * $Sharpen))
-      $out.SetPixel($x, $y, [System.Drawing.Color]::FromArgb([int]$r, [int]$gg, [int]$b))
+      $sharp.SetPixel($x, $y, [System.Drawing.Color]::FromArgb([int]$r, [int]$gg, [int]$b))
     }
   }
   $bmp.Dispose(); $blur.Dispose(); $small.Dispose()
-  $bmp = $out
+  $bmp = $sharp
 }
 
 $enc = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }

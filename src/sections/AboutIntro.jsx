@@ -1,4 +1,4 @@
-import { about, contact, identity, links, stats } from '../config/site.js'
+import { about, contact, identity, links } from '../config/site.js'
 import Button from '../components/Button.jsx'
 import Icon from '../components/Icons.jsx'
 import Photo from '../components/Photo.jsx'
@@ -7,18 +7,19 @@ import SectionHead from '../components/SectionHead.jsx'
 import './AboutIntro.css'
 
 /**
- * The Home page's introduction to Dr. Arman: a photo composition on the left,
- * the short version of the About page on the right, ending on the two things a
+ * The Home page's introduction to Dr. Arman: his portrait on the left, the
+ * short version of the About page on the right, ending on the two things a
  * visitor can actually do — read more, or ring the chamber.
  *
- * On a phone the composition collapses to one cropped portrait and the prose to
- * its opening paragraph; the rest is still in the markup and comes back at
- * 768px. The About page is where the full text belongs anyway.
+ * The whole section is sized to sit inside one screen, so a visitor who scrolls
+ * to it sees all of it at once instead of meeting a portrait tall enough to
+ * push the sentence explaining it below the fold. That budget is what the
+ * portrait being a circle buys: a 3:4 photograph 512px wide is 683px tall, most
+ * of a laptop screen on its own.
+ *
+ * On a phone the portrait shrinks again to a 92px avatar and the prose to its
+ * opening paragraph; the rest is still in the markup and comes back at 768px.
  */
-
-// The badge over the portrait reuses the years-in-practice stat, so the number
-// is never maintained in two places.
-const experience = stats[0]
 
 export default function AboutIntro() {
   return (
@@ -28,36 +29,30 @@ export default function AboutIntro() {
           {/* Art-directed so no photograph appears twice in one view. On
               desktop this is the blue scrubs shot, which the hero does not use
               there — the hero is the chamber. On a phone the hero IS the scrubs
-              shot, so this becomes the coat portrait instead. */}
+              shot, so this becomes the coat portrait instead.
+
+              Square, because every rendering of it is a circle: cropping to
+              1:1 in the file centres him in the frame, which object-position
+              cannot do here — fitting a 3:4 photograph into a square box scales
+              it to the width, so the horizontal is never cropped and he stayed
+              off to the left however the position was set. */}
           <Photo
             src="dr-arman-portrait.jpg"
             sources={[{ media: '(max-width: 899px)', src: 'dr-arman-portrait-sm.jpg' }]}
             alt={`${identity.name}, ${identity.title}`}
-            ratio="3/4"
+            ratio="1"
             shape="media"
             className="about-intro__portrait"
           />
-
-          <p className="about-intro__badge">
-            <span className="about-intro__badge-value">
-              {experience.prefix}
-              {experience.value}
-              {experience.suffix}
-            </span>
-            <span className="about-intro__badge-label">{experience.label}</span>
-          </p>
         </Reveal>
 
         <Reveal className="about-intro__content" delay={120}>
           <SectionHead eyebrow={about.eyebrow} title={about.headline} highlight={['passion']} />
 
-          <p className="lede about-intro__lede">{about.lede}</p>
-
-          {about.body.slice(0, 2).map((paragraph, i) => (
-            <p className="about-intro__para" key={i}>
-              {paragraph}
-            </p>
-          ))}
+          {/* One paragraph, on every screen. The second ran to three lines in
+              this column and put the section 86px past a 720px window — and it
+              is the About page's argument, which the button below leads to. */}
+          <p className="about-intro__para">{about.body[0]}</p>
 
           <ul className="about-intro__checks">
             {about.credentials.map((credential) => (
