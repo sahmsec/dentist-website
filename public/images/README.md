@@ -42,8 +42,17 @@ instrument still life that carry atmosphere behind text. They are **not**
 photographs of his chamber. `titlebar-*.jpg`, `stats-band.jpg`,
 `chamber-interior.jpg`, `why-painless/transparent/modern.jpg`, `service-*.jpg`.
 
-`hero-clinic.jpg`, `chamber-interior.jpg` and `titlebar-about.jpg` are a step
-closer than the rest:
+`chamber-interior.jpg` is **his actual chamber** — a real photograph, not a
+rendering. It has been colour-corrected with `scripts/colour-correct.ps1`
+(warm-light cast pulled back, exposure lifted, contrast added) but nothing has
+been added, removed or moved. The orange walls are the real wall colour.
+
+Tidying the clutter and relighting the room needs image-to-image editing —
+`scripts/enhance-photo.ps1` and FLUX.1-Kontext — which the free Hugging Face
+credit does not stretch to; every attempt returns 402. It needs a payment method
+on the Hugging Face account, and would then cost a few cents.
+
+`hero-clinic.jpg` and `titlebar-about.jpg` are a step closer than the rest:
 they were generated from a description of his actual room — royal blue chair and
 matching stool, green fabric partition, wall-mounted light on an articulated
 arm, small sink, warm wood cabinet — so they carry his room's real colours and

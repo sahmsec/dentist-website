@@ -98,11 +98,14 @@
 /* Two columns of short claims rather than four full-width rows. Every pixel
    spent on the tick is a character the label loses, so it is only just large
    enough to read as the same glyph it is at full size. */
+/* One column on a phone. Two columns gave each label ~150px, which wrapped all
+   four of them onto two lines and turned a scannable list into a block of
+   ragged text. Full width fits each on one line with room to spare. */
 .about-intro__checks {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
 }
 
 .about-intro__check {
