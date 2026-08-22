@@ -1,12 +1,13 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    HERO — phone layout first, desktop composition in the min-width query.
 
-   Phone: one image-led unit. The photograph fills the block and the words sit
-   over its lower edge on a gradient, the way a magazine cover works — so the
-   hero reads as a single thing rather than a picture with a slab of type stuck
-   to it. Two earlier attempts got this wrong: a white card climbing over the
-   photo (heavy, hid the image) and a card sitting below it (disconnected, and
-   the picture stopped being a hero).
+   Phone: the photograph with a compact white card sitting over its lower edge.
+   The card gives the block depth — two planes instead of a flat picture — which
+   is what plain type on a gradient was missing. It is deliberately small: an
+   earlier version was a full-width slab carrying eyebrow, headline, lede and
+   two buttons, which buried the photograph. This one holds the eyebrow and the
+   headline and nothing else, and leaves the top two thirds of the picture
+   clear.
 
    From 900px: the copy becomes the white circle overlaid on a full-bleed band,
    with the navy About badge straddling its edge and the rating card
@@ -19,7 +20,7 @@
      below it never appeared, so the opening screen was a picture and nothing
      else. At 98vw it is about half, which leaves the yellow band's heading and
      its first promise in view — image and substance in the same glance. */
-  --hero-band: min(98vw, 400px);
+  --hero-band: min(92vw, 380px);
   --hero-curve: var(--r-curve);
 
   position: relative;
@@ -56,27 +57,28 @@
   object-position: 50% 22%;
 }
 
-/* Type sits on the photograph's lower half, so it needs a foot to stand on.
-   Weighted to the bottom and transparent by the midpoint, which keeps his face
-   in clear light while the words below stay readable. */
+/* The card carries the words now, so the scrim only has to stop the photograph
+   ending in a hard bright edge under it. */
 .hero__scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(var(--navy-rgb), 0.92) 0%,
-    rgba(var(--navy-rgb), 0.72) 22%,
-    rgba(var(--navy-rgb), 0.18) 48%,
-    rgba(var(--navy-rgb), 0) 68%
+    rgba(var(--navy-rgb), 0.34) 0%,
+    rgba(var(--navy-rgb), 0) 34%
   );
 }
 
 /* Anchored to the foot of the photograph rather than following it in the flow,
    so image and words are one block. */
+/* Anchored to the foot of the photograph rather than following it in the flow,
+   so the image and the card read as one block. The card hangs a little past the
+   photo's lower edge, which is what makes it sit "on" the picture rather than
+   inside it. */
 .hero__overlay {
   position: absolute;
   inset: auto 0 0 0;
-  padding-bottom: clamp(26px, 7vw, 40px);
+  transform: translateY(34%);
 }
 
 .hero__overlay > .container { width: 100%; }
@@ -88,17 +90,19 @@
   margin-inline: auto;
 }
 
-/* No card on a phone — type directly on the photograph. */
 .hero__circle {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   justify-items: start;
+  padding: 16px 18px 18px;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
 }
 
 .hero__title {
-  font-size: clamp(1.7rem, 7.2vw, 2.25rem);
-  line-height: 1.1;
-  color: var(--white);
+  font-size: clamp(1.5rem, 6.2vw, 1.9rem);
+  line-height: 1.12;
 }
 
 /* The headline carries the message at this size; the supporting line is the
@@ -111,11 +115,9 @@
    narrowest phones, which is better than overflowing them. */
 .hero__circle .eyebrow {
   max-width: 100%;
-  padding: 7px 13px 7px 9px;
+  padding: 0;
   gap: 7px;
-  background: rgba(255, 255, 255, 0.16);
-  color: var(--white);
-  backdrop-filter: blur(6px);
+  background: none;
   box-shadow: none;
   font-size: var(--fs-xs);   /* 13px floor — uppercase at 1px tracking needs it */
   line-height: 1.3;
@@ -222,6 +224,8 @@
 
   .hero__lede { display: grid; }
 
+  .hero__overlay { transform: none; }
+
   .hero__circle {
     padding: clamp(28px, 5vw, 56px);
     border-radius: 50%;
@@ -253,9 +257,8 @@
   }
 
   .hero__circle .eyebrow {
+    padding: 8px 16px 8px 11px;
     background: var(--white);
-    color: var(--ink);
-    backdrop-filter: none;
     box-shadow: var(--shadow-sm);
     justify-self: center;
     padding: 8px 16px 8px 11px;

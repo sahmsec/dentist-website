@@ -62,6 +62,29 @@ export const contact = {
   },
 }
 
+/* ── Google Business Profile ───────────────────────────────────────────────────
+ *  Read off the live listing, not invented: 4.9 from 44 reviews, dental clinic
+ *  in Dhaka. `cid` is Google's own identifier for the place — every link below
+ *  is built from it, so if the listing ever moves there is one value to change.
+ *
+ *  NOTE: the listing is currently UNCLAIMED. Google is showing "Are you the
+ *  owner of this business?" on it, the phone number is missing, and the website
+ *  field is empty. Claiming it is the single highest-value thing outstanding —
+ *  see README.md.
+ *
+ *  The name on Google is "Dr. Arman's Dental Care & Cure", which differs from
+ *  the name this site uses. They should match; pick one and change the other.
+ */
+export const google = {
+  cid: '7590116896021837297',
+  rating: 4.9,
+  reviewCount: 44,
+  profileName: "Dr. Arman's Dental Care & Cure",
+  get listing() { return `https://www.google.com/maps?cid=${this.cid}` },
+  get reviews() { return `https://search.google.com/local/reviews?placeid=&q=&cid=${this.cid}` },
+  get writeReview() { return `https://search.google.com/local/writereview?cid=${this.cid}` },
+}
+
 export const social = [
   { name: 'Facebook', handle: '@drarmansdental', url: 'https://facebook.com/drarmansdental', icon: 'facebook' },
   // Derived, never typed: the number exists only in `contact` above, and the
@@ -349,9 +372,13 @@ export const links = {
   whatsapp: `https://wa.me/${contact.whatsapp.number}?text=${encodeURIComponent(contact.whatsapp.message)}`,
   mailto: contact.email ? `mailto:${contact.email.address}` : null,
   maps: contact.address.mapsUrl,
+  googleListing: google.listing,
+  googleReviews: google.reviews,
+  writeGoogleReview: google.writeReview,
 }
 
 export default {
-  identity, contact, social, hours, hero, pillars, pillarsIntro, services,
-  reasons, process, stats, about, testimonials, beforeAfter, sections, nav, links,
+  identity, contact, google, social, hours, hero, pillars, pillarsIntro,
+  services, reasons, process, stats, about, testimonials, beforeAfter,
+  sections, nav, links,
 }

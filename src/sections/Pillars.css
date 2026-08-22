@@ -22,11 +22,18 @@
 
 /* Colour, radius, clipping and stacking come from the .band primitive; only the
    tuck and the padding that compensates for it are local.
-   The hero card no longer overlaps this band on a phone, so no extra clearance
-   is needed — only the tuck compensation. */
+   --clear is room for the hero card, which hangs ~29px past the foot of the
+   hero so it reads as sitting ON the photograph rather than inside it. Measured
+   without it, the card overlapped this band's first heading by 9px. */
 .pillars__band {
+  --clear: 56px;
   margin-top: calc(var(--tuck) * -1);
-  padding-block: calc(var(--band-pad) + var(--tuck)) var(--band-pad);
+  padding-block: calc(var(--band-pad) + var(--tuck) + var(--clear)) var(--band-pad);
+}
+
+@media (min-width: 900px) {
+  /* The card is a circle overlaid on the band up here, not hanging into it. */
+  .pillars__band { --clear: 0px; }
 }
 
 .pillars__inner {

@@ -66,6 +66,30 @@ line and every call button on the site dials the new number. The same is true of
 `links.whatsapp` and `links.maps`. Nothing anywhere hard-codes a `tel:` string,
 so there is no risk of one stale button surviving in a corner of the site.
 
+## The Google Business Profile
+
+The listing is **Dr. Arman's Dental Care & Cure**, 4.9 stars from 44 reviews,
+CID `7590116896021837297`. Those figures live in `google` in
+`src/config/site.js` and drive the rating chip in the hero, which links to the
+real listing rather than asserting a score the visitor cannot check.
+
+Three things need doing on Google itself, none of which can be done from here:
+
+1. **Claim the listing.** It is currently unclaimed — Google shows "Are you the
+   owner of this business?" on it. Until it is claimed nobody can edit it, and
+   Google will keep accepting public "suggest an edit" changes from strangers.
+   Claim at <https://business.google.com>.
+2. **Add the website.** The website field is empty. Once claimed, Info →
+   Website. This is also what makes the listing and the site reinforce each
+   other in search.
+3. **Add the phone number.** Google is prompting "add a local business phone
+   number", so 01915109006 is not on the listing either.
+
+The profile name and the site title differ — Google says "Dental Care & Cure",
+the site says "Dental Care". Search treats a consistent name, address and phone
+across a site and its listing as a ranking signal, so pick one and change the
+other.
+
 ## Adding photographs
 
 Photographs go in `public/images/`, saved under specific filenames. Until a file

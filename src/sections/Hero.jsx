@@ -4,7 +4,7 @@ import Photo from '../components/Photo.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { CallButton, WhatsAppButton } from '../components/Button.jsx'
 import { renderHighlighted } from '../components/SectionHead.jsx'
-import { hero, identity } from '../config/site.js'
+import { google, hero, identity, links } from '../config/site.js'
 import './Hero.css'
 
 const STARS = [0, 1, 2, 3, 4]
@@ -39,17 +39,31 @@ export default function Hero() {
             white circle stays readable over whatever photograph lands here. */}
         <span className="hero__scrim" aria-hidden="true" />
 
-        <div className="hero__rating">
-          <span className="hero__stars" role="img" aria-label="Rated 4.9 out of 5">
+        {/* Real figures off the Google Business Profile, and a link straight to
+            it. An unverifiable score is worth less than a lower one a visitor
+            can go and check. */}
+        <a
+          className="hero__rating"
+          href={links.googleReviews}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            className="hero__stars"
+            role="img"
+            aria-label={`Rated ${google.rating} out of 5 on Google`}
+          >
             {STARS.map((i) => (
               <Icon key={i} name="star" size={15} />
             ))}
           </span>
           <p className="hero__rating-line">
-            <span className="hero__score">4.9</span>
-            <span className="hero__rating-label">Patients recommend {identity.shortName}</span>
+            <span className="hero__score">{google.rating}</span>
+            <span className="hero__rating-label">
+              {google.reviewCount} Google reviews
+            </span>
           </p>
-        </div>
+        </a>
       </div>
 
       {/* On a phone this is a card that climbs back over the photo's lower
