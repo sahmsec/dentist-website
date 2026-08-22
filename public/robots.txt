@@ -4,5 +4,6 @@
 User-agent: *
 Allow: /
 
-# Update the host here if the site is published on another domain.
-Sitemap: https://drarmansdental.com/sitemap.xml
+# The Sitemap directive only takes an absolute URL, so it goes back in — along
+# with public/sitemap.xml — once there is a domain to write into it. See
+# site.url in src/config/site.js.

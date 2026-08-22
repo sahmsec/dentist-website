@@ -13,7 +13,12 @@
  *  domain, so it is the one to keep.
  */
 export const site = {
-  url: 'https://drarmansdental.com',
+  /* Null until the practice has a domain. Every absolute URL — canonical,
+     og:url, og:image — is then built from the origin the page is served from,
+     so a Vercel link shares as itself instead of pointing at a host that does
+     not resolve. Set this to the live origin (no trailing slash) to pin them,
+     and put the Sitemap line back in public/robots.txt at the same time. */
+  url: null,
   locale: 'en_GB',
   region: 'BD',
 }

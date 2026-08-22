@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 import { identity, site } from '../config/site.js'
 
+/* The card image a shared link renders. Relative in the served HTML, absolute
+   here — several scrapers will not resolve a relative og:image against the page
+   and simply drop the picture. */
+const OG_IMAGE = '/images/og-cover.jpg'
+
 /**
  * Per-route metadata for a single-page app.
  *
@@ -14,6 +19,11 @@ import { identity, site } from '../config/site.js'
  *
  * Sets: <title>, description, canonical, and the Open Graph and Twitter tags
  * that decide what a shared link looks like.
+ *
+ * Absolute URLs come from `site.url` when a domain is configured and from the
+ * live origin when it is not, so a preview deployment shares as itself. A
+ * hard-coded domain made every shared link resolve somewhere that did not
+ * exist yet — the card was unclickable.
  */
 export function usePageMeta({ title, description, path } = {}) {
   useEffect(() => {
@@ -22,7 +32,8 @@ export function usePageMeta({ title, description, path } = {}) {
     const full = title ? `${title} — ${identity.brandName}` : identity.metaTitle
     document.title = full
 
-    const url = path ? new URL(path, site.url).href : site.url
+    const origin = site.url || window.location.origin
+    const url = new URL(path || '/', origin).href
 
     setMeta('name', 'description', description)
     setLink('canonical', url)
@@ -30,8 +41,10 @@ export function usePageMeta({ title, description, path } = {}) {
     setMeta('property', 'og:title', full)
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:url', url)
+    setMeta('property', 'og:image', new URL(OG_IMAGE, origin).href)
     setMeta('name', 'twitter:title', full)
     setMeta('name', 'twitter:description', description)
+    setMeta('name', 'twitter:image', new URL(OG_IMAGE, origin).href)
   }, [title, description, path])
 }
 
