@@ -14,9 +14,12 @@
    ══════════════════════════════════════════════════════════════════════════ */
 
 .hero {
-  /* Tall enough to be the whole first impression, short enough that the yellow
-     band peeks in under it and the page reads as scrollable. */
-  --hero-band: min(132vw, 560px);
+  /* Measured against a 390x844 screen with the 62px call bar subtracted: at
+     132vw the photograph took 66% of the usable height and the first promise
+     below it never appeared, so the opening screen was a picture and nothing
+     else. At 98vw it is about half, which leaves the yellow band's heading and
+     its first promise in view — image and substance in the same glance. */
+  --hero-band: min(98vw, 400px);
   --hero-curve: var(--r-curve);
 
   position: relative;
