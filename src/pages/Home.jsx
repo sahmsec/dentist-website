@@ -15,15 +15,18 @@ import CtaBand from '../sections/CtaBand.jsx'
 
 export default function Home() {
   // The landing page keeps the site-level title; every other route renames it.
-  usePageMeta({ title: null, description: identity.metaDescription })
+  usePageMeta({ title: null, description: identity.metaDescription, path: '/' })
 
   return (
     <>
       <Hero />
       <Pillars />
-      <AboutIntro />
-      {/* Phones only — on desktop the hero is already this room. */}
+      {/* Phones only, and ahead of the introduction: on a phone the hero is Dr.
+          Arman, so the room is the next thing a patient wants — not a second
+          photograph of the same person. On desktop the hero is already the
+          room, so this is hidden there and the introduction follows directly. */}
       <Chamber />
+      <AboutIntro />
       {/* Four of the six treatments here; the Services page carries all of them. */}
       <ServicesGrid limit={4} />
       <WhyPanel />

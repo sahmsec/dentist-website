@@ -14,6 +14,7 @@ export default function Services() {
   usePageMeta({
     title: 'Treatments',
     description: `General dentistry, orthodontics, dental implants, cosmetic dentistry, teeth whitening and oral surgery with ${identity.name} in Shyamoli, Dhaka.`,
+    path: '/services',
   })
 
   return (

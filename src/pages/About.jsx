@@ -12,6 +12,7 @@ export default function About() {
   usePageMeta({
     title: `About ${identity.shortName}`,
     description: about.body[0],
+    path: '/about',
   })
 
   return (

@@ -33,6 +33,7 @@ export default function Contact() {
   usePageMeta({
     title: 'Contact',
     description: `Call ${contact.phone.display} to book with ${identity.name}. Chamber at ${contact.address.display}. Appointments are taken by phone and WhatsApp.`,
+    path: '/contact',
   })
 
   return (

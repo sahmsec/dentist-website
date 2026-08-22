@@ -4,3 +4,7 @@ dist
 *.local
 .env
 .env.*
+
+# Stray screenshots from browser checks — these belong in .playwright-mcp/
+/*.png
+/*.jpeg

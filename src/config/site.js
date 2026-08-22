@@ -6,6 +6,18 @@
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
+/* ── Site ──────────────────────────────────────────────────────────────────────
+ *  The canonical origin. Every absolute URL — canonical tags, Open Graph, the
+ *  sitemap, the business schema — is built from this, so moving the site to a
+ *  different domain is a one-line change. His Instagram bio already cites this
+ *  domain, so it is the one to keep.
+ */
+export const site = {
+  url: 'https://drarmansdental.com',
+  locale: 'en_GB',
+  region: 'BD',
+}
+
 /* ── Identity ──────────────────────────────────────────────────────────────── */
 export const identity = {
   name: 'Dr. Arman Kayser',
@@ -287,9 +299,8 @@ export const about = {
   headline: 'Your dental health is our passion',
   lede: 'Let us make your smile your best feature.',
   body: [
-    'Dr. Arman Kayser is an Oral & Dental Surgeon practising in Shyamoli, Dhaka. His chamber ' +
-      'handles everything from a routine scaling to full-arch implant work, on one principle: ' +
-      'a patient who understands their treatment is comfortable during it.',
+    'An Oral & Dental Surgeon practising in Shyamoli, Dhaka. Surgical work — wisdom teeth, ' +
+      'implants, difficult extractions — is done here rather than referred elsewhere.',
     'Surgical training is what sets the practice apart: fewer appointments, one person ' +
       'accountable for the outcome, and a plan that holds from diagnosis to follow-up.',
     'Every plan is written down and costed before work begins.',
@@ -389,7 +400,7 @@ export const links = {
 }
 
 export default {
-  identity, contact, google, social, hours, hero, pillars, pillarsIntro,
+  site, identity, contact, google, social, hours, hero, pillars, pillarsIntro,
   services, reasons, process, stats, about, testimonials, beforeAfter,
   sections, nav, links,
 }

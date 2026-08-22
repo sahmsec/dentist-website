@@ -176,11 +176,15 @@
 @media (min-width: 768px) {
   .about-intro__grid { gap: clamp(2.5rem, 1rem + 5vw, 4rem); }
 
-  /* The padding is the room the square inset hangs into, so the overlap never
-     escapes the column and never causes a horizontal scroll. */
+  /* The padding is the room the badge hangs into, so the overlap never escapes
+     the column and never causes a horizontal scroll. A length rather than a
+     percentage because the badge is positioned against it — percentage padding
+     resolves against the width and percentage `bottom` against the height, so
+     the two would drift apart at every viewport. */
   .about-intro__media {
+    --about-hang: 44px;
     max-width: none;
-    padding: 0 6% 8% 0;
+    padding: 0 6% var(--about-hang) 0;
   }
 
   .about-intro__portrait {
@@ -189,14 +193,29 @@
     border-radius: var(--r-media);
   }
 
+  /* Bottom-left, not top-left. At the top it landed squarely on his head: the
+     badge is ~100px tall starting at 7% of a 683px photo, and his hairline is
+     at 8% — so the number was worn as a hat and the portrait read as though the
+     crop had cut his head off. Down here it sits over the floor. */
   .about-intro__badge {
-    top: 7%;
-    bottom: auto;
-    left: 0;
+    top: auto;
+    bottom: calc(var(--about-hang) + 18px);
+    left: 18px;
     gap: 12px;
     padding: 14px 22px;
     border-radius: var(--r-lg);
   }
+
+  /* "YEARS OF TRUSTED DENTAL CARE" is four words; at 9ch it set one per line
+     and the badge grew taller than the number beside it. 150px breaks it after
+     "trusted" — the label runs 244px unwrapped, so this is a little over half
+     and gives two even lines. ch is the wrong unit here: the tracking on the
+     uppercase adds most of a character's width to every character.
+
+     It has to shrink with the column: the two-column grid starts at 960px,
+     where the photo is down to ~347px and a fixed 150px label pushed the badge
+     10px past the photo's right edge. */
+  .about-intro__badge-label { max-width: clamp(105px, 11vw, 150px); }
 
   .about-intro__content { gap: clamp(1.25rem, 1rem + 0.8vw, 1.75rem); }
 
@@ -255,7 +274,40 @@
     gap: clamp(3rem, 1rem + 5vw, 5rem);
   }
 
-  /* Hangs the badge into the page gutter — narrower than the gutter itself, so
-     there is nothing for the page to scroll to. */
-  .about-intro__badge { translate: -14% 0; }
+  /* No outward hang: the page gutter is 28px at 1366px and the translate was
+     ~38px of a 275px badge, which put its left edge past the viewport. */
+}
+
+/* ── Phones ─────────────────────────────────────────────────────────────────
+   Cut to the two things a patient actually wants here: who he is, and a way
+   through to more. The tagline repeats the closing band almost word for word,
+   and the four credentials are listed again in full on the About page — on a
+   390px column they turned this into a wall of text nobody reads. */
+@media (max-width: 767px) {
+  .about-intro__lede,
+  .about-intro__checks { display: none; }
+}
+
+/* ── Phones: the portrait steps down to an avatar ───────────────────────────
+   The hero is already a full-bleed photograph of him and the chamber section
+   sits between, so a third large image — and the second of his face — competes
+   with both. At this size the picture is identification, not the point, so it
+   is a circle above the copy and the section leads with words instead. */
+@media (max-width: 767px) {
+  .about-intro__media {
+    max-width: none;
+    padding: 0;
+    margin-bottom: 4px;
+  }
+
+  .about-intro__portrait {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-position: 50% 12%;
+    box-shadow: 0 0 0 5px var(--white), var(--shadow-sm);
+  }
+
+  /* The same figure leads the stats band a screen later. */
+  .about-intro__badge { display: none; }
 }
