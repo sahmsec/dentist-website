@@ -32,16 +32,19 @@ export default function Contact() {
       <PageTitle title="Contact" breadcrumb="Contact" image="titlebar-contact.jpg" whole />
 
       <section className="section contact-reach">
-        <div className="container contact-reach__grid">
-          <div className="contact-reach__intro">
-            <SectionHead
-              eyebrow="Get in touch"
-              title="Reach out for the best treatment"
-              highlight={['best']}
-              text="Appointments are taken by phone — it is faster than a form and you speak to someone who can actually find you a slot."
-            />
+        <div className="container">
+          {/* Full width above both cards. With the headline inside the left
+              column the dial panel started where the prose ended, half a card
+              below the hours beside it — two cards of the same size sitting on
+              a diagonal, which reads as a mistake on a wide screen. */}
+          <SectionHead
+            eyebrow="Get in touch"
+            title="Reach out for the best treatment"
+            highlight={['best']}
+          />
 
-            <Reveal className="contact-reach__dial" delay={120}>
+          <div className="contact-reach__grid">
+            <Reveal className="contact-reach__dial" delay={90}>
               <p className="contact-reach__dial-label">{contact.phone.label}</p>
 
               <a className="contact-reach__number" href={links.tel}>
@@ -51,36 +54,44 @@ export default function Contact() {
                 {contact.phone.display}
               </a>
 
+              {/* Next to the number, not up in the section head: it is the
+                  answer to "where is the booking form", and that question is
+                  asked here, looking at this. */}
+              <p className="contact-reach__note">
+                Appointments are taken by phone — it is faster than a form, and you speak to
+                someone who can actually find you a slot.
+              </p>
+
               <div className="row contact-reach__actions">
                 <CallButton />
                 <WhatsAppButton />
               </div>
             </Reveal>
+
+            {/* Hours sit beside the number rather than in a section below it:
+                "can I ring them now" is the same question as "what do I ring". */}
+            <Reveal className="card contact-hours" delay={150}>
+              <span className="icon-circle contact-hours__icon">
+                <Icon name="clock" size={24} />
+              </span>
+
+              <h2 className="contact-hours__title">Chamber hours</h2>
+
+              <ul className="contact-hours__rows">
+                {hours.rows.map((row) => (
+                  <li key={row.days} className="contact-hours__row">
+                    <span className="contact-hours__days">{row.days}</span>
+                    <span className="contact-hours__time">{row.time}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="contact-hours__note">
+                <Icon name="phone" size={17} />
+                {hours.emergencyNote}
+              </p>
+            </Reveal>
           </div>
-
-          {/* Hours sit beside the number rather than in a section below it:
-              "can I ring them now" is the same question as "what do I ring". */}
-          <Reveal className="card contact-hours" delay={90}>
-            <span className="icon-circle contact-hours__icon">
-              <Icon name="clock" size={24} />
-            </span>
-
-            <h2 className="contact-hours__title">Chamber hours</h2>
-
-            <ul className="contact-hours__rows">
-              {hours.rows.map((row) => (
-                <li key={row.days} className="contact-hours__row">
-                  <span className="contact-hours__days">{row.days}</span>
-                  <span className="contact-hours__time">{row.time}</span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="contact-hours__note">
-              <Icon name="phone" size={17} />
-              {hours.emergencyNote}
-            </p>
-          </Reveal>
         </div>
       </section>
 

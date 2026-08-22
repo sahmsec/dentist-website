@@ -1,27 +1,21 @@
 /* ── Reach out: the headline and the number, beside the three channels ─────── */
+/* Two cards of equal width, both starting on the same line and stretching to
+   the same depth. The headline sits above them rather than in one of them. */
 .contact-reach__grid {
   display: grid;
-  /* The copy column carries the headline and the number; the hours card only
-     has to hold three rows, so it no longer takes half the width the channel
-     cards needed. */
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
-  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 0.8rem + 2.6vw, 2.5rem);
+  align-items: stretch;
+  margin-top: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
 }
 
-.contact-reach__intro {
-  display: grid;
-  gap: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
-}
-
+/* The hours card is the taller of the two, so this one's content spreads over
+   the depth it is given rather than sitting as a small block in the middle of
+   an empty card. */
 .contact-reach__dial {
   display: grid;
   justify-items: start;
-  /* Sized to the number rather than to the column: stretched full width it
-     carried ~285px of empty card to the right of the two buttons. */
-  justify-self: start;
-  width: fit-content;
-  max-width: 100%;
+  align-content: space-between;
   gap: 16px;
   padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
   background: var(--white);
@@ -66,6 +60,12 @@
 
 .contact-reach__number:hover .contact-reach__number-icon {
   transform: rotate(-12deg);
+}
+
+.contact-reach__note {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--body);
 }
 
 .contact-reach__actions {
