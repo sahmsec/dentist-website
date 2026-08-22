@@ -266,11 +266,19 @@ export const process = [
 ]
 
 /* ── Stats ─────────────────────────────────────────────────────────────────── */
+/* ── Stats ─────────────────────────────────────────────────────────────────────
+ *  Every figure here should be one a visitor could check. `prefix` exists so
+ *  "nearly 10" can be stated as nearly ten rather than rounded up to "10+",
+ *  which would be a different and untrue claim.
+ *
+ *  The rating and review count are read off the Google listing (see `google`
+ *  above), so they move when it does.
+ */
 export const stats = [
-  { value: 12, suffix: '+', label: 'Years treating patients' },
-  { value: 5000, suffix: '+', label: 'Smiles cared for' },
-  { value: 98, suffix: '%', label: 'Patients who recommend us' },
-  { value: 6, suffix: '', label: 'Treatments offered' },
+  { prefix: 'Nearly ', value: 10, suffix: '', label: 'Years of trusted dental care' },
+  { value: google.reviewCount, suffix: '', label: 'Reviews on Google' },
+  { value: google.rating, decimals: 1, suffix: '', label: 'Average Google rating' },
+  { value: services.length, suffix: '', label: 'Treatments offered' },
 ]
 
 /* ── About page content ────────────────────────────────────────────────────── */

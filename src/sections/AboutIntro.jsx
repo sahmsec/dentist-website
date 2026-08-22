@@ -40,20 +40,12 @@ export default function AboutIntro() {
 
           <p className="about-intro__badge">
             <span className="about-intro__badge-value">
+              {experience.prefix}
               {experience.value}
               {experience.suffix}
             </span>
             <span className="about-intro__badge-label">{experience.label}</span>
           </p>
-
-          <div className="about-intro__inset">
-            <Photo
-              src="chamber-interior.jpg"
-              alt="Inside the chamber, set up for a consultation"
-              ratio="1/1"
-              shape="lg"
-            />
-          </div>
         </Reveal>
 
         <Reveal className="about-intro__content" delay={120}>

@@ -1,0 +1,43 @@
+/* Phones only. From 900px the hero is this same room, and showing it twice on
+   one screen would be the same photograph twice. */
+.chamber { display: block; }
+
+@media (min-width: 900px) {
+  .chamber { display: none; }
+}
+
+.chamber__head {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  margin-bottom: 18px;
+}
+
+.chamber__title { font-size: var(--fs-h2); }
+
+.chamber__frame {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.chamber__photo { width: 100%; }
+
+.chamber__meta {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  margin-top: 20px;
+}
+
+.chamber__address,
+.chamber__hours {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--body);
+}
+
+.chamber__icon { margin-top: 1px; }

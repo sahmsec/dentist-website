@@ -292,3 +292,15 @@
     border-left: 1px solid var(--hairline-on-dark);
   }
 }
+
+/* "Nearly" sits above the numeral rather than beside it: at the numeral's size
+   an inline word would push the figure off its column. */
+.stats-band__prefix {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: -6px;
+}

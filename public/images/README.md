@@ -16,7 +16,7 @@ section under it must not repeat.
 | --- | --- | --- |
 | Hero | `hero-clinic.jpg` — the chamber | `hero-mobile.jpg` — blue scrubs by the signage |
 | Home introduction | `dr-arman-portrait.jpg` — blue scrubs | `dr-arman-portrait-sm.jpg` — the coat portrait |
-| Introduction inset | hidden; the hero is already the chamber | `chamber-interior.jpg` — the chamber |
+| The chamber | hidden; the hero is already the chamber | `chamber-wide.jpg` — a section of its own |
 | "An oral & dental surgeon" | `why-qualified.jpg` — the coat portrait | pane hidden on phones |
 | "Painless treatment" | `why-painless.jpg` — him treating a patient | pane hidden on phones |
 | About page portrait | `dr-arman-about.jpg` — grey suit | same |

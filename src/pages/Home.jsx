@@ -4,6 +4,7 @@ import { identity, sections } from '../config/site.js'
 import Hero from '../sections/Hero.jsx'
 import Pillars from '../sections/Pillars.jsx'
 import AboutIntro from '../sections/AboutIntro.jsx'
+import Chamber from '../sections/Chamber.jsx'
 import ServicesGrid from '../sections/ServicesGrid.jsx'
 import WhyPanel from '../sections/WhyPanel.jsx'
 import Process from '../sections/Process.jsx'
@@ -21,6 +22,8 @@ export default function Home() {
       <Hero />
       <Pillars />
       <AboutIntro />
+      {/* Phones only — on desktop the hero is already this room. */}
+      <Chamber />
       {/* Four of the six treatments here; the Services page carries all of them. */}
       <ServicesGrid limit={4} />
       <WhyPanel />

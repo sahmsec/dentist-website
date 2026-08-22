@@ -72,12 +72,14 @@ export default function StatsBand() {
 }
 
 function Stat({ stat, delay }) {
-  const [ref, value] = useCountUp(stat.value)
+  const [ref, value] = useCountUp(stat.value, { decimals: stat.decimals || 0 })
+  const shown = stat.decimals ? value.toFixed(stat.decimals) : value.toLocaleString()
 
   return (
     <Reveal as="li" className="stats-band__stat" delay={delay}>
       <p className="stats-band__value" ref={ref}>
-        {value > 999 ? value.toLocaleString() : value}
+        {stat.prefix && <span className="stats-band__prefix">{stat.prefix}</span>}
+        {shown}
         {stat.suffix && <span className="stats-band__suffix">{stat.suffix}</span>}
       </p>
       <p className="stats-band__label">{stat.label}</p>

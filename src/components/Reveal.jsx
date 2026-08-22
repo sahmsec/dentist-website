@@ -63,7 +63,7 @@ export default function Reveal({
  * Counts a number up when it scrolls into view — used by the stats band.
  * Returns [ref, displayValue].
  */
-export function useCountUp(target, { duration = 1600 } = {}) {
+export function useCountUp(target, { duration = 1600, decimals = 0 } = {}) {
   const ref = useRef(null)
   const [value, setValue] = useState(0)
 
@@ -87,7 +87,10 @@ export function useCountUp(target, { duration = 1600 } = {}) {
           const t = Math.min((now - start) / duration, 1)
           // Ease-out cubic: fast off the mark, settles gently on the number.
           const eased = 1 - Math.pow(1 - t, 3)
-          setValue(Math.round(target * eased))
+          // Rounding to whole numbers turned a 4.9 rating into 5, which is a
+          // different claim, so the caller says how many decimals to keep.
+          const f = Math.pow(10, decimals)
+          setValue(Math.round(target * eased * f) / f)
           if (t < 1) frame = requestAnimationFrame(tick)
         }
         frame = requestAnimationFrame(tick)
@@ -100,7 +103,7 @@ export function useCountUp(target, { duration = 1600 } = {}) {
       io.disconnect()
       cancelAnimationFrame(frame)
     }
-  }, [target, duration])
+  }, [target, duration, decimals])
 
   return [ref, value]
 }
