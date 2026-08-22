@@ -52,9 +52,11 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  /* Him left, signage right. Nothing covers the photograph on a phone, so the
-     window only needs to sit high enough to keep his head well inside it. */
-  object-position: 50% 22%;
+  /* Him left, signage right. Shortening the band moved the crop window down
+     onto his hairline — measured, it was taking 19px off the top of his head.
+     His hair starts at y=75 of a 1288px file; 6% starts the window at ~26 and
+     leaves ~49px of clear air above him. */
+  object-position: 50% 6%;
 }
 
 /* The card carries the words now, so the scrim only has to stop the photograph
