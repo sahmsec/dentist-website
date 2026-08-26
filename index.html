@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#09243c" />
 
-    <title>Dr. Arman's Dental Care — Oral &amp; Dental Surgeon, Shyamoli Dhaka</title>
+    <title>Dentist in Shyamoli, Dhaka — Dr. Arman's Dental Care</title>
     <meta
       name="description"
-      content="Dr. Arman&#39;s Dental Care — Oral &amp; Dental Surgeon in Shyamoli, Dhaka. General dentistry, orthodontics, dental implants, cosmetic dentistry and teeth whitening. Call 01915109006 to book an appointment."
+      content="Dental clinic in Shyamoli, Dhaka. Dr. Md. Arman Kayser, BDS, with postgraduate training in oral &amp; maxillofacial surgery — wisdom tooth removal, dental implants, braces and clear aligners, root canal, scaling and teeth whitening. Over 10,000 patients treated since 2016. Call 01915109006."
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- canonical and og:url are written at runtime from the origin the page is
-         served from — see src/lib/usePageMeta.js. -->
+    <link rel="canonical" href="https://drarmansdental.com/" />
 
     <!-- Local search: these three tell Google where the practice physically is,
          which is what "dentist near me" ranks on. -->
@@ -26,10 +25,15 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Dr. Arman&#39;s Dental Care" />
     <meta property="og:locale" content="en_GB" />
-    <meta property="og:title" content="Dr. Arman&#39;s Dental Care — Oral &amp; Dental Surgeon" />
-    <meta property="og:description" content="Healthy Teeth, Confident You. Expert care for a healthier, brighter smile in Shyamoli, Dhaka. Call 01915109006." />
-    <meta property="og:image" content="/images/og-cover.jpg" />
+    <meta property="og:url" content="https://drarmansdental.com/" />
+    <meta property="og:title" content="Dentist in Shyamoli, Dhaka — Dr. Arman&#39;s Dental Care" />
+    <meta property="og:description" content="Dental clinic in Shyamoli, Dhaka. Wisdom teeth, implants, braces and clear aligners, root canal and whitening — over 10,000 patients treated since 2016. Call 01915109006." />
+    <!-- Absolute, because several scrapers will not resolve a relative
+         og:image against the page and simply drop the picture. -->
+    <meta property="og:image" content="https://drarmansdental.com/images/og-cover.jpg" />
+    <meta property="og:image:alt" content="Dr. Arman&#39;s Dental Care, Shyamoli, Dhaka" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://drarmansdental.com/images/og-cover.jpg" />
 
     <!-- Onest for headings and UI, DM Sans for body copy — the reference pairing. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,64 +43,151 @@
       rel="stylesheet"
     />
 
-    <!-- Local business schema: this is what puts the phone number, hours and
-         address into a Google result card for "dentist shyamoli". -->
+    <!-- Local business schema. This is what puts the phone number, hours,
+         address and rating into a Google result card for searches like
+         "dentist in Shyamoli" or "dental clinic near me" from Dhaka.
+
+         Two linked entities: the practice, and Dr. Kayser himself. The @id
+         anchors let Google treat the person and the clinic as one knowledge
+         graph rather than two unrelated things that happen to share a phone
+         number. Every claim here is stated on the page as well — structured
+         data that says something the page does not is the fastest way to lose
+         the rich result entirely. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Dentist",
-        "name": "Dr. Arman's Dental Care",
-        "alternateName": "Dr. Arman Kayser — Oral & Dental Surgeon",
-        "description": "Oral & Dental Surgeon in Shyamoli, Dhaka offering general dentistry, orthodontics, dental implants, cosmetic dentistry and teeth whitening.",
-        "telephone": "+8801915109006",
-        "image": "/images/og-cover.jpg",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "12/Cha/A/2, Road No 4",
-          "addressLocality": "Shyamoli, Dhaka",
-          "addressCountry": "BD"
-        },
-        "sameAs": ["https://facebook.com/drarmansdental"],
-        "openingHoursSpecification": [
+        "@graph": [
           {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday"],
-            "opens": "17:00",
-            "closes": "22:00"
+            "@type": "Dentist",
+            "@id": "https://drarmansdental.com/#practice",
+            "name": "Dr. Arman's Dental Care",
+            "alternateName": ["Dr. Arman Kayser Dental Chamber", "Arman's Dental Care Shyamoli"],
+            "description": "Dental clinic in Shyamoli, Dhaka. General and restorative dentistry, oral and maxillofacial surgery, dental implants, fixed orthodontics and clear aligners.",
+            "url": "https://drarmansdental.com",
+            "telephone": "+8801915109006",
+            "image": "https://drarmansdental.com/images/og-cover.jpg",
+            "logo": "https://drarmansdental.com/favicon.svg",
+            "priceRange": "$$",
+            "currenciesAccepted": "BDT",
+            "paymentAccepted": "Cash, bKash, Nagad, Card",
+            "foundingDate": "2016",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "12/Cha/A/2, Road No 4",
+              "addressLocality": "Shyamoli",
+              "addressRegion": "Dhaka",
+              "postalCode": "1207",
+              "addressCountry": "BD"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 23.7746,
+              "longitude": 90.3654
+            },
+            "hasMap": "https://www.google.com/maps?cid=7590116896021837297",
+            "areaServed": [
+              { "@type": "City", "name": "Dhaka" },
+              { "@type": "Country", "name": "Bangladesh" }
+            ],
+            "founder": { "@id": "https://drarmansdental.com/#dr-arman-kayser" },
+            "employee": [
+              { "@id": "https://drarmansdental.com/#dr-arman-kayser" },
+              { "@type": "Person", "name": "Dr. Puspita Mehezabin", "jobTitle": "Dental Surgeon" },
+              { "@type": "Person", "name": "Antara Fahmida", "jobTitle": "Dental Technologist" }
+            ],
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "reviewCount": "44",
+              "bestRating": "5"
+            },
+            "sameAs": [
+              "https://facebook.com/drarmansdental",
+              "https://instagram.com/dr.armansdental",
+              "https://www.google.com/maps?cid=7590116896021837297"
+            ],
+            "availableService": [
+              { "@type": "MedicalProcedure", "name": "General dentistry" },
+              { "@type": "MedicalProcedure", "name": "Wisdom tooth removal" },
+              { "@type": "MedicalProcedure", "name": "Dental implants" },
+              { "@type": "MedicalProcedure", "name": "Fixed braces and clear aligners" },
+              { "@type": "MedicalProcedure", "name": "Root canal treatment" },
+              { "@type": "MedicalProcedure", "name": "Scaling and teeth whitening" },
+              { "@type": "MedicalProcedure", "name": "Cosmetic and restorative dentistry" },
+              { "@type": "MedicalProcedure", "name": "Oral and maxillofacial surgery" }
+            ],
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday"],
+                "opens": "17:00",
+                "closes": "22:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Thursday",
+                "opens": "17:00",
+                "closes": "21:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Friday",
+                "opens": "00:00",
+                "closes": "00:00"
+              }
+            ]
           },
           {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "Thursday",
-            "opens": "17:00",
-            "closes": "21:00"
+            "@type": "Physician",
+            "@id": "https://drarmansdental.com/#dr-arman-kayser",
+            "name": "Dr. Md. Arman Kayser",
+            "givenName": "Arman",
+            "familyName": "Kayser",
+            "honorificPrefix": "Dr.",
+            "jobTitle": "Oral & Dental Surgeon",
+            "medicalSpecialty": "Dentistry",
+            "description": "Oral and dental surgeon in Shyamoli, Dhaka. BDS 2014, with postgraduate training in oral and maxillofacial surgery, conservative dentistry, and fixed orthodontics and clear aligner therapy. Founder of Dr. Arman's Dental Care and Senior Lecturer at City Dental College & Hospital.",
+            "url": "https://drarmansdental.com/about",
+            "image": "https://drarmansdental.com/images/team-arman.jpg",
+            "telephone": "+8801915109006",
+            "worksFor": { "@id": "https://drarmansdental.com/#practice" },
+            "hasCredential": [
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "degree",
+                "name": "BDS — Bachelor of Dental Surgery"
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "Postgraduate diploma and clinical training",
+                "name": "Oral & Maxillofacial Surgery"
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "Postgraduate clinical training",
+                "name": "Conservative Dentistry"
+              },
+              {
+                "@type": "EducationalOccupationalCredential",
+                "credentialCategory": "certificate",
+                "name": "Fixed Orthodontic Treatment and Clear Aligner Therapy"
+              }
+            ],
+            "alumniOf": [
+              { "@type": "CollegeOrUniversity", "name": "Dhaka Dental College & Hospital" },
+              { "@type": "CollegeOrUniversity", "name": "Shaheed Suhrawardy Medical College & Hospital" }
+            ],
+            "knowsAbout": [
+              "Oral and maxillofacial surgery",
+              "Wisdom tooth extraction",
+              "Dental implants",
+              "Conservative and restorative dentistry",
+              "Fixed orthodontic treatment",
+              "Clear aligner therapy"
+            ],
+            "knowsLanguage": ["bn", "en"]
           }
-        ],
-        "medicalSpecialty": "Dentistry",
-        "areaServed": { "@type": "City", "name": "Dhaka" },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "reviewCount": "44",
-          "bestRating": "5"
-        },
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Treatments",
-          "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "General Dentistry" } },
-            { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Orthodontics (Braces)" } },
-            { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Dental Implants" } },
-            { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Cosmetic Dentistry" } },
-            { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Teeth Whitening" } },
-            { "@type": "Offer", "itemOffered": { "@type": "MedicalProcedure", "name": "Oral Surgery" } }
-          ]
-        },
-        "founder": {
-          "@type": "Person",
-          "name": "Dr. Arman Kayser",
-          "jobTitle": "Oral & Dental Surgeon"
-        }
+        ]
       }
     </script>
   </head>

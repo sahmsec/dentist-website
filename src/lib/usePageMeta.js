@@ -15,7 +15,12 @@ const OG_IMAGE = '/images/og-cover.jpg'
  * link previews will see.
  *
  *   usePageMeta({ title: 'Contact', description: '…', path: '/contact' })
- *   usePageMeta({ title: null, ... })   → the site title verbatim, for home
+ *   usePageMeta({ title: null, ... })         → the site title verbatim, for home
+ *   usePageMeta({ …, brandSuffix: false })    → the title alone
+ *
+ * The brand suffix is on by default, but a title that already names the
+ * practice does not need it twice, and Google only shows about 60 characters
+ * before it truncates — the About page's title is his name, which is the brand.
  *
  * Sets: <title>, description, canonical, and the Open Graph and Twitter tags
  * that decide what a shared link looks like.
@@ -25,11 +30,15 @@ const OG_IMAGE = '/images/og-cover.jpg'
  * hard-coded domain made every shared link resolve somewhere that did not
  * exist yet — the card was unclickable.
  */
-export function usePageMeta({ title, description, path } = {}) {
+export function usePageMeta({ title, description, path, brandSuffix = true } = {}) {
   useEffect(() => {
     // Suffix with the practice name, not the person's — the site is titled
     // after the practice and every tab should read the same way.
-    const full = title ? `${title} — ${identity.brandName}` : identity.metaTitle
+    const full = !title
+      ? identity.metaTitle
+      : brandSuffix
+        ? `${title} — ${identity.brandName}`
+        : title
     document.title = full
 
     const origin = site.url || window.location.origin
@@ -45,7 +54,7 @@ export function usePageMeta({ title, description, path } = {}) {
     setMeta('name', 'twitter:title', full)
     setMeta('name', 'twitter:description', description)
     setMeta('name', 'twitter:image', new URL(OG_IMAGE, origin).href)
-  }, [title, description, path])
+  }, [title, description, path, brandSuffix])
 }
 
 /** Creates the tag if the template does not already carry it. */

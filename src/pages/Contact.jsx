@@ -19,7 +19,7 @@ import './Contact.css'
 
 export default function Contact() {
   usePageMeta({
-    title: 'Contact',
+    title: 'Contact & Chamber Hours, Shyamoli',
     description: `Call ${contact.phone.display} to book with ${identity.name}. Chamber at ${contact.address.display}. Appointments are taken by phone and WhatsApp.`,
     path: '/contact',
   })

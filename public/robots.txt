@@ -4,6 +4,6 @@
 User-agent: *
 Allow: /
 
-# The Sitemap directive only takes an absolute URL, so it goes back in — along
-# with public/sitemap.xml — once there is a domain to write into it. See
-# site.url in src/config/site.js.
+# Absolute by requirement — the Sitemap directive takes nothing else. If the
+# domain changes, change it here and in public/sitemap.xml and site.url.
+Sitemap: https://drarmansdental.com/sitemap.xml

@@ -82,7 +82,7 @@ be cropped out. The un-watermarked original is needed from whoever produced it.
 | --- | --- |
 | `ba-1/2/3-before.jpg`, `ba-1/2/3-after.jpg` | Before-and-after pairs are claims about clinical outcomes — genuine cases with written patient consent only. **The section is currently hidden**: `sections.beforeAfter` in `src/config/site.js` is `false`. Set it to `true` when the photographs exist; the component, its styles and its captions are all still in place. |
 | `patient-1.jpg`–`patient-3.jpg` | Testimonial avatars. The testimonials section is currently hidden (`sections.testimonials` in `src/config/site.js`) because its four quotes are invented placeholder copy and there are 44 real Google reviews one link away. Replace the quotes with real review text, then turn it back on. |
-| `team-associate.jpg`, `team-assistant.jpg` | Real colleagues. A monogram until there are photographs of them. |
+| `team-*.jpg` | Real colleagues, photographed at the chamber. Never a stock face — a monogram is better than an invented person. |
 
 ---
 
@@ -160,8 +160,15 @@ without a face attached.
 | --- | --- | --- |
 | `dr-arman-about.jpg` | 3/4 | The main portrait on the About page. More formal than the home page one — this is the "meet the surgeon" photograph. |
 | `team-arman.jpg` | 1/1 | Circular team portrait of Dr. Arman. Plain background, shoulders up. |
-| `team-associate.jpg` | 1/1 | The associate dentist, same framing and same background as above. |
-| `team-assistant.jpg` | 1/1 | The chamber assistant, same framing and same background again. |
+| `team-puspita.jpg` | 1/1 | Dr. Puspita Mehezabin, dental surgeon. Same framing. |
+| `team-antara.jpg` | 1/1 | Antara Fahmida, dental technologist. Same framing. |
+| `team-fahmida.jpg` | 1/1 | Fahmida Haque, owner. Same framing. |
+| `team-anik.jpg` | 1/1 | Anik, dental assistant. Same framing. |
+
+All five are cut from the practice's own portrait session by
+`scripts/team-crop.ps1` — a centred square with roughly 8% headroom above the
+hairline, because the cards mask them to a circle and a tight crop loses the
+top of the head to the curve.
 
 The three team portraits sit in a row, so shoot them in one session against the
 same wall. Names and roles come from `about.team` in `src/config/site.js`.

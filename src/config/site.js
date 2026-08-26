@@ -13,12 +13,11 @@
  *  domain, so it is the one to keep.
  */
 export const site = {
-  /* Null until the practice has a domain. Every absolute URL — canonical,
-     og:url, og:image — is then built from the origin the page is served from,
-     so a Vercel link shares as itself instead of pointing at a host that does
-     not resolve. Set this to the live origin (no trailing slash) to pin them,
-     and put the Sitemap line back in public/robots.txt at the same time. */
-  url: null,
+  /* The live origin, no trailing slash. Everything absolute — canonical,
+     og:url, og:image, the sitemap — is built from this one value. Set it back
+     to null to fall through to whatever host is serving the page, which is what
+     makes a preview deployment share as itself. */
+  url: 'https://drarmansdental.com',
   locale: 'en_GB',
   region: 'BD',
 }
@@ -31,11 +30,15 @@ export const identity = {
   title: 'Oral & Dental Surgeon',
   tagline: 'Healthy Teeth, Confident You',
   brandName: "Dr. Arman's Dental Care",
-  metaTitle: "Dr. Arman's Dental Care — Oral & Dental Surgeon, Shyamoli Dhaka",
+  /* What someone in Dhaka types comes first, the practice name second. Nobody
+     searches for the brand until they already know it; they search for a
+     dentist and a place. Kept under ~60 characters so Google shows all of it. */
+  metaTitle: "Dentist in Shyamoli, Dhaka — Dr. Arman's Dental Care",
   metaDescription:
-    "Dr. Arman's Dental Care — Oral & Dental Surgeon in Shyamoli, Dhaka. General dentistry, " +
-    'orthodontics, dental implants, cosmetic dentistry and teeth whitening. ' +
-    'Call 01915109006 to book an appointment.',
+    'Dental clinic in Shyamoli, Dhaka. Dr. Md. Arman Kayser, BDS, with postgraduate training ' +
+    'in oral & maxillofacial surgery — wisdom tooth removal, dental implants, braces and clear ' +
+    'aligners, root canal, scaling and teeth whitening. Over 10,000 patients treated since ' +
+    '2016. Call 01915109006.',
 }
 
 /* ── Contact ───────────────────────────────────────────────────────────────────
@@ -292,10 +295,13 @@ export const process = [
  *  above), so they move when it does.
  */
 export const stats = [
-  { prefix: 'Nearly ', value: 10, suffix: '', label: 'Years of trusted dental care' },
-  { value: google.reviewCount, suffix: '', label: 'Reviews on Google' },
+  /* Every figure here is checkable. The patient count is the practice's own,
+     for the chamber since it opened in 2016; the two Google numbers come from
+     the listing and are read from one place in `google` above. */
+  { value: 10000, suffix: '+', label: 'Patients treated since 2016' },
+  { value: 10, suffix: '', label: 'Years of the practice in Shyamoli' },
   { value: google.rating, decimals: 1, suffix: '', label: 'Average Google rating' },
-  { value: services.length, suffix: '', label: 'Treatments offered' },
+  { value: google.reviewCount, suffix: '', label: 'Reviews on Google' },
 ]
 
 /* ── About page content ────────────────────────────────────────────────────── */
@@ -303,24 +309,102 @@ export const about = {
   eyebrow: 'About Dr. Arman',
   headline: 'Your dental health is our passion',
   lede: 'Let us make your smile your best feature.',
+
+  /* body[0] is the whole of the home introduction; the About page runs the
+     lot. Written as the practice's own account of itself — the specifics are
+     what a patient searching for a dental surgeon in Dhaka is weighing up, and
+     they are also the only search terms worth ranking for. */
   body: [
-    'An Oral & Dental Surgeon practising in Shyamoli, Dhaka. Surgical work — wisdom teeth, ' +
-      'implants, difficult extractions — is done here rather than referred elsewhere.',
-    'Surgical training is what sets the practice apart: fewer appointments, one person ' +
-      'accountable for the outcome, and a plan that holds from diagnosis to follow-up.',
-    'Every plan is written down and costed before work begins.',
+    'Dr. Md. Arman Kayser is an Oral & Dental Surgeon practising in Shyamoli, Dhaka, and the ' +
+      'founder of Dr. Arman’s Dental Care. Wisdom teeth, implants and difficult extractions are ' +
+      'treated here rather than referred elsewhere.',
+    'He qualified BDS in 2014, then completed a one-year postgraduate diploma and clinical ' +
+      'training in Oral & Maxillofacial Surgery at Dhaka Dental College & Hospital, and ' +
+      'postgraduate clinical training in Conservative Dentistry at Shaheed Suhrawardy Medical ' +
+      'College & Hospital.',
+    'He founded Dr. Arman’s Dental Care in 2016. Since then he and the clinical team have ' +
+      'treated more than 10,000 patients, from across Bangladesh and from abroad.',
+    'Alongside the chamber he has been a Senior Lecturer at City Dental College & Hospital ' +
+      'since 2017, and keeps up with the field through training in Thailand, Singapore and ' +
+      'Malaysia — so what is taught in the lecture room and what happens in the chair stay the ' +
+      'same thing.',
   ],
+
+  /* Real qualifications, each with where it was earned. The home page shows the
+     first four; the About page shows them all. */
   credentials: [
-    { title: 'BDS — Bachelor of Dental Surgery', org: 'Registered dental surgeon' },
-    { title: 'Oral & Dental Surgery', org: 'Surgical extraction, implants, minor oral surgery' },
-    { title: 'Orthodontic treatment', org: 'Fixed appliances and clear aligners' },
-    { title: 'Cosmetic & restorative dentistry', org: 'Veneers, bonding, smile design' },
+    { title: 'BDS — Bachelor of Dental Surgery', org: 'Qualified 2014' },
+    {
+      title: 'Oral & Maxillofacial Surgery',
+      org: 'Postgraduate diploma and clinical training — Dhaka Dental College & Hospital',
+    },
+    {
+      title: 'Conservative Dentistry',
+      org: 'Postgraduate clinical training — Shaheed Suhrawardy Medical College & Hospital',
+    },
+    {
+      title: 'Fixed orthodontics & clear aligners',
+      org: 'One-year training programme — ICTTRDB',
+    },
+    { title: 'Senior Lecturer since 2017', org: 'City Dental College & Hospital' },
+    {
+      title: 'Cardiopulmonary resuscitation (CPR)',
+      org: 'Dhaka Medical College Hospital — emergency readiness in the chair',
+    },
   ],
-  // Deliberately small — this is a personal portfolio, not a hospital site.
+
+  /* The people a patient actually meets. `bio` is the About page; the cards on
+     smaller screens fall back to name and role. */
   team: [
-    { name: 'Dr. Arman Kayser', role: 'Oral & Dental Surgeon', image: 'team-arman.jpg', lead: true },
-    { name: 'Associate Dentist', role: 'General Dentistry', image: 'team-associate.jpg' },
-    { name: 'Chamber Assistant', role: 'Dental Assistant', image: 'team-assistant.jpg' },
+    {
+      name: 'Dr. Md. Arman Kayser',
+      role: 'Oral & Dental Surgeon',
+      credential: 'BDS | Postgraduate training in Oral & Maxillofacial Surgery',
+      image: 'team-arman.jpg',
+      lead: true,
+      bio:
+        'Founder of the practice and the surgeon who sees the complex cases. More than a decade ' +
+        'in clinical practice since qualifying BDS in 2014, with postgraduate training in oral ' +
+        'and maxillofacial surgery, conservative dentistry, and fixed orthodontics and clear ' +
+        'aligners. Senior Lecturer at City Dental College & Hospital since 2017.',
+    },
+    {
+      name: 'Dr. Puspita Mehezabin',
+      role: 'Dental Surgeon',
+      credential: 'BDS | Postgraduate trainee, Oral & Maxillofacial Surgery',
+      image: 'team-puspita.jpg',
+      bio:
+        'A qualified dental surgeon handling diagnosis and treatment across a wide range of ' +
+        'dental conditions, currently taking postgraduate training in Oral & Maxillofacial ' +
+        'Surgery at Dhaka Medical College & Hospital. Her interests are oral surgery, minor ' +
+        'surgical procedures, dental infections and impacted teeth.',
+    },
+    {
+      name: 'Antara Fahmida',
+      role: 'Dental Technologist & Dental Assistant',
+      credential: 'Dental Technology | MPH',
+      image: 'team-antara.jpg',
+      bio:
+        'Eight years with the practice, across both the chair and the laboratory. She assists ' +
+        'during procedures and handles impressions and casts, denture and prosthetic work, and ' +
+        'the fit and finish of dental appliances — as well as the infection-control protocol ' +
+        'every instrument goes through.',
+    },
+    {
+      name: 'Fahmida Haque',
+      role: 'Owner',
+      credential: 'BDS (in training)',
+      image: 'team-fahmida.jpg',
+      bio:
+        'Owner of Dr. Arman’s Dental Care, currently reading for her BDS. She runs the practice ' +
+        'day to day, with an eye on the part of dentistry that happens before the chair: how ' +
+        'people are received, informed and looked after.',
+    },
+    {
+      name: 'Anik',
+      role: 'Dental Assistant',
+      image: 'team-anik.jpg',
+    },
   ],
 }
 

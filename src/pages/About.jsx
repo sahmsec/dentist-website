@@ -5,12 +5,14 @@ import Photo from '../components/Photo.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icons.jsx'
 import CtaBand from '../sections/CtaBand.jsx'
-import { about, identity, links, social } from '../config/site.js'
+import { about, identity } from '../config/site.js'
 import './About.css'
 
 export default function About() {
   usePageMeta({
-    title: `About ${identity.shortName}`,
+    // His name is the brand; the suffix would only repeat it.
+    title: 'Dr. Md. Arman Kayser — Oral & Dental Surgeon',
+    brandSuffix: false,
     description: about.body[0],
     path: '/about',
   })
@@ -75,7 +77,7 @@ export default function About() {
             eyebrow="Who you will meet"
             title="The chamber team"
             align="center"
-            text="Small on purpose. The same faces every visit, so nobody has to explain their history twice."
+            text="The same faces every visit, so nobody has to explain their history twice."
           />
 
           <ul className="about-team__grid">
@@ -83,55 +85,34 @@ export default function About() {
               <li key={member.name}>
                 <Reveal
                   as="article"
-                  className={`team-card${member.lead ? ' team-card--lead' : ''}`}
-                  delay={i * 90}
+                  className={`team-profile${member.lead ? ' team-profile--lead' : ''}`}
+                  delay={i * 80}
                 >
-                  <div className="team-card__portrait">
+                  <div className="team-profile__portrait">
                     <Photo
                       src={member.image}
-                      alt={`${member.name}, ${member.role}`}
+                      alt={`${member.name}, ${member.role} at ${identity.brandName}`}
                       shape="circle"
                       ratio="1"
+                      initials={member.name
+                        .replace(/^Dr\.?\s+(Md\.?\s+)?/, '')
+                        .split(' ')
+                        .map((w) => w[0])
+                        .slice(0, 2)
+                        .join('')}
                     />
                   </div>
 
-                  <div className="team-card__body">
-                    <p className="team-card__role">{member.role}</p>
-                    <h3 className="team-card__name">{member.name}</h3>
+                  <div className="team-profile__body">
+                    <h3 className="team-profile__name">{member.name}</h3>
+                    <p className="team-profile__role">{member.role}</p>
 
-                    <ul className="team-card__social">
-                      {social.map((channel) => (
-                        <li key={channel.name}>
-                          <a
-                            href={channel.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`${identity.brandName} on ${channel.name}`}
-                          >
-                            <Icon name={channel.icon} size={15} />
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
+                    {member.credential && (
+                      <p className="team-profile__credential">{member.credential}</p>
+                    )}
+
+                    {member.bio && <p className="team-profile__bio">{member.bio}</p>}
                   </div>
-
-                  {/* The whole strip is the link for the lead, not just the
-                      label — it reads as one bar, so tapping anywhere on it
-                      should dial rather than only the 128px of text. */}
-                  {member.lead ? (
-                    <a className="team-card__strip team-card__strip--link" href={links.tel}>
-                      <span className="icon-circle icon-circle--sm team-card__strip-icon">
-                        <Icon name="phone" size={16} />
-                      </span>
-                      <span className="team-card__strip-label">Call the chamber</span>
-                    </a>
-                  ) : (
-                    <div className="team-card__strip">
-                      <span className="icon-circle icon-circle--sm team-card__strip-icon">
-                        <Icon name="tooth" size={16} />
-                      </span>
-                    </div>
-                  )}
                 </Reveal>
               </li>
             ))}

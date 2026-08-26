@@ -55,8 +55,10 @@ export default function AboutIntro() {
               is the About page's argument, which the button below leads to. */}
           <p className="about-intro__para">{about.body[0]}</p>
 
+          {/* Four of the six. The rest are on the About page — this section is
+              budgeted to one screen, and each extra row is 41px of it. */}
           <ul className="about-intro__checks">
-            {about.credentials.map((credential) => (
+            {about.credentials.slice(0, 4).map((credential) => (
               <li className="about-intro__check" key={credential.title}>
                 <span className="icon-circle about-intro__check-icon" aria-hidden="true">
                   <Icon name="check" size={16} />

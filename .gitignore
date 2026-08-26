@@ -8,3 +8,9 @@ dist
 # Stray screenshots from browser checks — these belong in .playwright-mcp/
 /*.png
 /*.jpeg
+
+# Raw image drops land here before they are cropped into public/images.
+# The processed files and their originals in public/images/_source are what
+# the site actually uses; this is a staging tray, not a source of truth.
+/asstes/
+/assets/
