@@ -369,6 +369,16 @@ export const about = {
         'aligners. Senior Lecturer at City Dental College & Hospital since 2017.',
     },
     {
+      name: 'Fahmida Haque',
+      role: 'Owner',
+      credential: 'BDS (in training)',
+      image: 'team-fahmida.jpg',
+      bio:
+        'Owner of Dr. Arman’s Dental Care, currently reading for her BDS. She runs the practice ' +
+        'day to day, with an eye on the part of dentistry that happens before the chair: how ' +
+        'people are received, informed and looked after.',
+    },
+    {
       name: 'Dr. Puspita Mehezabin',
       role: 'Dental Surgeon',
       credential: 'BDS | Postgraduate trainee, Oral & Maxillofacial Surgery',
@@ -389,16 +399,6 @@ export const about = {
         'during procedures and handles impressions and casts, denture and prosthetic work, and ' +
         'the fit and finish of dental appliances — as well as the infection-control protocol ' +
         'every instrument goes through.',
-    },
-    {
-      name: 'Fahmida Haque',
-      role: 'Owner',
-      credential: 'BDS (in training)',
-      image: 'team-fahmida.jpg',
-      bio:
-        'Owner of Dr. Arman’s Dental Care, currently reading for her BDS. She runs the practice ' +
-        'day to day, with an eye on the part of dentistry that happens before the chair: how ' +
-        'people are received, informed and looked after.',
     },
   ],
 
