@@ -112,6 +112,29 @@ That is the entire change. Every surface, button, icon tile, border and shadow
 resolves through the design tokens in `src/styles/tokens.css`, so all of them
 follow at once. Remove the attribute to go back.
 
+## Deploying
+
+The site is a client-rendered single-page app: React Router owns `/about`,
+`/services` and `/contact`, and none of them exists as a file on disk. Any host
+serving the build has to answer every unmatched path with `index.html` and let
+the router take it from there, or those three URLs 404 for anyone who types
+them, follows a link into them, or refreshes on one.
+
+Both hosts we ship to are configured for it, and they say the same thing twice:
+
+    docker/nginx.conf   try_files $uri $uri/ /index.html
+    vercel.json         rewrites: /(.*) -> /index.html
+
+Neither swallows the static files. Vercel checks the filesystem before applying
+a rewrite, and nginx's `try_files` checks `$uri` first, so `/sitemap.xml`,
+`/robots.txt`, `/images/*` and the hashed `/assets/*` are all still served as
+themselves.
+
+One domain, not two. `drarmansdental.com` and `www.drarmansdental.com` are the
+same site to a visitor and two sites to a search engine. The canonical tag names
+the apex, so the `www` host should be set to redirect to it in the Vercel
+dashboard rather than serving a second copy.
+
 ## Project structure
 
     docker/            Dockerfile (dev, build and prod targets) and the nginx config
