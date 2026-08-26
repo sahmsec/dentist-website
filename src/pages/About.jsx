@@ -4,6 +4,7 @@ import SectionHead from '../components/SectionHead.jsx'
 import Photo from '../components/Photo.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icons.jsx'
+import { LogoMark } from '../components/Logo.jsx'
 import CtaBand from '../sections/CtaBand.jsx'
 import { about, identity } from '../config/site.js'
 import './About.css'
@@ -85,7 +86,7 @@ export default function About() {
               <li key={member.name}>
                 <Reveal
                   as="article"
-                  className={`team-profile${member.lead ? ' team-profile--lead' : ''}`}
+                  className={`team-profile${member.lead ? ' team-profile--lead on-dark' : ''}`}
                   delay={i * 80}
                 >
                   <div className="team-profile__portrait">
@@ -104,6 +105,8 @@ export default function About() {
                   </div>
 
                   <div className="team-profile__body">
+                    {member.lead && <p className="eyebrow team-profile__flag">Founder</p>}
+
                     <h3 className="team-profile__name">{member.name}</h3>
                     <p className="team-profile__role">{member.role}</p>
 
@@ -113,6 +116,14 @@ export default function About() {
 
                     {member.bio && <p className="team-profile__bio">{member.bio}</p>}
                   </div>
+
+                  {/* Same watermark the pillars band uses, at the same opacity —
+                      it is what stops a large flat panel reading as a blank. */}
+                  {member.lead && (
+                    <span className="team-profile__watermark" aria-hidden="true">
+                      <LogoMark size={230} tone="light" />
+                    </span>
+                  )}
                 </Reveal>
               </li>
             ))}

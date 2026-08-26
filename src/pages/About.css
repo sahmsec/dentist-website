@@ -105,7 +105,11 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.25rem, 0.6rem + 2vw, 2rem);
-  align-items: start;
+  /* Stretch, so the two cards in a row end level. Their bios are different
+     lengths, and `start` left one card standing 100px short of the one beside
+     it — the copy still sits at the top of each, so the difference lands as
+     padding rather than as a gap in the middle. */
+  align-items: stretch;
   margin-top: clamp(2rem, 1.4rem + 2vw, 3rem);
 }
 
@@ -132,9 +136,52 @@
   box-shadow: var(--shadow-md);
 }
 
-/* The founder's card carries the accent ring the reference theme gives its
-   lead, so the eye finds him first without the layout changing shape. */
-.team-profile--lead { box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.6), var(--shadow-md); }
+/* ── The founder's card ──────────────────────────────────────────────────────
+   An accent ring on a white card was not enough to make him the subject of the
+   section — it read as the same card with a border. This is the site's dark
+   panel treatment instead: navy ground, the logo watermark the pillars band
+   uses, a larger portrait, and the accent moved onto the things that carry
+   meaning (his role, the ring around his face). It stays the same size and
+   shape as the other three, so the grid does not change. */
+.team-profile--lead {
+  --portrait: clamp(104px, 11vw, 140px);
+
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--navy) 0%, var(--navy-soft) 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.team-profile--lead:hover { box-shadow: var(--shadow-lg); }
+
+/* Two rings: white for separation from the navy, accent outside it. */
+.team-profile--lead .team-profile__portrait {
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.14),
+    0 0 0 6px rgba(var(--accent-rgb), 0.85);
+}
+
+.team-profile--lead .team-profile__role { color: var(--accent); }
+.team-profile--lead .team-profile__credential { color: rgba(255, 255, 255, 0.6); }
+.team-profile--lead .team-profile__bio { color: var(--body-on-dark); }
+
+/* The eyebrow pill picks up .on-dark's translucent white from base.css. */
+.team-profile__flag { margin-bottom: 2px; }
+
+.team-profile__watermark {
+  position: absolute;
+  right: -58px;
+  bottom: -72px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* Above the watermark, or the copy sits behind it. */
+.team-profile--lead .team-profile__portrait,
+.team-profile--lead .team-profile__body {
+  position: relative;
+  z-index: 1;
+}
 
 .team-profile__portrait {
   width: var(--portrait);
