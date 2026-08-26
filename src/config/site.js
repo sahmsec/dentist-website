@@ -400,12 +400,21 @@ export const about = {
         'day to day, with an eye on the part of dentistry that happens before the chair: how ' +
         'people are received, informed and looked after.',
     },
-    {
-      name: 'Anik',
-      role: 'Dental Assistant',
-      image: 'team-anik.jpg',
-    },
   ],
+
+  /* The rest of the chamber, shown by role rather than by name — they have not
+     given names or titles to publish, and a made-up one is worse than none.
+     Their faces are the point here: a patient recognises who assisted them
+     without needing to be told what to call anyone. */
+  support: {
+    title: 'And the rest of the chamber',
+    text: 'Assisting at the chair and in the laboratory.',
+    people: [
+      { role: 'Dental Assistant', image: 'staff-assistant-1.jpg' },
+      { role: 'Dental Assistant', image: 'staff-assistant-2.jpg' },
+      { role: 'Laboratory Technologist', image: 'staff-technologist.jpg' },
+    ],
+  },
 }
 
 /* ── Testimonials ──────────────────────────────────────────────────────────── */

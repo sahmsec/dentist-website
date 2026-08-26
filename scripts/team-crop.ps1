@@ -16,18 +16,24 @@ $src  = Join-Path $root 'public\images\_source'
 $out  = Join-Path $root 'public\images'
 $sheet = Join-Path $root '.playwright-mcp\team-sheet.png'
 
-# file, X, Y, side, output name
+# file, X, Y, side, output name. The window is chosen so the hairline lands at
+# roughly 8% from the top — the cards mask these to a circle, and a crop that
+# looks fine as a square loses the top of the head to the curve.
 $crops = @(
-  @{ In = 'puspita-mehezabin.jpg'; X =  95; Y =  80; S = 900; Out = 'team-puspita.jpg' },
-  @{ In = 'antara-fahmida.jpg';        X = 190; Y =  60; S = 900; Out = 'team-antara.jpg'  },
-  @{ In = 'fahmida-haque.jpg';         X = 140; Y = 190; S = 900; Out = 'team-fahmida.jpg' },
-  @{ In = 'anik-assistant.jpg';     X = 325; Y = 140; S = 950; Out = 'team-anik.jpg'    }
+  @{ In = 'puspita-mehezabin.jpg';  X =  95; Y =  80; S = 900; Out = 'team-puspita.jpg' },
+  @{ In = 'antara-fahmida.jpg';     X = 190; Y =  60; S = 900; Out = 'team-antara.jpg' },
+  @{ In = 'fahmida-haque.jpg';      X = 140; Y = 190; S = 900; Out = 'team-fahmida.jpg' },
+  @{ In = 'staff-assistant-2.jpg';  X = 325; Y = 140; S = 950; Out = 'staff-assistant-2.jpg' },
+  @{ In = 'staff-assistant-1.jpg';  X = 186; Y = 120; S = 900; Out = 'staff-assistant-1.jpg' },
+  # Narrower window: he stands right of centre, and 900px wide would run past
+  # the edge of a 1086px frame and drag him back off-centre.
+  @{ In = 'staff-technologist.jpg'; X = 315; Y = 138; S = 770; Out = 'staff-technologist.jpg' }
 )
 
 $SIZE = 560          # what we ship
-$CELL = 300          # contact-sheet cell
+$CELL = 240          # contact-sheet cell
 
-$sheetBmp = New-Object System.Drawing.Bitmap(($CELL * 4), ($CELL + 26))
+$sheetBmp = New-Object System.Drawing.Bitmap(($CELL * $crops.Count), ($CELL + 26))
 $sg = [System.Drawing.Graphics]::FromImage($sheetBmp)
 $sg.Clear([System.Drawing.Color]::FromArgb(240, 243, 247))
 $sg.SmoothingMode = 'AntiAlias'

@@ -163,9 +163,11 @@ without a face attached.
 | `team-puspita.jpg` | 1/1 | Dr. Puspita Mehezabin, dental surgeon. Same framing. |
 | `team-antara.jpg` | 1/1 | Antara Fahmida, dental technologist. Same framing. |
 | `team-fahmida.jpg` | 1/1 | Fahmida Haque, owner. Same framing. |
-| `team-anik.jpg` | 1/1 | Anik, dental assistant. Same framing. |
+| `staff-assistant-1.jpg` | 1/1 | Dental assistant. Shown by role — no name published. |
+| `staff-assistant-2.jpg` | 1/1 | Dental assistant. Shown by role — no name published. |
+| `staff-technologist.jpg` | 1/1 | Laboratory technologist. Shown by role — no name published. |
 
-All five are cut from the practice's own portrait session by
+All six are cut from the practice's own portrait session by
 `scripts/team-crop.ps1` — a centred square with roughly 8% headroom above the
 hairline, because the cards mask them to a circle and a tight crop loses the
 top of the head to the curve.

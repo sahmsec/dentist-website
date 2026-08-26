@@ -117,6 +117,33 @@ export default function About() {
               </li>
             ))}
           </ul>
+
+          {/* Shown by role, not by name. Three faces in a row rather than three
+              more profile rows: without a name or a paragraph there is nothing
+              for a full-width card to hold, and an empty one reads as missing
+              rather than deliberate. */}
+          <Reveal className="about-support" delay={120}>
+            <div className="about-support__head">
+              <h3 className="about-support__title">{about.support.title}</h3>
+              <p className="about-support__text">{about.support.text}</p>
+            </div>
+
+            <ul className="about-support__grid">
+              {about.support.people.map((person) => (
+                <li className="support-card" key={person.image}>
+                  <div className="support-card__portrait">
+                    <Photo
+                      src={person.image}
+                      alt={`A ${person.role.toLowerCase()} at ${identity.brandName}`}
+                      shape="circle"
+                      ratio="1"
+                    />
+                  </div>
+                  <p className="support-card__role">{person.role}</p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 
