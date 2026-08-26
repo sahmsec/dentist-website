@@ -121,11 +121,10 @@ export const social = [
 
 /* ── Chamber hours ─────────────────────────────────────────────────────────── */
 export const hours = {
-  rows: [
-    { days: 'Saturday – Wednesday', time: '5:00 PM – 10:00 PM' },
-    { days: 'Thursday', time: '5:00 PM – 9:00 PM' },
-    { days: 'Friday', time: 'Closed' },
-  ],
+  /* One line, every day. `rows` stays an array because four places render it as
+     a list, and a chamber that adds a different Saturday later should only have
+     to add a row here — not change four components back. */
+  rows: [{ days: 'Every day', time: '6:00 PM – 11:00 PM' }],
   emergencyNote: 'Dental emergency? Call any time',
 }
 
