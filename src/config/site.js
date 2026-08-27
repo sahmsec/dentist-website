@@ -415,7 +415,7 @@ export const about = {
     },
     {
       name: 'Antara Fahmida',
-      role: 'Dental Technologist & Dental Assistant',
+      role: 'Dental Technologist',
       credential: 'Dental Technology | MPH',
       image: 'team-antara.jpg',
       bio:
