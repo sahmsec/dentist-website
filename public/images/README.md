@@ -161,7 +161,7 @@ without a face attached.
 | `dr-arman-about.jpg` | 3/4 | The main portrait on the About page. More formal than the home page one — this is the "meet the surgeon" photograph. |
 | `team-arman.jpg` | 1/1 | Circular team portrait of Dr. Arman. Plain background, shoulders up. |
 | `team-puspita.jpg` | 1/1 | Dr. Puspita Mehezabin, dental surgeon. Same framing. |
-| `team-antara.jpg` | 1/1 | Antara Fahmida, dental technologist. Same framing. |
+| `team-antara.jpg` | 1/1 | Antora Fahmida, dental hygienist. Same framing. |
 | `team-fahmida.jpg` | 1/1 | Fahmida Haque, owner. Same framing. |
 | `staff-assistant-1.jpg` | 1/1 | Dental assistant. Shown by role — no name published. |
 | `staff-assistant-2.jpg` | 1/1 | Dental assistant. Shown by role — no name published. |

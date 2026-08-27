@@ -424,17 +424,18 @@ export const about = {
         'oral and maxillofacial conditions.',
     },
     {
-      name: 'Antara Fahmida',
-      role: 'Dental Technologist',
-      credential: 'Dental Technology | MPH',
+      name: 'Antora Fahmida',
+      role: 'Dental Hygienist',
+      credential: 'DDT | MPH',
       image: 'team-antara.jpg',
       bio:
-        'Eight years with the practice, across both the chair and the laboratory. She assists ' +
-        'the surgeons during procedures, prepares the materials and instruments, and keeps the ' +
-        'infection-control protocol. On the technical side: impressions and casts, model ' +
-        'preparation, denture and prosthetic work, shade and material selection, and the ' +
-        'fabrication and adjustment of appliances — working to the fit, function and finish the ' +
-        'dentist has specified.',
+        'A qualified dental hygienist with eight years of clinical experience, holding a DDT ' +
+        'and a Master of Public Health — clinical practice on one side, preventive and ' +
+        'community oral healthcare on the other. Her work is the maintenance half of dentistry: ' +
+        'professional cleaning, scaling and polishing, plaque and calculus removal, and ' +
+        'preventive gum care. She catches the early signs of gum disease, and spends time on ' +
+        'the part most people are never actually taught — how to brush, how to floss, and what ' +
+        'daily care keeps teeth and gums healthy between visits.',
     },
   ],
 
