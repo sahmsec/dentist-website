@@ -1,15 +1,37 @@
-/* ── Intro: portrait beside the story ──────────────────────────────────────── */
+/* ── The practice ───────────────────────────────────────────────────────────
+   No photograph. The banner above it is the chamber, the founder's portrait is
+   directly below and there are seven faces further down — this section is the
+   one place on the page where words are the whole of it, which is also what
+   gives the page its rhythm: clinic, then founder, then training, then faces. */
+.about-practice__body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(1.25rem, 0.8rem + 1.8vw, 2.5rem);
+  margin-top: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+}
+
+.about-practice__body p {
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}
+
+/* ── The founder: portrait beside the story ─────────────────────────────────
+   0.55fr, not 0.84fr. As a 3:4 panel across a wider column the portrait ran
+   ~530x700 — the largest thing on the page by some way, for a section that is
+   mostly prose. Square and narrower, it introduces him without taking over. */
 .about-bio__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-  gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
   align-items: start;
 }
 
-/* The section is white, so the pill needs the page tone to stay a pill. */
-.about-bio .eyebrow {
-  background: var(--surface);
-}
+.about-bio__media { max-width: 340px; }
+
+/* The practice section is white, so its pill needs the page tone to stay a
+   pill; the founder section sits on the page tone, so its pill takes white. */
+.about-practice .eyebrow { background: var(--surface); }
+.about-bio .eyebrow { background: var(--white); }
 
 /* The copy column is much taller than the portrait — pinning it keeps the two
    columns in conversation instead of leaving a long empty gutter. */

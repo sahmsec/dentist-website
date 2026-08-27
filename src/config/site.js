@@ -305,6 +305,26 @@ export const stats = [
 
 /* ── About page content ────────────────────────────────────────────────────── */
 export const about = {
+  /* The About page is about the clinic first. Dr. Arman is the founder and the
+     name over the door, but the thing a patient books with, walks into and
+     reviews is the practice — and the practice is the primary entity in the
+     structured data too, with him linked to it. `practice` opens the page;
+     `body` below is his own story, and the home page still takes body[0]. */
+  practice: {
+    eyebrow: 'The practice',
+    headline: 'A dental chamber in Shyamoli since 2016',
+    body: [
+      'Dr. Arman’s Dental Care was founded in 2016 to provide comprehensive, modern and ' +
+        'ethical dental care, with the patient at the centre of it.',
+      'Since then the clinical team has treated more than 10,000 patients — from across ' +
+        'Bangladesh, and from abroad. Everything from a routine scaling to full implant work is ' +
+        'carried out in the one chamber on Road No 4.',
+      'What the practice holds itself to: a treatment plan made for the person in the chair, ' +
+        'agreed and costed before anything begins; patient safety and sterilisation without ' +
+        'exception; and care aimed at oral health that lasts rather than a problem cleared today.',
+    ],
+  },
+
   eyebrow: 'About Dr. Arman',
   headline: 'Your dental health is our passion',
   lede: 'Let us make your smile your best feature.',
@@ -362,10 +382,12 @@ export const about = {
       image: 'team-arman.jpg',
       lead: true,
       bio:
-        'Founder of the practice and the surgeon who sees the complex cases. More than a decade ' +
-        'in clinical practice since qualifying BDS in 2014, with postgraduate training in oral ' +
-        'and maxillofacial surgery, conservative dentistry, and fixed orthodontics and clear ' +
-        'aligners. Senior Lecturer at City Dental College & Hospital since 2017.',
+        'Founder of the practice and the surgeon who takes the complex cases. BDS in 2014, then ' +
+        'a one-year postgraduate diploma and clinical training in Oral & Maxillofacial Surgery ' +
+        'at Dhaka Dental College & Hospital, postgraduate clinical training in Conservative ' +
+        'Dentistry at Shaheed Suhrawardy Medical College & Hospital, and a year of fixed ' +
+        'orthodontic and clear aligner training at ICTTRDB. Senior Lecturer at City Dental ' +
+        'College & Hospital since 2017, and a decade of clinical practice behind him.',
     },
     {
       name: 'Fahmida Haque',
@@ -373,9 +395,10 @@ export const about = {
       credential: 'BDS (in training)',
       image: 'team-fahmida.jpg',
       bio:
-        'Owner of Dr. Arman’s Dental Care, currently reading for her BDS. She runs the practice ' +
-        'day to day, with an eye on the part of dentistry that happens before the chair: how ' +
-        'people are received, informed and looked after.',
+        'Owner of Dr. Arman’s Dental Care and closely involved in the development and running ' +
+        'of it, while reading for her own BDS. Her interest is in the patient-centred side of ' +
+        'dentistry — building a professional, compassionate and modern practice where people are ' +
+        'looked after with care and attention, not processed.',
     },
     {
       name: 'Dr. Puspita Mehezabin',
@@ -383,10 +406,12 @@ export const about = {
       credential: 'BDS | Postgraduate trainee, Oral & Maxillofacial Surgery',
       image: 'team-puspita.jpg',
       bio:
-        'A qualified dental surgeon handling diagnosis and treatment across a wide range of ' +
-        'dental conditions, currently taking postgraduate training in Oral & Maxillofacial ' +
-        'Surgery at Dhaka Medical College & Hospital. Her interests are oral surgery, minor ' +
-        'surgical procedures, dental infections and impacted teeth.',
+        'A qualified dental surgeon, diagnosing and treating a wide range of dental conditions, ' +
+        'and currently taking postgraduate training in Oral & Maxillofacial Surgery at Dhaka ' +
+        'Medical College & Hospital. She works on the principle that clinical expertise and ' +
+        'plain, unhurried explanation belong together. Her interests are oral surgery, minor ' +
+        'surgical procedures, dental infections, impacted teeth, and the management of complex ' +
+        'oral and maxillofacial conditions.',
     },
     {
       name: 'Antara Fahmida',
@@ -395,9 +420,11 @@ export const about = {
       image: 'team-antara.jpg',
       bio:
         'Eight years with the practice, across both the chair and the laboratory. She assists ' +
-        'during procedures and handles impressions and casts, denture and prosthetic work, and ' +
-        'the fit and finish of dental appliances — as well as the infection-control protocol ' +
-        'every instrument goes through.',
+        'the surgeons during procedures, prepares the materials and instruments, and keeps the ' +
+        'infection-control protocol. On the technical side: impressions and casts, model ' +
+        'preparation, denture and prosthetic work, shade and material selection, and the ' +
+        'fabrication and adjustment of appliances — working to the fit, function and finish the ' +
+        'dentist has specified.',
     },
   ],
 

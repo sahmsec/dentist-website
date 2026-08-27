@@ -11,32 +11,54 @@ import './About.css'
 
 export default function About() {
   usePageMeta({
-    // His name is the brand; the suffix would only repeat it.
-    title: 'Dr. Md. Arman Kayser — Oral & Dental Surgeon',
-    brandSuffix: false,
-    description: about.body[0],
+    title: 'About the practice & the team',
+    description: `${about.practice.body[0]} ${about.body[0]}`,
     path: '/about',
   })
 
   return (
     <>
-      <PageTitle title="About Dr. Arman" breadcrumb="About" image="titlebar-about.jpg" />
+      <PageTitle title="About the practice" breadcrumb="About" image="titlebar-about.jpg" />
 
-      <section className="section section--white section--curve-bottom about-bio">
+      {/* The clinic first. A patient books with the practice, walks into the
+          practice and reviews the practice — Dr. Arman is the founder and the
+          name over the door, but he is a section of this page, not the whole
+          of it. His story follows directly below. */}
+      <section className="section section--white section--curve-bottom about-practice">
+        <div className="container">
+          <SectionHead
+            eyebrow={about.practice.eyebrow}
+            title={about.practice.headline}
+            highlight={['Shyamoli']}
+            align="split"
+            text={about.practice.body[0]}
+          />
+
+          <div className="about-practice__body">
+            {about.practice.body.slice(1).map((paragraph, i) => (
+              <Reveal as="p" key={paragraph.slice(0, 32)} delay={i * 90}>
+                {paragraph}
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section about-bio">
         <div className="container about-bio__grid">
           <Reveal className="about-bio__media">
             <Photo
               src="dr-arman-about.jpg"
-              alt={`${identity.name}, ${identity.title}, in the Shyamoli chamber`}
+              alt={`${identity.name}, ${identity.title} and founder of ${identity.brandName}`}
               shape="media"
-              ratio="3/4"
+              ratio="1"
             />
           </Reveal>
 
           <Reveal className="about-bio__copy" delay={120}>
-            <p className="eyebrow">{about.eyebrow}</p>
-            <h2>{about.headline}</h2>
-            <p className="lede about-bio__lede">{about.lede}</p>
+            <p className="eyebrow">The founder</p>
+            <h2>{about.team[0].name}</h2>
+            <p className="lede about-bio__lede">{about.team[0].credential}</p>
             {about.body.map((paragraph) => (
               <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
