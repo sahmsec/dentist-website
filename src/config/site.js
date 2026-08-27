@@ -83,9 +83,14 @@ export const contact = {
 }
 
 /* ── Google Business Profile ───────────────────────────────────────────────────
- *  Read off the live listing, not invented: 4.9 from 44 reviews, dental clinic
- *  in Dhaka. `cid` is Google's own identifier for the place — every link below
- *  is built from it, so if the listing ever moves there is one value to change.
+ *  Read off the live listing, not invented. `cid` is Google's own identifier for
+ *  the place — every link below is built from it, so if the listing ever moves
+ *  there is one value to change.
+ *
+ *  There is deliberately no aggregateRating in the page schema. Google has not
+ *  shown review stars for self-serving LocalBusiness markup since 2019, so it
+ *  was doing nothing for search while being one more number to keep in sync
+ *  with a listing that changes on its own.
  *
  *  NOTE: the listing is currently UNCLAIMED. Google is showing "Are you the
  *  owner of this business?" on it, the phone number is missing, and the website
@@ -98,7 +103,12 @@ export const contact = {
 export const google = {
   cid: '7590116896021837297',
   rating: 4.9,
-  reviewCount: 44,
+  /* A floor, not a count. The exact figure moves every few weeks, and every
+     place it appears would have to be edited by hand to keep up — which is the
+     kind of number that quietly goes stale and then reads as a lie. "50+" only
+     ever becomes more true. Raise it when the listing is comfortably past the
+     next round number. */
+  reviewsFloor: 50,
   profileName: "Dr. Arman's Dental Care & Cure",
   get listing() { return `https://www.google.com/maps?cid=${this.cid}` },
   get reviews() { return `https://search.google.com/local/reviews?placeid=&q=&cid=${this.cid}` },
@@ -300,7 +310,7 @@ export const stats = [
   { value: 10000, suffix: '+', label: 'Patients treated since 2016' },
   { value: 10, suffix: '', label: 'Years of the practice in Shyamoli' },
   { value: google.rating, decimals: 1, suffix: '', label: 'Average Google rating' },
-  { value: google.reviewCount, suffix: '', label: 'Reviews on Google' },
+  { value: google.reviewsFloor, suffix: '+', label: 'Reviews on Google' },
 ]
 
 /* ── About page content ────────────────────────────────────────────────────── */

@@ -54,7 +54,7 @@ export default function Hero() {
           <p className="hero__rating-line">
             <span className="hero__score">{google.rating}</span>
             <span className="hero__rating-label">
-              {google.reviewCount} Google reviews
+              {google.reviewsFloor}+ Google reviews
             </span>
           </p>
         </a>
