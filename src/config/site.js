@@ -424,7 +424,7 @@ export const about = {
         'oral and maxillofacial conditions.',
     },
     {
-      name: 'Antora Fahmida',
+      name: 'Antara Fahmida',
       role: 'Dental Hygienist',
       credential: 'DDT | MPH',
       image: 'team-antara.jpg',
