@@ -86,9 +86,21 @@ export default function Footer() {
           </div>
 
           <div className="footer__bottom">
-            <p className="footer__copy">
-              © {year} {identity.name}. All rights reserved.
-            </p>
+            <div className="footer__legal">
+              <p className="footer__copy">
+                © {year} {identity.name}. All rights reserved.
+              </p>
+              <p className="footer__credit">
+                Developed by{' '}
+                <a
+                  href="https://sahmsec.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @sahmsec
+                </a>
+              </p>
+            </div>
             <a
               className="footer__address"
               href={links.maps}

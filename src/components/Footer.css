@@ -203,6 +203,26 @@
 
 .footer__copy { color: var(--body-on-dark); }
 
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.footer__credit { color: var(--body-on-dark); }
+
+.footer__credit a {
+  color: var(--accent);
+  font-weight: 600;
+  text-underline-offset: 3px;
+  transition: color var(--t) var(--ease);
+}
+
+.footer__credit a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
 /* The contact row at the top of the footer already carries the address as a
    maps link, three taps higher up. One of them is enough on a phone. */
 .footer__address { display: none; }
